@@ -16,6 +16,8 @@
     <!-- CSS PERSONALIZADO PARA MENU-->
     <link rel="stylesheet" href="css/personalizado.css">
     <link rel="stylesheet" href="css/metodos-verificacao.css">
+    <!-- Melhorias visuais -->
+    <link rel="stylesheet" href="css/melhorias-visuais.css">
 </head>
 
 <body>
@@ -29,9 +31,9 @@
                     <div class="w-12 h-12"></div>
                 </div>
                 <!-- Header -->
-                <div class="px-4 pb-2">
-                    <h1 class="text-2xl font-bold text-gray-800">Verificar identidade</h1>
-                    <p id="subtituloMetodos" class="text-gray-600">Escolha como deseja confirmar sua identidade</p>
+                <div class="px-4 pb-2" style="animation: mv-fade-in 0.4s ease-out;">
+                    <h1 class="text-2xl font-bold text-gray-800" style="letter-spacing: -0.025em;">Verificar identidade</h1>
+                    <p id="subtituloMetodos" class="text-gray-500">Escolha como deseja confirmar sua identidade</p>
                 </div>
 
                 <!-- Page content -->
@@ -47,7 +49,7 @@
                                     <div class="flex-1">
                                         <div class="flex items-center gap-2">
                                             <h3 class="font-semibold text-gray-800 mb-1">SMS</h3>
-                                            <span class="px-2 py-1 text-xs font-bold text-white rounded-full" style="background: #6b7280;">Em breve</span>
+                                            <span class="mv-badge mv-badge-gray">Em breve</span>
                                         </div>
                                         <div id="textoSms" class="metodo-info">
                                             <div class="metodo-skeleton"></div>
@@ -67,7 +69,7 @@
                                     <div class="flex-1">
                                         <div class="flex items-center gap-2">
                                             <h3 class="font-semibold text-gray-800 mb-1">WhatsApp</h3>
-                                            <span class="px-2 py-1 text-xs font-bold text-white rounded-full" style="background: #6b7280;">Em breve</span>
+                                            <span class="mv-badge mv-badge-gray">Em breve</span>
                                         </div>
                                         <div id="textoWhatsapp" class="metodo-info">
                                             <div class="metodo-skeleton"></div>
