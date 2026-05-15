@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#1e40af">
+    <!-- Your app title -->
+    <title>Métodos de Verificação - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/metodos-verificacao.css">
+</head>
+
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="metodos-verificacao" class="page" style="border-radius: 16px 16px 0 0; overflow: hidden;">
+                <!-- Navbar — mesma altura da página de senha -->
+                <div class="flex items-center justify-between px-4 pb-2" style="padding-top: 40px;">
+                    <div class="w-12 h-12"></div>
+                    <div class="w-12 h-12"></div>
+                </div>
+                <!-- Header -->
+                <div class="px-4 pb-2">
+                    <h1 class="text-2xl font-bold text-gray-800">Verificar identidade</h1>
+                    <p id="subtituloMetodos" class="text-gray-600">Escolha como deseja confirmar sua identidade</p>
+                </div>
+
+                <!-- Page content -->
+                <div class="page-content bg-white">
+                    <!-- Métodos Form -->
+                    <div class="px-6 py-20">
+
+                        <!-- Opções de Verificação -->
+                        <div class="space-y-4 mb-8 mt-32">
+                            <!-- SMS -->
+                            <div class="card card-strong color-blue rounded-2xl cursor-pointer" data-metodo="sms" onclick="selecionarMetodo('sms')" style="margin: 0 0 16px 0; padding: 20px 16px 20px 16px;">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="font-semibold text-gray-800 mb-1">SMS</h3>
+                                            <span class="px-2 py-1 text-xs font-bold text-white rounded-full" style="background: #6b7280;">Em breve</span>
+                                        </div>
+                                        <div id="textoSms" class="metodo-info">
+                                            <div class="metodo-skeleton"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                            <path d="M9 18l6-6-6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- WhatsApp -->
+                            <div class="card card-strong color-blue rounded-2xl cursor-pointer" data-metodo="whatsapp" onclick="selecionarMetodo('whatsapp')" style="margin: 0 0 16px 0; padding: 20px 16px 20px 16px;">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="font-semibold text-gray-800 mb-1">WhatsApp</h3>
+                                            <span class="px-2 py-1 text-xs font-bold text-white rounded-full" style="background: #6b7280;">Em breve</span>
+                                        </div>
+                                        <div id="textoWhatsapp" class="metodo-info">
+                                            <div class="metodo-skeleton"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                            <path d="M9 18l6-6-6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="card card-strong color-blue rounded-2xl cursor-pointer" data-metodo="email" onclick="selecionarMetodo('email')" style="margin: 0 0 16px 0; padding: 20px 16px 20px 16px;">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-gray-800 mb-1">Email</h3>
+                                        <div id="textoEmail" class="metodo-info">
+                                            <div class="metodo-skeleton"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                            <path d="M9 18l6-6-6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Roteamento do app-->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <!-- Script dos Métodos -->
+    <script type="text/javascript" src="js/metodos-verificacao.js"></script>
+
+    <style>
+        body { background-color: white; }
+        .page { height: 100vh; overflow: hidden; }
+        .page-content {
+            height: calc(100vh - 120px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .cursor-pointer:active { transform: scale(0.98); transition: transform 0.1s ease; }
+
+        /* Skeleton loader */
+        .metodo-info {
+            min-height: 18px;
+            margin-top: 2px;
+        }
+        .metodo-skeleton {
+            display: block;
+            width: 130px;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.4s infinite;
+        }
+        @keyframes skeletonShimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+
+
+</body>
+</html> 
+
+                            <div class="bg-gray-200 rounded-2xl p-4 cursor-pointer" data-metodo="email" onclick="selecionarMetodo('email')">
+
+                                <div class="flex items-center">
+
+                                    <div class="flex-1">
+
+                                        <h3 class="font-semibold text-gray-800 mb-1">Email</h3>
+
+                                        <p class="text-sm text-gray-600">jo******rar@gmail.com</p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Path to Framework7 Library Bundle JS-->
+
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+
+    <!-- jQuery -->
+
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+
+    <!-- Roteamento do app-->
+
+    <script type="text/javascript" src="js/routes.js"></script>
+
+    <!-- Script dos Métodos -->
+
+    <script type="text/javascript" src="js/metodos-verificacao.js"></script>
+
+
+
+    <style>
+
+        body {
+
+            background-color: white;
+
+        }
+
+        
+
+        /* Garantir que a página não tenha rolagem */
+
+        .page {
+
+            height: 100vh;
+
+            overflow: hidden;
+
+        }
+
+        
+
+        .page-content {
+
+            height: calc(100vh - 120px); /* Subtrair altura do header */
+
+            overflow: hidden;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-start;
+
+        }
+
+        
+
+        /* Efeito hover nos cards */
+
+        .cursor-pointer:active {
+
+            transform: scale(0.98);
+
+            transition: transform 0.1s ease;
+
+        }
+
+    </style>
+
+
+
+    <script>
+
+        function selecionarMetodo(metodo) {
+
+            console.log('[METODOS-VERIFICACAO] Método selecionado:', metodo);
+
+            
+
+            // Por enquanto apenas mostra mensagem
+
+            let mensagem = '';
+
+            switch(metodo) {
+
+                case 'sms':
+
+                    mensagem = 'SMS selecionado! Código será enviado para o telefone terminado em 8429.';
+
+                    break;
+
+                case 'whatsapp':
+
+                    mensagem = 'WhatsApp selecionado! Código será enviado para o telefone terminado em 8429.';
+
+                    break;
+
+                case 'email':
+
+                    mensagem = 'Email selecionado! Código será enviado para jo******rar@gmail.com.';
+
+                    break;
+
+            }
+
+            
+
+            alert(mensagem + ' (Em desenvolvimento)');
+
+        }
+
+    </script>
+
+
+
+</body>
+
+</html> 

@@ -1,0 +1,31 @@
+<div class="page" data-name="meus-dispositivos">
+
+    <!-- Imagem fullscreen -->
+    <img id="previewImg" src="" alt="Preview">
+
+    <!-- Botão voltar -->
+    <button id="previewBtnVoltar" onclick="previewVoltar()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 6l-6 6l6 6"/>
+        </svg>
+    </button>
+
+    <!-- Campo de legenda na parte inferior da imagem -->
+    <div id="previewLegendaWrap">
+        <input id="previewLegendaInput" type="text" placeholder="Adicione uma legenda..." autocomplete="off">
+    </div>
+
+    <!-- Barra inferior preta com botões de publicar -->
+    <div id="previewFooter">
+        <button id="previewBtnSeuStory" onclick="previewPublicar()">
+            <div id="previewThumb"></div>
+            <span>Seu story</span>
+        </button>
+        <button id="previewBtnSeta" onclick="previewPublicar()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 6l6 6l-6 6"/>
+            </svg>
+        </button>
+    </div>
+
+</div>

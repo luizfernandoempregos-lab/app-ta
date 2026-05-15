@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar Face - NandoPay</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+</head>
+<body>
+    <div class="page" data-name="validar-face">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="link back" onclick="history.back()">
+                        <i class="icon icon-back"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content" style="padding-bottom: 140px;">
+            <div class="block">
+                <div class="camera-container">
+                    <video id="cameraVideo" autoplay playsinline></video>
+                    <canvas id="cameraCanvas"></canvas>
+
+                    <div class="preview-container" id="previewContainer">
+                        <img id="photoPreview" alt="Prévia da foto">
+                    </div>
+
+                    <!-- SVG com oval tracejado para rosto -->
+                    <svg id="faceMask" class="face-mask" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                            <mask id="circleMask">
+                                <rect width="400" height="600" fill="white"/>
+                                <ellipse cx="200" cy="250" rx="100" ry="140" fill="black"/>
+                            </mask>
+                        </defs>
+                        <ellipse cx="200" cy="250" rx="100" ry="140" fill="none" stroke="#999" stroke-width="2" stroke-dasharray="8,4" opacity="0.8"/>
+                    </svg>
+                </div>
+
+                <div class="camera-controls">
+                    <div id="faceStatus" style="text-align: center; color: black; padding: 8px 16px; border-radius: 20px; margin-bottom: 10px; font-size: 14px; display: inline-block;">
+                        Posicione seu rosto na câmera
+                    </div>
+                </div>
+
+                <div class="preview-controls" id="previewControls" style="display: none;">
+                    <button class="preview-btn retry" onclick="tentarNovamente()" style="flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #000; border-radius: 9999px; background-color: #ffffff; height: 50px; color: #333; font-weight: 500;">
+                        Tentar Novamente
+                    </button>
+                    <button class="preview-btn confirm" onclick="confirmarFoto()" style="flex: 1; display: flex; align-items: center; justify-content: center; border: none; border-radius: 9999px; background-color: #059669; height: 50px; color: #ffffff; font-weight: 500;">
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading-overlay" id="loadingOverlay">
+            <div style="text-align: center;">
+                <div class="preloader"></div>
+                <p style="margin-top: 20px;">Processando foto...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/framework7-bundle.min.js"></script>
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <script src="js/validar-face.js"></script>
+</body>
+</html>

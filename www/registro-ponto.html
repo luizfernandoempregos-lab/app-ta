@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Registro de Ponto</title>
+  <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+  <link rel="stylesheet" href="css/personalizado.css">
+  <link rel="stylesheet" href="css/registro-ponto.css">
+</head>
+<body class="bg-white min-h-screen">
+  <div id="app">
+    <div class="view view-main">
+      <div class="page page-scrollable" data-name="score-credito">
+        <!-- Header fixo -->
+        <div class="sticky top-0 z-30 bg-white">
+          <div class="flex items-center justify-between px-4 pb-2 bg-white" style="padding-top: 40px;">
+            <div class="flex items-center">
+              <a href="#" onclick="if (window.app && app.views && app.views.main && app.views.main.router) { app.views.main.router.back(); } else { window.history.back(); }" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 6l-6 6l6 6" />
+                </svg>
+              </a>
+            </div>
+            <div class="text-center flex-1">
+              <h1 class="text-lg font-bold text-gray-900">Registro de Ponto</h1>
+            </div>
+            <div class="w-12"></div>
+          </div>
+        </div>
+
+        <!-- Modal para selecionar hora -->
+        <div id="modalDataHora" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 13000; align-items: center; justify-content: center;">
+          <div style="background: white; border-radius: 16px; padding: 24px; width: 90%; max-width: 350px; margin: auto;" onclick="event.stopPropagation();">
+            <div style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 16px; text-align: center;">Selecionar Hora</div>
+            <input type="hidden" id="dataSelecionada">
+            <div style="margin-bottom: 24px;">
+              <label style="display: block; font-size: 14px; color: #6b7280; margin-bottom: 8px;">Hora</label>
+              <input type="time" id="horaSelecionada" style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px; color: #1f2937; box-sizing: border-box;">
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <button onclick="fecharModalDataHora()" style="flex: 1; padding: 12px; border: 1px solid #e5e7eb; background: white; border-radius: 8px; font-size: 16px; color: #6b7280; cursor: pointer;">Cancelar</button>
+              <button onclick="confirmarDataHora()" style="flex: 1; padding: 12px; border: none; background: var(--app-primary-color); color: white; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;">Confirmar</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pb-6">
+          <!-- Data Atual -->
+          <div class="px-4 pt-4 pb-4">
+            <div class="text-center">
+              <div class="text-sm text-gray-600 mb-2">Data de Hoje</div>
+              <div id="dataAtual" class="text-lg font-bold text-gray-900"></div>
+            </div>
+          </div>
+
+          <!-- Gauge do Progresso de Ponto -->
+          <div class="px-4 pt-4 pb-4">
+            <div class="text-center mb-4">
+              <div class="text-sm text-gray-600 mb-4">Progresso do Dia</div>
+              <div class="flex justify-center mb-4">
+                <div class="gauge score-gauge"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seção de Horários Marcados -->
+          <div class="px-4 mb-6">
+            <div class="text-gray-800 font-semibold mb-3">Horários Marcados</div>
+            <div id="horariosMarcados">
+              <div class="ponto-horario-card" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;">
+                <div style="flex: 1;">
+                  <div style="font-size: 12px; color: #6b7280; font-weight: 500;">Entrada</div>
+                  <div style="font-size: 14px; color: var(--app-primary-color); font-weight: 600;" id="entrada1">--:--</div>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <button style="border: none; cursor: pointer; background: none; padding: 8px; display: flex; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="window.abrirCameraComPermissao(function(img) { anexarComprovante(1, img); })">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
+                  </button>
+                  <button id="btnMarcar1" class="px-4 py-2 rounded-full bg-primary text-white text-sm font-semibold" style="border: none; cursor: pointer; margin: 0; flex-shrink: 0; width: auto; height: auto;" onclick="marcarEntrada(1)">Marcar</button>
+                  <button id="btnEditar1" style="display: none; border: none; cursor: pointer; background: none; padding: 8px; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="marcarEntrada(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415" /><path d="M16 5l3 3" /></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="ponto-horario-card" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;">
+                <div style="flex: 1;">
+                  <div style="font-size: 12px; color: #6b7280; font-weight: 500;">Intervalo</div>
+                  <div style="font-size: 14px; color: var(--app-primary-color); font-weight: 600;" id="saida1">--:--</div>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <button style="border: none; cursor: pointer; background: none; padding: 8px; display: flex; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="window.abrirCameraComPermissao(function(img) { anexarComprovante(2, img); })">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
+                  </button>
+                  <button id="btnMarcar2" class="px-4 py-2 rounded-full bg-primary text-white text-sm font-semibold" style="border: none; cursor: pointer; margin: 0; flex-shrink: 0; width: auto; height: auto;" onclick="marcarSaida(1)">Marcar</button>
+                  <button id="btnEditar2" style="display: none; border: none; cursor: pointer; background: none; padding: 8px; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="marcarSaida(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415" /><path d="M16 5l3 3" /></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="ponto-horario-card" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;">
+                <div style="flex: 1;">
+                  <div style="font-size: 12px; color: #6b7280; font-weight: 500;">Retorno</div>
+                  <div style="font-size: 14px; color: var(--app-primary-color); font-weight: 600;" id="entrada2">--:--</div>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <button style="border: none; cursor: pointer; background: none; padding: 8px; display: flex; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="window.abrirCameraComPermissao(function(img) { anexarComprovante(3, img); })">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
+                  </button>
+                  <button id="btnMarcar3" class="px-4 py-2 rounded-full bg-primary text-white text-sm font-semibold" style="border: none; cursor: pointer; margin: 0; flex-shrink: 0; width: auto; height: auto;" onclick="marcarEntrada(2)">Marcar</button>
+                  <button id="btnEditar3" style="display: none; border: none; cursor: pointer; background: none; padding: 8px; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="marcarEntrada(2)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415" /><path d="M16 5l3 3" /></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="ponto-horario-card" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;">
+                <div style="flex: 1;">
+                  <div style="font-size: 12px; color: #6b7280; font-weight: 500;">Saída</div>
+                  <div style="font-size: 14px; color: var(--app-primary-color); font-weight: 600;" id="saida2">--:--</div>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <button style="border: none; cursor: pointer; background: none; padding: 8px; display: flex; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="window.abrirCameraComPermissao(function(img) { anexarComprovante(4, img); })">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-paperclip"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5" /></svg>
+                  </button>
+                  <button id="btnMarcar4" class="px-4 py-2 rounded-full bg-primary text-white text-sm font-semibold" style="border: none; cursor: pointer; margin: 0; flex-shrink: 0; width: auto; height: auto;" onclick="marcarSaida(2)">Marcar</button>
+                  <button id="btnEditar4" style="display: none; border: none; cursor: pointer; background: none; padding: 8px; align-items: center; justify-content: center; color: var(--app-primary-color);" onclick="marcarSaida(2)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415" /><path d="M16 5l3 3" /></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumo do Dia -->
+          <div class="px-4 mb-6" style="padding-bottom: 80px;">
+            <div class="card card-strong color-blue">
+              <div class="font-semibold mb-3">Resumo do Dia</div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: #4b5563;">Horas Trabalhadas:</span>
+                  <span style="font-weight: 600; color: #222;" id="horasTrabalhadas">0h 00m</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: #4b5563;">Banco de Horas:</span>
+                  <span style="font-weight: 600; color: #222;" id="bancoHoras">0h 00m</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: #4b5563;">Status:</span>
+                  <span style="font-weight: 600; color: #eab308;" id="statusDia">Incompleto</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+  <script type="text/javascript" src="js/registro-ponto.js"></script>
+  <script type="text/javascript">
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      inicializarRegistroPonto();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Análise de Documentos</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/analise-abertura-conta.css">
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="analise-abertura-conta" class="page page-scrollable" style="background: white;">
+                <!-- Header vazio (sem título) -->
+                <div class="flex items-center justify-between px-4 pb-2 bg-white fixed top-0 left-0 right-0 z-50" style="background: white; padding-top: 40px;">
+                </div>
+
+                <!-- Conteúdo -->
+                <div class="px-4 pb-6 pt-6 mt-20">
+                    <!-- Ícone de Sucesso -->
+                    <div class="analise-abertura-conta-icon-container">
+                        <div class="analise-abertura-conta-icon-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M5 12l5 5l10 -10" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Título -->
+                    <div class="analise-abertura-conta-title-container">
+                        <h1 class="analise-abertura-conta-title">Dados Enviados para Análise</h1>
+                    </div>
+
+                    <!-- Mensagem Principal -->
+                    <div class="analise-abertura-conta-message-container">
+                        <p class="analise-abertura-conta-message">
+                            Seus documentos e dados foram enviados com sucesso para análise. Nossa equipe está verificando todas as informações para concluir a abertura da sua conta.
+                        </p>
+                    </div>
+
+                    <!-- Informações sobre Notificação -->
+                    <div class="analise-abertura-conta-notification-container">
+                        <div class="analise-abertura-conta-notification-box">
+                            <div class="analise-abertura-conta-notification-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+                                    <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+                                </svg>
+                            </div>
+                            <div class="analise-abertura-conta-notification-text">
+                                <p class="analise-abertura-conta-notification-title">Você será notificado</p>
+                                <p class="analise-abertura-conta-notification-description">
+                                    Após a conclusão da análise, você receberá uma notificação via <strong>e-mail</strong> e no <strong>aplicativo</strong> informando o resultado.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Ação (Voltar ao início ou sair) -->
+                    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 20px; padding-bottom: 60px; z-index: 1000;">
+                        <button
+                            onclick="analiseAberturaContaVoltarInicio()"
+                            class="w-full text-white font-semibold py-2 pl-4 pr-1 rounded-full transition-colors flex items-center justify-between"
+                            style="background: #1e40af;"
+                        >
+                            <span class="ml-4" style="font-family: 'Moranga Medium', sans-serif;">Voltar ao Início</span>
+                            <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14"/>
+                                    <path d="m12 5 7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Framework7 Library -->
+    <script src="lib/framework7-bundle.min.js"></script>
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="js/routes.js"></script>
+</body>
+</html>
+

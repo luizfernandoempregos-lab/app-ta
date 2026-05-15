@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <title>Checklist - Banco Digital</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/checklist_users.css">
+    <script>
+        // Aplicar tema salvo antes do render
+        (function() {
+            var temas = {
+                blue:'#1e40af',green:'#059669',pink:'#db2777',black:'#1f2937',purple:'#7c3aed',
+                orange:'#ea580c',red:'#dc2626',yellow:'#d97706',cyan:'#0891b2',teal:'#14b8a6',
+                indigo:'#4f46e5',fuchsia:'#d946ef',lime:'#84cc16',sky:'#0ea5e9',rose:'#f43f5e',
+                emerald:'#10b981',violet:'#a855f7',navy:'#001f3f',forest:'#0d3d1e',grape:'#4a0e4e',
+                wine:'#722f37',terracota:'#8b4513',magenta:'#9b2667',darkTeal:'#0b6662',
+                darkIndigo:'#1e1b4b',coral:'#ff6b6b',mint:'#00b894',gold:'#f59e0b',brown:'#92400e',
+                slate:'#475569',cobalt:'#1746a2',salmon:'#fa8072',olive:'#4d7c0f',plum:'#6b21a8',
+                steel:'#334155',azure:'#0078d4',crimson:'#be123c',jade:'#16a34a',denim:'#1d4ed8',
+                midnight:'#0f172a',pine:'#166534',brick:'#9f1239',ocean:'#0369a1'
+            };
+            var tema = localStorage.getItem('app-tema') || 'blue';
+            var cor = localStorage.getItem('app-tema-color') || temas[tema] || '#1e40af';
+            document.documentElement.style.setProperty('--app-primary-color', cor);
+        })();
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <div class="page page-scrollable" data-name="checklist_users">
+                
+                <!-- Header -->
+                <div class="checklist-header">
+                    <div class="checklist-topbar">
+                        <a href="#" onclick="app.views.main.router.back()" class="checklist-back-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 6l-6 6l6 6" />
+                            </svg>
+                        </a>
+                        <span class="checklist-title">Checklist de Tarefas</span>
+                        <div style="width: 40px;"></div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalTasks">0</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="completedTasks">0</div>
+                            <div class="stat-label">Concluídas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="pendingTasks">0</div>
+                            <div class="stat-label">Pendentes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="page-content">
+                    <div id="tasksList"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Framework7 Library -->
+    <script src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Checklist Script (DEVE ser carregado ANTES de routes.js) -->
+    <script type="text/javascript" src="js/checklist_users.js"></script>
+    <!-- Routes -->
+    <script type="text/javascript" src="js/routes.js"></script>
+
+</body>
+</html>

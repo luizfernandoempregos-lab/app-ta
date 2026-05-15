@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/lista-espera-cadastro.css">
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="lista-espera-cadastro" class="page">
+
+                <!-- Navbar -->
+                <div class="navbar">
+                    <div class="navbar-bg"></div>
+                    <div class="navbar-inner">
+                        <div class="left">
+                            <a href="#" class="link back">
+                                <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6"/></svg>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="title"></div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+
+                <!-- Page Content -->
+                <div class="page-content">
+
+                    <!-- Header -->
+                    <div class="py-4 px-4">
+                        <h1 class="text-2xl font-bold text-gray-900 mb-2">Criar conta</h1>
+                        <p class="text-sm text-gray-600">Preencha seus dados para acessar o app</p>
+                    </div>
+
+                    <!-- Formulário -->
+                    <div class="px-4 pb-4">
+                        <form id="formCadastro">
+                            <div class="list">
+                                <ul>
+                                    <!-- Nome -->
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Nome completo</div>
+                                            <div class="item-input-wrap">
+                                                <input type="text" id="cadastroNome" placeholder="Seu nome completo" autocomplete="name" style="text-transform:uppercase;">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- Telefone -->
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Telefone / WhatsApp</div>
+                                            <div class="item-input-wrap">
+                                                <input type="tel" id="cadastroTelefone" placeholder="(00) 00000-0000" maxlength="15" inputmode="numeric">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- Email -->
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">E-mail</div>
+                                            <div class="item-input-wrap">
+                                                <input type="email" id="cadastroEmail" placeholder="seu@email.com" inputmode="email" autocomplete="email">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- Cargo -->
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Cargo</div>
+                                            <div class="item-input-wrap">
+                                                <input type="text" id="cadastroCargo" placeholder="Ex: Operador de caixa">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- Horários da jornada -->
+                                    <li style="padding: 12px 16px 4px;">
+                                        <div style="font-size:13px; font-weight:600; color:#374151;">Horários da jornada</div>
+                                        <div style="font-size:12px; color:#9ca3af; margin-top:2px;">Defina seus horários de trabalho</div>
+                                    </li>
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Entrada</div>
+                                            <div class="item-input-wrap">
+                                                <input type="time" id="cadastroEntrada">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Saída p/ intervalo</div>
+                                            <div class="item-input-wrap">
+                                                <input type="time" id="cadastroSaidaIntervalo">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Retorno do intervalo</div>
+                                            <div class="item-input-wrap">
+                                                <input type="time" id="cadastroRetorno">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Saída final</div>
+                                            <div class="item-input-wrap">
+                                                <input type="time" id="cadastroSaidaFinal">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Mensagem de erro -->
+                            <div id="cadastroErro" style="display:none; color:#ef4444; font-size:13px; text-align:center; padding:8px 0; margin-bottom:8px;"></div>
+
+                        </form>
+                    </div>
+
+                    <!-- Botão -->
+                    <div class="rodape-avançar-lista-espera">
+                        <button id="btnCadastrar" type="button" class="button button-fill button-large" style="width:100%; background:#1e40af; color:#fff; border-radius:9999px;" onclick="cadastrarColaborador()">
+                            Cadastrar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/framework7-bundle.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/lista-espera-cadastro.js"></script>
+</body>
+</html>

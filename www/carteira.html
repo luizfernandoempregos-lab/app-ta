@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <title>Carteira</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/carteira.css">
+    <script>
+        // Aplicar tema salvo antes do render para evitar flash
+        (function() {
+            var temas = {
+                blue:'#1e40af',green:'#059669',pink:'#db2777',black:'#1f2937',purple:'#7c3aed',
+                orange:'#ea580c',red:'#dc2626',yellow:'#d97706',cyan:'#0891b2',teal:'#14b8a6',
+                indigo:'#4f46e5',fuchsia:'#d946ef',lime:'#84cc16',sky:'#0ea5e9',rose:'#f43f5e',
+                emerald:'#10b981',violet:'#a855f7',navy:'#001f3f',forest:'#0d3d1e',grape:'#4a0e4e',
+                wine:'#722f37',terracota:'#8b4513',magenta:'#9b2667',darkTeal:'#0b6662',
+                darkIndigo:'#1e1b4b',coral:'#ff6b6b',mint:'#00b894',gold:'#f59e0b',brown:'#92400e',
+                slate:'#475569',cobalt:'#1746a2',salmon:'#fa8072',olive:'#4d7c0f',plum:'#6b21a8',
+                steel:'#334155',azure:'#0078d4',crimson:'#be123c',jade:'#16a34a',denim:'#1d4ed8',
+                midnight:'#0f172a',pine:'#166534',brick:'#9f1239',ocean:'#0369a1'
+            };
+            var tema = localStorage.getItem('app-tema') || 'blue';
+            var cor = localStorage.getItem('app-tema-color') || temas[tema] || '#1e40af';
+            document.documentElement.style.setProperty('--app-primary-color', cor);
+            if (localStorage.getItem('app-dark-mode') === 'true') {
+                document.documentElement.classList.add('dark-mode-pre');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+
+            <div class="page page-scrollable" data-name="carteira">
+
+                <!-- Seção superior: navbar + saldo — fundo bg-primary -->
+                <div class="cashbacks-header">
+
+                    <!-- Navbar -->
+                    <div class="cashbacks-topbar">
+                        <a href="#" onclick="app.views.main.router.back()" class="cashbacks-back-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 6l-6 6l6 6" />
+                            </svg>
+                        </a>
+                        <span class="cashbacks-title">Carteira</span>
+                    </div>
+
+                    <!-- Nome do usuário -->
+                    <div class="cashbacks-nome-wrapper">
+                        <div id="nomeUsuarioCashback" class="cashbacks-nome">Carregando...</div>
+                    </div>
+
+                    <!-- Saldo centralizado com olhinho -->
+                    <div class="cashbacks-saldo-wrapper">
+                        <div class="cashbacks-saldo-label">Saldo disponível</div>
+                        <div class="cashbacks-saldo-row">
+                            <div id="saldoCashback" class="cashbacks-saldo-valor">R$ 0,00</div>
+                            <button id="btnToggleSaldoCashback" onclick="toggleSaldoCashback()" class="cashbacks-toggle-btn">
+                                <svg id="iconOlhoCashback" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="cashbacks-saldo-sub">Acumulado por registros e bônus</div>
+                    </div>
+
+                    <!-- 3 Botões centralizados -->
+                    <div class="cashbacks-acoes">
+                        <!-- Transferir -->
+                        <div class="cashbacks-acao-item">
+                            <button onclick="if(window.app&&app.views&&app.views.main){app.views.main.router.navigate('/destinatario-transferencia/',{transition:'f7-push'});}else{window.location.href='/destinatario-transferencia/';}" class="cashbacks-acao-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10M7 17l10-10"/></svg>
+                            </button>
+                            <span class="cashbacks-acao-label">Transferir</span>
+                        </div>
+                        <!-- Extrato -->
+                        <div class="cashbacks-acao-item">
+                            <button class="cashbacks-acao-btn" onclick="if(window.app&&app.views&&app.views.main){app.views.main.router.navigate('/extrato/',{transition:'f7-push'});}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 5h3m4 0h9" /><path d="M3 10h11m4 0h1" /><path d="M5 15h5m4 0h7" /><path d="M3 20h9m4 0h3" /></svg>
+                            </button>
+                            <span class="cashbacks-acao-label">Extrato</span>
+                        </div>
+                        <!-- Registro de Ponto / Pagar -->
+                        <div class="cashbacks-acao-item">
+                            <button class="cashbacks-acao-btn" onclick="if(window.app&&app.views&&app.views.main){app.views.main.router.navigate('/qr-scanner/',{transition:'f7-push'});}">
+                                <svg width="24" height="24" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_75_2717)"><path d="M4.96449 33.3967C4.96449 27.2923 4.87584 21.1752 4.96449 15.0582C5.04048 9.49839 9.18183 4.60982 14.7923 3.95126C17.8065 3.59664 20.9853 3.88793 24.0122 3.88793H34.4226C36.8668 3.88793 36.8668 0.0885251 34.4226 0.0885251H24.9494C21.7199 0.0885251 18.4397 -0.0887806 15.2229 0.113854C8.77656 0.544454 3.07745 5.20506 1.58302 11.5374C0.797808 14.8809 1.16508 18.6296 1.16508 22.0364V33.3967C1.16508 35.8409 4.96449 35.8409 4.96449 33.3967Z" fill="white"/><path d="M109.676 33.3967V23.8982C109.676 20.6687 109.853 17.3759 109.65 14.1464C109.232 7.70009 104.572 2.00098 98.2394 0.506542C94.8959 -0.278669 91.1598 0.0886074 87.7657 0.0886074H76.4308C73.9865 0.0886074 73.9865 3.88801 76.4308 3.88801C82.5225 3.88801 88.6269 3.79936 94.7186 3.88801C100.278 3.964 105.167 8.10536 105.826 13.7158C106.18 16.73 105.889 19.9215 105.889 22.961V33.3967C105.889 35.841 109.688 35.841 109.688 33.3967H109.676Z" fill="white"/><path d="M0.0757506 73.1893V83.0171C0.0757506 86.3606 -0.11422 89.7547 0.10108 93.0982C0.544344 99.7725 5.35693 105.662 11.9172 107.181C15.362 107.979 19.2248 107.587 22.7329 107.587H34.4097C36.854 107.587 36.854 103.787 34.4097 103.787C28.1027 103.787 21.783 103.876 15.476 103.787C9.54894 103.699 4.30576 99.1266 3.90049 93.0982C3.69785 90.0713 3.87516 86.9811 3.87516 83.9543V73.1893C3.87516 70.745 0.0757506 70.745 0.0757506 73.1893Z" fill="white"/><path d="M105.876 74.4811C105.876 80.5855 105.965 86.7026 105.876 92.8196C105.801 98.3794 101.659 103.268 96.0487 103.927C93.0345 104.281 89.8557 103.99 86.8288 103.99H76.4184C73.9741 103.99 73.9741 107.789 76.4184 107.789H85.8916C89.1211 107.789 92.4013 107.967 95.6181 107.764C102.064 107.346 107.764 102.685 109.258 96.3531C110.043 93.0096 109.676 89.2608 109.676 85.854V74.4938C109.676 72.0495 105.876 72.0495 105.876 74.4938V74.4811Z" fill="white"/><path d="M38.8044 43.4779C31.6995 43.4779 24.5946 43.5159 17.4897 43.4779C15.6153 43.4779 13.8803 42.7306 13.2597 40.793C12.9178 39.7418 13.0824 38.412 13.0824 37.3228V23.8096C13.0824 21.15 12.1959 16.3628 14.7541 14.5897C15.9193 13.7792 17.3124 13.9311 18.6549 13.9311H37.4113C38.7664 13.9311 40.0835 13.8678 41.2233 14.7797C42.6038 15.8815 42.6418 17.4139 42.6418 18.997V33.3081C42.6418 36.6643 43.8449 43.2879 38.8044 43.4779C36.3728 43.5665 36.3601 47.3659 38.8044 47.2773C42.6671 47.138 45.9219 44.4024 46.3779 40.489C46.5172 39.2732 46.4412 38.0194 46.4412 36.7909V21.9099C46.4412 20.5421 46.4792 19.1743 46.4412 17.8065C46.3525 14.4884 44.3642 11.5628 41.16 10.499C39.7036 10.0051 38.1078 10.1191 36.5881 10.1191H29.7491C25.5571 10.1191 21.3651 10.0684 17.1731 10.1191C14.2729 10.1571 11.55 11.5628 10.1822 14.1971C9.32099 15.8308 9.29566 17.5406 9.29566 19.3136V33.7261C9.29566 37.8041 8.54844 42.6673 12.1326 45.5549C15.2607 48.0625 20.2506 47.2646 23.9994 47.2646H38.8171C41.2613 47.2646 41.2613 43.4652 38.8171 43.4652L38.8044 43.4779Z" fill="white"/><path d="M65.2738 13.931H90.6538C91.8949 13.931 93.3387 13.7664 94.4912 14.311C96.4162 15.2102 96.7329 17.0465 96.7329 18.9209V45.3901C96.7329 47.8344 100.532 47.8344 100.532 45.3901V19.2629C100.532 17.2492 100.406 15.2988 99.2151 13.5511C97.6194 11.1955 95.0864 10.1443 92.3129 10.1316C87.7283 10.1063 83.1563 10.1316 78.5717 10.1316H65.2738C62.8295 10.1316 62.8295 13.931 65.2738 13.931Z" fill="white"/><path d="M84.6892 53.8882C77.5843 53.8882 70.4794 53.9262 63.3745 53.8882C61.5001 53.8882 59.765 53.141 59.1445 51.2033C58.8025 50.1521 58.9672 48.8223 58.9672 47.7332V34.2199C58.9672 31.5604 58.0806 26.7731 60.6389 25C61.8041 24.1895 63.1972 24.3415 64.5396 24.3415H83.296C84.6512 24.3415 85.9683 24.2782 87.1081 25.19C88.4886 26.2918 88.5266 27.8243 88.5266 29.4074V43.7185C88.5266 47.0746 89.7297 53.6982 84.6892 53.8882C82.2575 53.9769 82.2449 57.7763 84.6892 57.6876C88.5519 57.5483 91.8067 54.8127 92.2626 50.8993C92.4019 49.6835 92.326 48.4297 92.326 47.2013V32.3202C92.326 30.9525 92.364 29.5847 92.326 28.2169C92.2373 24.8987 90.249 21.9732 87.0448 20.9094C85.5884 20.4154 83.9926 20.5294 82.4728 20.5294H75.6339C71.4419 20.5294 67.2499 20.4788 63.0579 20.5294C60.1576 20.5674 57.4347 21.9732 56.067 24.6074C55.2058 26.2412 55.1804 27.9509 55.1804 29.724V44.1364C55.1804 48.2144 54.4332 53.0777 58.0173 55.9652C61.1455 58.4728 66.1354 57.6749 69.8841 57.6749H84.7018C87.1461 57.6749 87.1461 53.8755 84.7018 53.8755L84.6892 53.8882Z" fill="white"/><path d="M88.5265 62.8674V67.4773C88.5265 68.9464 88.9824 71.3021 86.9434 71.5174C84.9044 71.7327 82.7134 71.5174 80.649 71.5174H68.2376C65.7427 71.5174 63.1464 71.72 60.6641 71.5174C58.7391 71.3654 58.9671 69.643 58.9671 68.1992V62.8674C58.9671 60.4231 55.1677 60.4231 55.1677 62.8674V68.1992C55.1677 70.5422 55.2943 72.7585 57.4093 74.2909C59.7016 75.95 63.6277 75.3168 66.2999 75.3168H79.8131C82.4094 75.3168 85.3096 75.6841 87.8806 75.2281C93.5923 74.2023 92.3132 67.0847 92.3132 62.8674C92.3132 60.4231 88.5138 60.4231 88.5138 62.8674H88.5265Z" fill="white"/><path d="M38.8044 95.8338C31.6995 95.8338 24.5946 95.8718 17.4897 95.8338C15.6153 95.8338 13.8803 95.0865 13.2597 93.1488C12.9178 92.0977 13.0824 90.7679 13.0824 89.6787V76.1655C13.0824 73.5059 12.1959 68.7187 14.7541 66.9456C15.9193 66.1351 17.3124 66.287 18.6549 66.287H37.4113C38.7664 66.287 40.0835 66.2237 41.2233 67.1356C42.6038 68.2374 42.6418 69.7698 42.6418 71.3529V85.664C42.6418 89.0202 43.8449 95.6438 38.8044 95.8338C36.3728 95.9224 36.3601 99.7218 38.8044 99.6332C42.6671 99.4939 45.9219 96.7583 46.3779 92.8449C46.5172 91.6291 46.4412 90.3753 46.4412 89.1468V74.2658C46.4412 72.898 46.4792 71.5302 46.4412 70.1624C46.3525 66.8443 44.3642 63.9187 41.16 62.8549C39.7036 62.361 38.1078 62.475 36.5881 62.475H29.7491C25.5571 62.475 21.3651 62.4243 17.1731 62.475C14.2729 62.513 11.55 63.9187 10.1822 66.553C9.32099 68.1867 9.29566 69.8965 9.29566 71.6695V86.082C9.29566 90.16 8.54844 95.0232 12.1326 97.9108C15.2607 100.418 20.2506 99.6205 23.9994 99.6205H38.8171C41.2613 99.6205 41.2613 95.8211 38.8171 95.8211L38.8044 95.8338Z" fill="white"/><path d="M100.519 67.3509V51.976C100.519 49.5317 96.72 49.5317 96.72 51.976V67.3509C96.72 69.7952 100.519 69.7952 100.519 67.3509Z" fill="white"/><path d="M65.2734 99.9117H85.5749C87.9812 99.9117 90.4002 99.9877 92.8065 99.9117C95.884 99.8104 98.6576 98.1007 99.886 95.2258C100.57 93.63 100.519 92.0216 100.519 90.3372V78.787C100.519 76.3427 96.7199 76.3427 96.7199 78.787V88.2475C96.7199 91.4137 97.2391 95.9223 92.7811 96.1123C86.2842 96.3909 79.7238 96.1123 73.2269 96.1123H65.2861C62.8418 96.1123 62.8418 99.9117 65.2861 99.9117H65.2734Z" fill="white"/><path d="M10.5373 56.0159H44.8713C47.3156 56.0159 47.3156 52.2165 44.8713 52.2165H10.5373C8.09303 52.2165 8.09303 56.0159 10.5373 56.0159Z" fill="white"/><path d="M57.0157 88.8554H91.3497C93.794 88.8554 93.794 85.056 91.3497 85.056H57.0157C54.5714 85.056 54.5714 88.8554 57.0157 88.8554Z" fill="white"/><path d="M51.6596 100H58.8152C59.803 100 60.7655 99.1265 60.7149 98.1007C60.6642 97.0749 59.879 96.201 58.8152 96.201H51.6596C50.6718 96.201 49.7093 97.0749 49.7599 98.1007C49.8106 99.1265 50.5958 100 51.6596 100Z" fill="white"/></g><defs><clipPath id="clip0_75_2717"><rect width="120.872" height="119.58" fill="white"/></clipPath></defs></svg>
+                            </button>
+                            <span class="cashbacks-acao-label">Pagar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo abaixo -->
+                <div>
+                    <!-- Últimas Transações -->
+                    <div class="cashbacks-swiper-section cashbacks-ultimas-transacoes-section" style="margin-top: 16px;">
+                        <div class="cashbacks-swiper-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h2 class="cashbacks-swiper-title">Últimas movimentações</h2>
+                                <p class="cashbacks-swiper-sub">Suas 3 últimas transações</p>
+                            </div>
+                            <a href="#" onclick="if(window.app&&app.views&&app.views.main){app.views.main.router.navigate('/extrato/',{transition:'f7-push'});} return false;" style="color: var(--app-primary-color, #1e40af); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap;">Ver tudo</a>
+                        </div>
+                        <div id="ultimasTransacoesCashback" style="padding: 0 16px;">
+                            <div class="text-center text-gray-500 py-4">Carregando...</div>
+                        </div>
+                    </div>
+
+                    <!-- Swiper de Cards Informativos -->
+                    <div class="cashbacks-swiper-section">
+                        <div class="cashbacks-swiper-header">
+                            <h2 class="cashbacks-swiper-title">Como funciona <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--app-primary-color,#1e40af)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; margin-left:4px; margin-bottom:2px;"><path d="M9 21h6"/><path d="M12 3a6 6 0 0 1 6 6c0 2.22-1.2 4.16-3 5.2V17a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1v-2.8C7.2 13.16 6 11.22 6 9a6 6 0 0 1 6-6z"/></svg></h2>
+                            <p class="cashbacks-swiper-sub">Entenda como acumular e usar seu saldo</p>
+                        </div>
+                        <div class="swiper-container indicacao-swiper-cashbacks">
+                            <div class="swiper-wrapper">
+
+                                <!-- Card 1: Como acumular -->
+                                <div class="swiper-slide">
+                                    <div class="card card-strong color-blue cashbacks-card">
+                                        <div class="cashbacks-card-header">
+                                            <div class="cashbacks-card-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--app-primary-color,#1e40af)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 0 0 4h-2a2 2 0 0 0 -1.8 -1"/><path d="M12 7v2m0 6v2"/></svg>
+                                            </div>
+                                            <div>
+                                                <div class="home-card-name cashbacks-card-name">Como acumular saldo</div>
+                                                <div class="cashbacks-card-sub">Ganhe bônus em cada ação</div>
+                                            </div>
+                                        </div>
+                                        <div class="home-card-destaque cashbacks-card-body">
+                                            <div class="cashbacks-card-text">
+                                                Registre seu ponto diariamente e ganhe de <strong>R$0,10 a R$0,15</strong> por registro. Quanto mais consistente, mais você acumula.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Como transferir -->
+                                <div class="swiper-slide">
+                                    <div class="card card-strong color-blue cashbacks-card">
+                                        <div class="cashbacks-card-header">
+                                            <div class="cashbacks-card-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--app-primary-color,#1e40af)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h10v10M7 17l10-10"/></svg>
+                                            </div>
+                                            <div>
+                                                <div class="home-card-name cashbacks-card-name">Como transferir</div>
+                                                <div class="cashbacks-card-sub">Envie saldo para colegas</div>
+                                            </div>
+                                        </div>
+                                        <div class="home-card-destaque cashbacks-card-body">
+                                            <div class="cashbacks-card-text">
+                                                Toque em <strong>Transferir</strong>, escolha o destinatário e o valor. A transferência é instantânea entre usuários do app.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3: Regras -->
+                                <div class="swiper-slide">
+                                    <div class="card card-strong color-blue cashbacks-card">
+                                        <div class="cashbacks-card-header">
+                                            <div class="cashbacks-card-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--app-primary-color,#1e40af)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"/><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                                            </div>
+                                            <div>
+                                                <div class="home-card-name cashbacks-card-name">Regras da carteira</div>
+                                                <div class="cashbacks-card-sub">Informações importantes</div>
+                                            </div>
+                                        </div>
+                                        <div class="home-card-destaque cashbacks-card-body">
+                                            <div class="cashbacks-card-text">
+                                                O saldo é acumulado em reais e pode ser transferido a qualquer momento. Novos bônus e formas de acumular serão adicionados em breve.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Indicadores do swiper -->
+                        <div class="cashbacks-indicators">
+                            <div id="cashback-ind-1" class="cashbacks-ind cashbacks-ind-active"></div>
+                            <div id="cashback-ind-2" class="cashbacks-ind"></div>
+                            <div id="cashback-ind-3" class="cashbacks-ind"></div>
+                        </div>
+                    </div>
+
+                    <div class="cashbacks-bottom-spacer"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <script type="text/javascript" src="js/supabase-config.js"></script>
+    <script type="text/javascript" src="js/user-service.js"></script>
+    <script type="text/javascript" src="js/carteira.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.inicializarPaginaCarteira) {
+                window.inicializarPaginaCarteira();
+            } else if (window.carteiraInitializePage) {
+                window.carteiraInitializePage();
+            } else if (window.inicializarPaginaCashbacks) {
+                window.inicializarPaginaCashbacks();
+            } else if (window.cashbacksInitializePage) {
+                window.cashbacksInitializePage();
+            }
+        });
+    </script>
+</body>
+</html>

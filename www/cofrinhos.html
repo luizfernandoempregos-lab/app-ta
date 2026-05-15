@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Cofrinhos</title>
+  <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/personalizado.css">
+  <link rel="stylesheet" href="css/cofrinhos.css">
+  <script src="js/cofrinhos.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div id="app">
+    <div class="view view-main">
+      <div class="page page-scrollable" data-name="cofrinhos">
+
+
+        <!-- Header -->
+        <div class="navbar-fixed flex items-center px-4 pb-2" style="padding-top: 40px;">
+          <a href="#" onclick="app.views.main.router.back()" class="back w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50 back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-chevron-left">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M15 6l-6 6l6 6" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Page content -->
+        <div class="page-content cofrinhos-content">
+          <div class="px-4 py-6">
+            <h1 class="text-2xl font-bold mb-6">Cofrinhos</h1>
+
+            <!-- Card com Valor dos Cofrinhos -->
+            <div class="mb-8" id="cofrinhoContainer">
+              <div class="card card-strong color-blue" style="margin: 0; padding: 20px 16px 20px 16px; position: relative;">
+                <div id="cofrinhoContent">
+                  <div class="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto"></div>
+                  <p class="text-sm text-gray-600 mt-4">Carregando...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seção de Ações com Ícones -->
+            <div class="mb-8 flex justify-center gap-8">
+              <div class="flex flex-col items-center cursor-pointer" onclick="navegarParaReservar()">
+                <div class="w-16 h-16 rounded-full card card-strong color-blue flex items-center justify-center mb-2" style="color: #222;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </div>
+                <p class="text-sm font-semibold text-gray-900 text-center">Reservar</p>
+              </div>
+              <div class="flex flex-col items-center cursor-pointer" onclick="navegarParaResgatar()">
+                <div class="w-16 h-16 rounded-full card card-strong color-blue flex items-center justify-center mb-2" style="color: #222;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                </div>
+                <p class="text-sm font-semibold text-gray-900 text-center">Resgatar</p>
+              </div>
+              <div class="flex flex-col items-center cursor-pointer" onclick="navegarParaExtrato()">
+                <div class="w-16 h-16 rounded-full card card-strong color-blue flex items-center justify-center mb-2" style="color: #222;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="12" y1="13" x2="16" y2="13"></line>
+                    <line x1="12" y1="17" x2="16" y2="17"></line>
+                    <polyline points="9 13 8 12 7 13"></polyline>
+                    <polyline points="9 17 8 16 7 17"></polyline>
+                  </svg>
+                </div>
+                <p class="text-sm font-semibold text-gray-900 text-center">Extrato</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay semi-transparente para loading -->
+  <div id="loadingOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000000; display: none; text-align: center;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; padding: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.4);">
+      <div style="width: 40px; height: 40px; border: 4px solid #1e40af; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+</body>
+</html>

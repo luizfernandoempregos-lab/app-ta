@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <title>Banco Digital</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/home.css">
+    <style>.botoes-scroll::-webkit-scrollbar{display:none;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/user-service.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    },
+                    fontFamily: {
+                        'sora': ['Sora', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <!-- Seletor Conta/Cartões Flutuante -->
+            <div data-name="home" class="page">
+                <!-- Top Azul -->
+                <!-- Navbar fora do page-content -->
+                <div class="navbar shadow-none px-0 pb-0 navbar-fixed-home" style="min-height: 52px; padding-top: 6px; padding-bottom: 6px;">
+                        <div class="navbar-bg"></div>
+                        <div class="navbar-inner flex items-center justify-between px-4">
+                            <div class="flex items-center">
+                                <a href="/configuracoes-usuario/" data-transition="f7-push" id="seletorPerfilNavbar" class="flex items-center overflow-hidden transition-all duration-300 relative" style="max-width: 200px; padding: 0; gap: 0; background:none; border:none; cursor:pointer; text-decoration: none;">
+                                  <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 relative z-10 bg-primary" id="iniciaisUsuario" style="border: 1.5px solid rgba(255, 255, 255, 0.3);">
+                                    <span class="text-white font-bold text-base"></span>
+                                  </div>
+                                  <span id="nomeUsuarioNavbar" class="card color-blue font-semibold text-sm whitespace-nowrap transition-all duration-300 relative z-0 text-gray-800" style="opacity: 1; width: auto; padding: 6px 12px 6px 8px; margin-left: -40px; border-radius: 24px; height: 40px; display: flex; align-items: center; padding-left: 56px;"></span>
+                                </a>
+                            </div>
+                            <div class="flex items-center space-x-1 ml-auto">
+                                <div class="relative flex flex-col items-center">
+                                    <a href="/carteira/" class="text-white p-2 relative" data-transition="f7-push">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <rect x="7" y="9" width="14" height="10" rx="2"/>
+                                            <circle cx="14" cy="14" r="2"/>
+                                            <path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2"/>
+                                        </svg>
+                                        <span id="badgeSaldoCarteira" style="position:absolute;top:-2px;right:-4px;background:#10b981;color:#fff;font-size:9px;font-weight:700;border-radius:999px;padding:1px 4px;white-space:nowrap;line-height:1.4;display:none;pointer-events:none;"></span>
+                                    </a>
+                                    <span style="display:block;width:20px;height:3px;background:var(--app-text-primary,#ffffff);border-radius:2px;opacity:0.4;margin-top:-2px;"></span>
+                                </div>
+                                <a href="/notificacoes/" class="text-white p-2 relative" data-transition="f7-push">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bell"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+                                    <span id="badgeNotificacoes" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center hidden" style="pointer-events: none;">0</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <!-- page-content único -->
+                <div class="page-content" style="padding-top: 0; overflow-x: hidden;">
+
+                <!-- Seção Últimas Movimentações -->
+                <div class="mb-6" style="margin-top: 0px;">
+                    <div class="px-4 mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1">
+                                <span class="text-xs text-gray-400">Cargo:</span>
+                                <span class="text-xs text-gray-600 font-medium" id="cargoUsuarioHome"></span>
+                            </div>
+                            <span class="text-gray-300" id="separadorMatricula" style="display:none;">|</span>
+                            <div class="flex items-center gap-1" id="containerMatricula" style="display:none;">
+                                <span class="text-xs text-gray-400">Matrícula:</span>
+                                <span class="text-xs text-gray-600 font-medium" id="matriculaUsuarioHome"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 mb-4">
+                        <h2 class="text-lg font-bold text-gray-900">Registro do dia</h2>
+                        <p class="text-gray-600 text-sm">Registre aqui cada venda realizada hoje</p>
+                    </div>
+                    <div class="swiper-container ultimas-movimentacoes-swiper" style="padding-left: 16px; padding-right: 16px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" id="slide-adicionar" style="position: relative; overflow: visible;">
+                                <div class="flex flex-col items-center" onclick="adicionarMovimentacao()" style="cursor: pointer;">
+                                    <div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary" style="border: 2px dashed rgba(255, 255, 255, 0.5);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        </svg>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Adicionar</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="position: relative; overflow: visible;">
+                                <span class="badge-contador absolute text-xs font-bold rounded-full flex items-center justify-center" style="background: #10b981; color: white; width: 20px; height: 20px; line-height: 1; top: -8px; right: -8px; z-index: 50;">0</span>
+                                <div class="flex flex-col items-center" onclick="incrementarBadge(this)" style="cursor: pointer;">
+                                    <img src="img/icon_ass_prata.png" alt="Prata" style="width: 64px; height: 64px; object-fit: contain;">
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Prata</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="position: relative; overflow: visible;">
+                                <span class="badge-contador absolute text-xs font-bold rounded-full flex items-center justify-center" style="background: #10b981; color: white; width: 20px; height: 20px; line-height: 1; top: -8px; right: -8px; z-index: 50;">0</span>
+                                <div class="flex flex-col items-center" onclick="incrementarBadge(this)" style="cursor: pointer;">
+                                    <img src="img/icon_ass_ouro.png" alt="Ouro" style="width: 64px; height: 64px; object-fit: contain;">
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Ouro</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="position: relative; overflow: visible;">
+                                <span class="badge-contador absolute text-xs font-bold rounded-full flex items-center justify-center" style="background: #10b981; color: white; width: 20px; height: 20px; line-height: 1; top: -8px; right: -8px; z-index: 50;">0</span>
+                                <div class="flex flex-col items-center" onclick="incrementarBadge(this)" style="cursor: pointer;">
+                                    <img src="img/icon_ass_diamante.png" alt="Diamante" style="width: 64px; height: 64px; object-fit: contain;">
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Diamante</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="position: relative; overflow: visible;">
+                                <span class="badge-contador absolute text-xs font-bold rounded-full flex items-center justify-center" style="background: #10b981; color: white; width: 20px; height: 20px; line-height: 1; top: -8px; right: -8px; z-index: 50;">0</span>
+                                <div class="flex flex-col items-center" onclick="incrementarBadge(this)" style="cursor: pointer;">
+                                    <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: #f3f4f6; overflow: hidden;">
+                                        <img src="img/OIP.webp" alt="Selection" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Selection</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="position: relative; overflow: visible;">
+                                <span class="badge-contador absolute text-xs font-bold rounded-full flex items-center justify-center" style="background: #10b981; color: white; width: 20px; height: 20px; line-height: 1; top: -8px; right: -8px; z-index: 50;">0</span>
+                                <div class="flex flex-col items-center" onclick="incrementarBadge(this)" style="cursor: pointer;">
+                                    <img src="img/artpoin-logo-pix.png" alt="Pix" style="width: 64px; height: 64px; object-fit: contain;">
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Pix</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carrossel de Serviços -->
+                <div class="mb-4" style="overflow: visible;">
+                    <div class="swiper-container botoes-swiper" style="padding-left: 16px; padding-right: 16px; overflow: visible;">
+                        <div class="swiper-wrapper" style="overflow: visible;">
+                            <!-- Vendas -->
+                            <div class="swiper-slide" style="width: 80px;">
+                                <div class="flex flex-col items-center">
+                                    <a href="/pix/" id="btnPix" data-transition="f7-push" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;">
+                                        <div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary" style="margin-bottom: 6px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                                        </div>
+                                        <span class="text-gray-600 text-xs text-center font-medium">Vendas</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Checklist Users -->
+                            <div class="swiper-slide" style="width: 80px; position: relative; overflow: visible;">
+                                <div class="flex flex-col items-center">
+                                    <a href="/checklist_users/" data-transition="f7-push" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;">
+                                        <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: var(--app-primary-color, #1e40af); margin-bottom: 6px; position: relative;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M3.5 5.5l1.5 1.5l2.5 -2.5" />
+                                                <path d="M3.5 11.5l1.5 1.5l2.5 -2.5" />
+                                                <path d="M3.5 17.5l1.5 1.5l2.5 -2.5" />
+                                                <path d="M11 6l9 0" />
+                                                <path d="M11 12l9 0" />
+                                                <path d="M11 18l9 0" />
+                                            </svg>
+                                            <span id="badgeChecklistPendentes" style="display:none;position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:18px;height:18px;padding:0 4px;align-items:center;justify-content:center;border:2px solid #fff;z-index:10;">0</span>
+                                        </div>
+                                        <span class="text-gray-600 text-xs text-center font-medium">Checklist</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Banho e Tosa -->
+                            <div class="swiper-slide" style="width: 80px; position: relative; overflow: visible;">
+                                <div class="flex flex-col items-center">
+                                    <a href="/gerenciar-assinatura-clube/" data-transition="f7-push" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;">
+                                        <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: var(--app-primary-color, #1e40af); margin-bottom: 6px; position: relative;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M3 6l3 12h12l3 -12h-18" />
+                                                <path d="M5 6l1 -3h12l1 3" />
+                                                <path d="M9 11v.01" />
+                                                <path d="M15 11v.01" />
+                                                <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
+                                            </svg>
+                                            <!-- Badge NOVO -->
+                                            <span style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 10px; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">Novo</span>
+                                        </div>
+                                        <span class="text-gray-600 text-xs text-center font-medium">Banho e Tosa</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card lembrete saída -->
+                <div class="px-4 mb-4" id="cardLembreteSaida" style="display:none;">
+                    <div class="card card-strong color-blue" style="margin:0;padding:16px 16px 14px 16px;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+                            <img src="img/undraw_alarm-clock_zgtg.svg" style="width:40px;height:40px;flex-shrink:0;">
+                            <div style="flex:1;">
+                                <div style="font-weight:700;font-size:14px;color:#111;margin-bottom:2px;">Lembrete de saída</div>
+                                <div style="font-size:11px;color:#6b7280;">Você voltou do intervalo</div>
+                            </div>
+                            <span onclick="document.getElementById('cardLembreteSaida').style.display='none';" style="color:#9ca3af;font-size:16px;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;">✕</span>
+                        </div>
+                        <div style="background:#f9fafb;border-radius:12px;padding:10px 12px;">
+                            <div style="font-size:12px;color:#374151;font-weight:600;margin-bottom:2px;">🕐 Bata o ponto de saída às <span id="lembreteSaidaHora" style="color:var(--app-primary-color,#1e40af);">--:--</span></div>
+                            <div style="font-size:11px;color:#6b7280;">Para não ficar devendo horas, não esqueça de registrar sua saída no horário certo!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card débito de horas -->
+                <div class="px-4 mb-4" id="cardPontoEmDia" style="display:none;">
+                    <div class="card card-strong color-blue" style="margin:0;padding:16px 16px 14px 16px;">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+                            <img src="img/undraw_document-warning_2es6.svg" style="width:40px;height:40px;flex-shrink:0;">
+                            <div style="flex:1;">
+                                <div style="font-weight:700;font-size:14px;color:#111;margin-bottom:2px;">Saída antecipada</div>
+                                <div style="font-size:11px;color:#6b7280;">Você saiu antes do horário</div>
+                            </div>
+                            <span onclick="document.getElementById('cardPontoEmDia').style.display='none';" style="color:#9ca3af;font-size:16px;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;">✕</span>
+                        </div>
+                        <div style="background:#f9fafb;border-radius:12px;padding:10px 12px;">
+                            <div style="font-size:12px;color:#374151;font-weight:600;margin-bottom:2px;">🕐 Você está devendo <span id="pontoEmDiaHora" style="color:var(--app-primary-color,#1e40af);">--</span></div>
+                            <div style="font-size:11px;color:#6b7280;">Para compensar, fique <span id="pontoEmDiaCompensa" style="font-weight:600;color:#374151;">--</span> a mais amanhã.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card de Verificação de Conta para quando o statsu limite for pendente tbm -->
+                <div id="cardVerificacaoConta" class="px-4 mb-4" style="display: block; margin-top: 36px; position: relative; overflow: visible;">
+                    <span id="badgeBancoHoras" class="absolute px-1.5 py-0.5 text-xs font-bold rounded-full" style="background: #fef3c7; color: #d97706; font-size: 10px; top: -10px; right: 24px; z-index: 50; display: none;"></span>
+                    <div class="card card-strong color-blue" style="border-radius: 24px; padding: 20px; margin: 0; position: relative; overflow: visible;">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="flex items-center justify-center mr-3 relative">
+                                    <svg width="26" height="26" viewBox="0 0 127 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_75_2536)">
+                        <path d="M126.83 142.96H0C0 115.53 22.24 93.29 49.67 93.29C49.5 93.7 45.62 103.68 51.88 111.63C56.01 116.88 61.94 117.91 63.42 118.12C64.9 117.94 70.78 117.07 74.95 111.99C79.09 106.95 79.91 99.71 77.17 93.28C80.35 93.26 98.34 93.43 112.66 107.96C126.66 122.16 126.86 139.64 126.84 142.95L126.83 142.96Z" fill="#C1D9E5"/>
+                        <path d="M93.6899 53.79C100.24 47.41 100.55 37.06 98.5099 28.7C97.4999 24.55 95.8299 20.4 93.2799 16.95C90.4899 13.17 86.7599 10.8 82.0599 10.02C77.3599 9.23999 72.0499 9.99998 67.5099 11.91L68.6699 12.06C59.9399 7.76999 49.9299 8.78999 42.0199 14.35C35.4699 18.96 31.1999 25.95 29.9999 33.89C29.0899 39.9 29.7399 46.02 31.6699 51.77C32.0899 53.02 34.3499 53.36 34.5599 51.77C34.8599 49.51 35.6399 47.47 36.7099 45.65C38.8399 42.02 42.4999 40.14 46.8699 40.85C50.5599 41.45 53.6099 43.54 57.0799 44.76C59.8299 45.73 62.7899 46.09 65.6599 45.52C70.2799 44.6 73.8199 41.12 76.1499 37.19C77.6399 34.68 78.8599 31.83 79.4899 28.97L76.5399 28.57C76.3299 32 77.5099 35.78 79.5599 38.5C81.6099 41.22 84.3199 42.7 87.4799 43.73C89.7899 44.48 92.3299 45.95 92.3499 48.57C92.3499 49.85 91.9799 50.96 91.3199 51.97C90.4099 53.36 92.1299 54.56 93.3699 54.02C96.0299 52.87 99.7499 52.71 100.61 56.2C101.06 58.03 100.13 59.85 99.4899 61.52C98.8499 63.19 98.1699 64.77 97.3599 66.33C96.4399 68.1 95.3999 69.95 93.8399 71.24C93.6399 71.4 93.9099 71.2 93.6499 71.38C93.5299 71.46 93.4099 71.54 93.2899 71.61C93.1899 71.67 93.0899 71.72 92.9899 71.77C92.7999 71.87 93.2299 71.69 92.8799 71.8C92.7799 71.83 92.6799 71.85 92.5799 71.88C92.2599 71.97 92.8399 71.86 92.6199 71.88C92.4499 71.89 92.2899 71.88 92.1199 71.88C92.5699 71.9 92.2199 71.88 91.9999 71.81C92.0999 71.84 92.2599 71.98 91.9799 71.78C91.5899 71.51 92.2099 72.01 91.9899 71.8C91.1799 71 89.7899 71.37 89.4799 72.46C86.1699 84 79.0399 96.76 66.3499 98.94C65.8999 99.02 66.3599 98.94 66.2499 98.96C66.1299 98.97 66.0099 98.99 65.8899 99C65.6999 99.02 65.5199 99.03 65.3299 99.04C65.1399 99.05 64.9699 99.04 64.7799 99.05C63.7999 99.05 62.8199 99.08 61.8399 99C61.7199 98.99 61.5999 98.97 61.4799 98.96C61.3899 98.95 61.8099 99.02 61.3799 98.94C61.0499 98.88 60.7299 98.83 60.3999 98.76C59.5799 98.59 58.7599 98.36 57.9699 98.08C55.9899 97.4 53.9899 96.33 52.1399 95.01C44.7599 89.74 40.6799 80.93 38.2499 72.46C37.9399 71.37 36.5499 71 35.7399 71.8C35.5099 72.03 36.1099 71.51 35.8199 71.74C35.3599 72.1 35.9699 71.61 35.5199 71.87C35.1999 72.05 35.7899 71.9 35.4399 71.89C35.3599 71.89 35.2699 71.89 35.1899 71.89C34.8299 71.86 35.3999 71.95 35.1899 71.89C35.0699 71.86 34.5799 71.71 34.7499 71.77C34.8699 71.82 34.3399 71.54 34.1899 71.45C33.8599 71.25 33.9899 71.33 33.6099 70.99C33.3099 70.72 33.0399 70.42 32.7699 70.11C32.0899 69.31 31.5399 68.41 31.0199 67.51C30.2399 66.15 29.5599 64.72 28.9499 63.27C28.2299 61.55 27.1899 59.56 27.0099 57.69C26.8499 56.02 27.6299 54.4 29.1199 53.59C30.2599 52.97 31.8099 53.03 33.0799 52.87C34.9699 52.63 34.9899 49.63 33.0799 49.87C31.4599 50.07 29.6599 50.05 28.1399 50.73C26.5299 51.46 25.2399 52.78 24.5599 54.41C23.7399 56.37 23.9199 58.38 24.6199 60.34C25.3999 62.53 26.2599 64.7 27.2599 66.79C28.7299 69.84 31.4499 75.16 35.5999 74.86C36.4099 74.8 37.2599 74.49 37.8499 73.91L35.3399 73.25C38.8399 85.47 46.7199 99.63 60.5699 101.82C66.5599 102.77 72.5799 100.91 77.4299 97.34C85.2799 91.55 89.7299 82.42 92.3599 73.25L89.8499 73.91C91.4599 75.5 93.9599 74.88 95.5599 73.65C97.6499 72.04 99.0599 69.58 100.21 67.25C101.25 65.16 102.12 62.99 102.91 60.79C103.7 58.59 104.03 56.57 103.13 54.41C102.34 52.52 100.75 51.07 98.7799 50.48C96.4199 49.78 93.9999 50.48 91.8199 51.41L93.8699 53.46C95.8899 50.38 95.8399 46.08 93.0799 43.47C90.3199 40.86 86.6599 40.89 83.8699 38.72C81.8799 37.17 80.5999 34.95 79.9599 32.53C79.5999 31.15 79.3999 30.02 79.4899 28.55C79.5899 26.87 76.9099 26.5 76.5399 28.15C75.2399 34.02 71.4299 41.22 64.9099 42.59C62.1399 43.17 59.2299 42.5 56.6699 41.41C53.2899 39.98 50.2499 38.24 46.5399 37.79C41.7099 37.21 37.3699 39.23 34.6299 43.2C33.0899 45.44 31.9599 48.25 31.5999 50.96H34.4899C31.2899 41.44 31.6599 30.11 38.0999 21.96C42.3999 16.52 49.1899 12.63 56.1499 12.31C58.8099 12.19 61.4399 12.56 63.9699 13.37C64.9199 13.67 65.8199 14.05 66.7299 14.46C67.6399 14.87 68.0799 14.84 68.9099 14.51C72.5399 13.1 76.5099 12.37 80.3999 12.79C84.2899 13.21 87.8999 14.97 90.3899 18.14C92.5899 20.94 94.0699 24.32 95.0699 27.72C97.3399 35.42 97.6899 45.6 91.4899 51.64C90.1099 52.99 92.2299 55.11 93.6099 53.76L93.6899 53.79Z" fill="#231F20"/>
+                        <path d="M7.22998 22.09V1.5L5.72998 3H26.32C28.25 3 28.25 0 26.32 0H5.72998C4.91998 0 4.22998 0.69 4.22998 1.5V22.09C4.22998 24.02 7.22998 24.02 7.22998 22.09Z" fill="url(#paint0_linear_75_2536)"/>
+                        <path d="M26.32 92.06H5.72998L7.22998 93.56V72.97C7.22998 71.04 4.22998 71.04 4.22998 72.97V93.56C4.22998 94.37 4.91998 95.06 5.72998 95.06H26.32C28.25 95.06 28.25 92.06 26.32 92.06Z" fill="url(#paint1_linear_75_2536)"/>
+                        <path d="M99.96 3H120.55L119.05 1.5V22.09C119.05 24.02 122.05 24.02 122.05 22.09V1.5C122.05 0.69 121.36 0 120.55 0H99.96C98.03 0 98.03 3 99.96 3Z" fill="url(#paint2_linear_75_2536)"/>
+                        <path d="M119.05 72.98V93.57L120.55 92.07H99.96C98.03 92.07 98.03 95.07 99.96 95.07H120.55C121.36 95.07 122.05 94.38 122.05 93.57V72.98C122.05 71.05 119.05 71.05 119.05 72.98Z" fill="url(#paint3_linear_75_2536)"/>
+                        </g>
+                        <defs>
+                        <linearGradient id="paint0_linear_75_2536" x1="5.22998" y1="11.77" x2="26.32" y2="11.77" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#8DCC9A"/>
+                        <stop offset="1" stop-color="#5DC4C6"/>
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_75_2536" x1="-1.95018e-05" y1="83.29" x2="26.32" y2="83.29" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#8DCC9A"/>
+                        <stop offset="1" stop-color="#5DC4C6"/>
+                        </linearGradient>
+                        <linearGradient id="paint2_linear_75_2536" x1="99.96" y1="0" x2="121.05" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#8DCC9A"/>
+                        <stop offset="1" stop-color="#5DC4C6"/>
+                        </linearGradient>
+                        <linearGradient id="paint3_linear_75_2536" x1="99.96" y1="83.29" x2="121.05" y2="83.29" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#8DCC9A"/>
+                        <stop offset="1" stop-color="#5DC4C6"/>
+                        </linearGradient>
+                        <clipPath id="clip0_75_2536">
+                        <rect width="126.83" height="142.96" fill="white"/>
+                        </clipPath>
+                        </defs>
+                        </svg>
+                    <i id="cardVerificacaoIcone" class="mdi mdi-clock" style="position: absolute; bottom: -2px; right: -2px; font-size: 14px; color: #f59e0b; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; line-height: 1;"></i>
+                </div>
+                <div>
+                    <div class="text-gray-600 text-sm font-medium">Registro de ponto</div>
+                    <div id="cardVerificacaoDescricao" class="text-gray-400 text-xs">Registre sua entrada, saída e acompanhe seu banco de horas</div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span id="horarioPontoEntrada" class="text-xs font-semibold" style="color: var(--app-primary-color);">
+                            <span id="hpEntrada">--:--</span>
+                            <span class="text-gray-400"> – </span>
+                            <span id="hpSaidaInt">--:--</span>
+                        </span>
+                        <span class="text-gray-300 text-xs">|</span>
+                        <span id="horarioPontoRetorno" class="text-xs font-semibold" style="color: var(--app-primary-color);">
+                            <span id="hpRetorno">--:--</span>
+                            <span class="text-gray-400"> – </span>
+                            <span id="hpSaidaFinal">--:--</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <button id="cardVerificacaoBotao" onclick="if (window.app && app.views && app.views.main && app.views.main.router) { app.views.main.router.navigate('/score-credito/', { transition: 'f7-push' }); } else { window.location.href = 'score-credito.html'; }" class="px-4 py-2 rounded-full bg-primary text-white text-sm font-semibold" style="border: none; cursor: pointer; margin: 0; flex-shrink: 0; width: auto; height: auto;">
+                <!-- Spinner de loading -->
+                <div id="cardVerificacaoSpinner" class="hidden items-center justify-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                </div>
+                <!-- Texto do botão -->
+                <span id="cardVerificacaoTexto">Registrar</span>
+            </button>
+                        </div>
+                        <!-- Linha divisória -->
+                        <div class="border-t border-gray-200 my-3"></div>
+                        <!-- Link acessar -->
+                        <a href="/depositar/" class="flex items-center justify-between active-state" style="text-decoration: none;" data-transition="f7-push">
+                            <span class="text-gray-600 text-sm">Acessar</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" style="color:#9ca3af;"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                        </a>
+                        
+                    </div>
+                </div>
+                <!-- Card de Limite Reprovado -->
+                <!-- Card de Limite Cancelado -->
+                <div id="cardLimiteCancelado" class="px-4 mb-4" style="display: block;">
+                    <div class="card card-strong color-blue" style="border-radius: 24px; padding: 20px; margin: 0;">
+                        <div class="flex items-center" style="margin-bottom: 12px;">
+                            <div class="flex items-center mr-3">
+                                <!-- 3 avatares empilhados + badge -->
+                                <div style="display:flex; align-items:center; position:relative;">
+                                    <div id="avatarsCardConversas" style="display:flex; align-items:center;">
+                                        <div style="width:36px;height:36px;border-radius:50%;background:#f3f4f6;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#374151;z-index:3;position:relative;">--</div>
+                                        <div style="width:36px;height:36px;border-radius:50%;background:#f3f4f6;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#374151;z-index:2;position:relative;margin-left:-10px;">--</div>
+                                        <div style="width:36px;height:36px;border-radius:50%;background:#f3f4f6;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#374151;z-index:1;position:relative;margin-left:-10px;">--</div>
+                                    </div>
+                                    <!-- Badge mensagens não lidas — fora do container dos avatares -->
+                                    <span id="badgeMensagensHome" style="display:none;position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:18px;height:18px;padding:0 4px;align-items:center;justify-content:center;border:2px solid #fff;z-index:10;">0</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600 text-sm font-medium">
+                                    Converse com sua equipe.
+                                    
+                                </div>
+                                <div class="text-gray-400 text-xs mt-1">Troque mensagens com seus colegas de trabalho em tempo real.</div>
+                            </div>
+                        </div>
+                        <!-- Linha divisória -->
+                        <div class="border-t border-gray-200 my-3"></div>
+                        <!-- Link acessar -->
+                        <a href="#" onclick="if(window.app&&app.views&&app.views.main){app.views.main.router.navigate('/conversas-usuarios/',{transition:'f7-push'});}else{window.location.href='conversas-usuarios.html';}return false;" class="flex items-center justify-between active-state" style="text-decoration: none; cursor: pointer;">
+                            <span class="text-gray-600 text-sm">Conversar</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" style="color:#9ca3af;"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Seção Stories -->
+                <div class="mb-6" style="margin-top: 0px;">
+                    <div class="px-4 mb-2">
+                        <h2 class="text-lg font-bold text-gray-900">Novidades da equipe</h2>
+                        <p class="text-gray-600 text-sm">Veja o que seus colegas estão compartilhando</p>
+                    </div>
+                    <div class="swiper-container ultimas-movimentacoes-swiper" style="padding-left: 16px; padding-right: 16px;">
+                        <div class="swiper-wrapper">
+                            <!-- Círculo inicial "Você" -->
+                            <div class="swiper-slide" style="position: relative; overflow: visible;" onclick="abrirSeletorStory()">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: #f3f4f6; position: relative;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        </svg>
+                                        <div style="position: absolute; bottom: 0; right: 0; background: var(--app-primary-color); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Você</span>
+                                </div>
+                            </div>
+                            <!-- Stories com imagens reais -->
+                            <div class="swiper-slide story-circle-slide" style="position: relative; overflow: visible;" onclick="abrirStory(0)">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="story-ring w-16 h-16 rounded-full" style="padding: 3px; background: var(--app-primary-color);">
+                                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center" style="padding: 2px;">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ana" alt="Ana" style="width: 100%; height: 100%; border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Ana Silva</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide story-circle-slide" style="position: relative; overflow: visible;" onclick="abrirStory(1)">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="story-ring w-16 h-16 rounded-full" style="padding: 3px; background: var(--app-primary-color);">
+                                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center" style="padding: 2px;">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos" alt="Carlos" style="width: 100%; height: 100%; border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Carlos</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide story-circle-slide" style="position: relative; overflow: visible;" onclick="abrirStory(2)">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="story-ring w-16 h-16 rounded-full" style="padding: 3px; background: var(--app-primary-color);">
+                                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center" style="padding: 2px;">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maria" alt="Maria" style="width: 100%; height: 100%; border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Maria</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide story-circle-slide" style="position: relative; overflow: visible;" onclick="abrirStory(3)">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="story-ring w-16 h-16 rounded-full" style="padding: 3px; background: var(--app-primary-color);">
+                                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center" style="padding: 2px;">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro" alt="Pedro" style="width: 100%; height: 100%; border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Pedro</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide story-circle-slide" style="position: relative; overflow: visible;" onclick="abrirStory(4)">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="story-ring w-16 h-16 rounded-full" style="padding: 3px; background: var(--app-primary-color);">
+                                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center" style="padding: 2px;">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Julia" alt="Julia" style="width: 100%; height: 100%; border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Julia</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide story-circle-slide" style="position: relative; overflow: visible;" onclick="abrirStory(5)">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="story-ring w-16 h-16 rounded-full" style="padding: 3px; background: var(--app-primary-color);">
+                                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center" style="padding: 2px;">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Roberto" alt="Roberto" style="width: 100%; height: 100%; border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Roberto</span>
+                                </div>
+                            </div>
+                            <div class="swiper-slide story-circle-slide" style="position: relative; overflow: visible;" onclick="abrirStory(6)">
+                                <div class="flex flex-col items-center" style="cursor: pointer;">
+                                    <div class="story-ring w-16 h-16 rounded-full" style="padding: 3px; background: var(--app-primary-color);">
+                                        <div class="w-full h-full rounded-full bg-white flex items-center justify-center" style="padding: 2px;">
+                                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Fernanda" alt="Fernanda" style="width: 100%; height: 100%; border-radius: 50%;">
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-700 text-center font-medium mt-2">Fernanda</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Wrapper de abas (tabs) - Framework7 -->
+                <!-- Conteúdo da página -->
+                
+                <!-- Carrossel de Cards -->
+                <div class="mt-4">
+                    <div class="swiper-container indicacao-swiper" style="padding-left: 16px; padding-right: 16px; padding-top: 20px;">
+                        <div class="swiper-wrapper">
+                            <!-- Card 1: Ranking Assinatura -->
+                            <div class="swiper-slide">
+                                <div class="card card-strong color-blue" style="margin: 0 0 16px 0; padding: 20px 16px 16px 16px;">
+                                    <!-- Topo: avatares + título -->
+                                    <div class="flex items-center" style="margin-bottom: 12px; gap: 10px;">
+                                        <!-- 3 avatares empilhados -->
+                                        <div id="cardRankingAvatares" style="display:flex; align-items:center;">
+                                            <div style="width:34px;height:34px;border-radius:50%;background:#f3f4f6;border:2px solid #fff;overflow:hidden;z-index:3;position:relative;">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user1" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                                            </div>
+                                            <div style="width:34px;height:34px;border-radius:50%;background:#f3f4f6;border:2px solid #fff;overflow:hidden;z-index:2;position:relative;margin-left:-10px;">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user2" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                                            </div>
+                                            <div style="width:34px;height:34px;border-radius:50%;background:#f3f4f6;border:2px solid #fff;overflow:hidden;z-index:1;position:relative;margin-left:-10px;">
+                                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=user3" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight:600;font-size:14px;" class="home-card-name">Ranking de Assinatura 🏆</div>
+                                            <div style="font-size:11px;color:#6b7280;margin-top:2px;">Melhores da semana</div>
+                                            <div style="font-size:10px;color:#9ca3af;margin-top:1px;"><span id="rankingDataInicio">--/--</span> até <span id="rankingDataFim">--/--</span></div>
+                                        </div>
+                                    </div>
+                                    <!-- Destaque -->
+                                    <div style="background:#f9fafb;border-radius:12px;padding:10px 12px;margin-bottom:12px;" class="home-card-destaque">
+                                        <div style="font-size:12px;font-weight:600;margin-bottom:2px;" class="home-card-destaque-title">🏆 Competição acirrada!</div>
+                                        <div style="font-size:11px;color:#6b7280;">Veja quem está liderando o ranking de vendas e conquiste o topo!</div>
+                                    </div>
+                                    <!-- Linha divisória -->
+                                    <div style="border-top:1px solid #e5e7eb;margin-bottom:10px;"></div>
+                                    <!-- Botão acessar -->
+                                    <a href="/ranking/" data-transition="f7-push" style="display:flex;align-items:center;justify-content:space-between;text-decoration:none;cursor:pointer;">
+                                        <span style="font-size:13px;color:#6b7280;">Ver ranking completo</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#9ca3af;"><path d="M9 6l6 6l-6 6"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 2: Premiação da Semana -->
+                            <div class="swiper-slide">
+                                <div class="card card-strong color-blue" style="margin: 0 0 16px 0; padding: 20px 16px 16px 16px;">
+                                    <!-- Topo: avatar destaque + título -->
+                                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+                                        <div style="position:relative;flex-shrink:0;">
+                                            <img src="https://i.pravatar.cc/52?img=12" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #fff;">
+                                            <span style="position:absolute;bottom:-2px;right:-2px;font-size:16px;line-height:1;">🏅</span>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight:700;font-size:15px;" class="home-card-name">Arthur</div>
+                                            <div style="font-size:11px;color:#6b7280;margin-top:2px;">Premiação da semana ⭐</div>
+                                            <div style="font-size:10px;color:#9ca3af;margin-top:1px;"><span id="premiacaoDataInicio">--/--</span> até <span id="premiacaoDataFim">--/--</span></div>
+                                        </div>
+                                    </div>
+                                    <!-- Destaque -->
+                                    <div style="background:#f9fafb;border-radius:12px;padding:10px 12px;margin-bottom:12px;" class="home-card-destaque">
+                                        <div style="font-size:12px;font-weight:600;margin-bottom:2px;" class="home-card-destaque-title">🐾 Maior vendedor de rações marca própria</div>
+                                        <div style="font-size:11px;color:#6b7280;">Parabéns pelo desempenho incrível essa semana!</div>
+                                    </div>
+                                    <!-- Linha divisória -->
+                                    <div style="border-top:1px solid #e5e7eb;margin-bottom:10px;"></div>
+                                    <!-- Botão -->
+                                    <a href="#" onclick="return false;" style="display:flex;align-items:center;justify-content:space-between;text-decoration:none;cursor:pointer;">
+                                        <span style="font-size:13px;color:#6b7280;">Ver premiações</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#9ca3af;"><path d="M9 6l6 6l-6 6"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 3: Premiação Assinaturas -->
+                            <div class="swiper-slide">
+                                <div class="card card-strong color-blue" style="margin: 0 0 16px 0; padding: 20px 16px 16px 16px;">
+                                    <!-- Topo: avatar destaque + título -->
+                                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+                                        <div style="position:relative;flex-shrink:0;">
+                                            <img src="https://i.pravatar.cc/52?img=12" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #fff;">
+                                            <span style="position:absolute;bottom:-2px;right:-2px;font-size:16px;line-height:1;">🏅</span>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight:700;font-size:15px;" class="home-card-name">Fernando</div>
+                                            <div style="font-size:11px;color:#6b7280;margin-top:2px;">Premiação da semana ⭐</div>
+                                            <div style="font-size:10px;color:#9ca3af;margin-top:1px;"><span id="premiacaoAssDataInicio">--/--</span> até <span id="premiacaoAssDataFim">--/--</span></div>
+                                        </div>
+                                    </div>
+                                    <!-- Destaque -->
+                                    <div style="background:#f9fafb;border-radius:12px;padding:10px 12px;margin-bottom:12px;" class="home-card-destaque">
+                                        <div style="font-size:12px;font-weight:600;margin-bottom:2px;" class="home-card-destaque-title">🏆 Maior vendedor de assinaturas</div>
+                                        <div style="font-size:11px;color:#6b7280;">Parabéns pelo desempenho incrível essa semana!</div>
+                                    </div>
+                                    <!-- Linha divisória -->
+                                    <div style="border-top:1px solid #e5e7eb;margin-bottom:10px;"></div>
+                                    <!-- Botão -->
+                                    <a href="#" onclick="return false;" style="display:flex;align-items:center;justify-content:space-between;text-decoration:none;cursor:pointer;">
+                                        <span style="font-size:13px;color:#6b7280;">Ver premiações</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#9ca3af;"><path d="M9 6l6 6l-6 6"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Indicadores do carrossel -->
+                        <div class="flex justify-center mt-2">
+                            <div class="flex space-x-2">
+                                <div id="indicador-1" class="w-2 h-2 rounded-full bg-primary transition-colors duration-300" style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--app-primary-color);"></div>
+                                <div id="indicador-2" class="w-2 h-2 rounded-full bg-gray-300 transition-colors duration-300" style="width: 8px; height: 8px; border-radius: 50%; background-color: #d1d5db;"></div>
+                                <div id="indicador-3" class="w-2 h-2 rounded-full bg-gray-300 transition-colors duration-300" style="width: 8px; height: 8px; border-radius: 50%; background-color: #d1d5db;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        <!-- Seção Meu Ponto -->
+                        <div class="mb-6">
+                            <div class="px-4 mb-4">
+                                <h2 class="text-lg font-bold text-gray-900">Meu Ponto</h2>
+                            </div>
+                            <div class="px-4">
+                                <div class="card card-strong color-blue" style="margin: 0; padding: 20px 16px 20px 16px; position: relative;">
+                                    <div class="flex items-center" onclick="if (window.app && app.views && app.views.main && app.views.main.router) { app.views.main.router.navigate('/score-credito/', { transition: 'f7-push' }); } else { window.location.href = 'score-credito.html'; }" style="cursor: pointer; margin-bottom: 12px;">
+                                        <svg width="26" height="26" viewBox="0 0 105 89" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-3">
+                                            <g clip-path="url(#clip0_75_3282)">
+                                            <path d="M72.68 51.3999C72.61 59.7199 67.4 67.4399 59.5 70.2899C51.6 73.1399 42.48 70.7099 37.03 64.1799C31.58 57.6499 31.01 48.1599 35.37 40.9699C39.72 33.7999 48.38 29.9799 56.61 31.6899C65.91 33.6299 72.61 41.9299 72.68 51.3999C72.7 53.3299 75.7 53.3299 75.68 51.3999C75.6 41.7299 69.54 33.0299 60.46 29.6799C51.41 26.3399 40.78 29.2599 34.71 36.7499C28.63 44.2599 27.75 55.0299 32.79 63.3399C37.83 71.6499 47.6 75.8799 57.08 74.0599C67.83 71.9999 75.6 62.2399 75.68 51.3899C75.7 49.4599 72.7 49.4599 72.68 51.3899V51.3999Z" fill="#231F20"/>
+                                            <path d="M84.5 14.92C84.83 16.06 84.34 16.62 83.54 17.41C82.51 18.42 81.48 19.43 80.45 20.45C79.54 21.36 78.64 22.27 77.73 23.18C76.8801 24.04 76.02 25.17 75.03 25.87C74.04 26.57 73.34 25.63 72.57 25.05C71.56 24.29 70.5201 23.57 69.44 22.9C67.56 21.75 65.57 20.79 63.5 20.03C55.14 16.95 45.18 17.84 37.44 22.23C36.45 22.79 35.5 23.41 34.59 24.09C33.88 24.61 32.73 25.99 31.84 26.03C30.87 26.08 29.78 24.49 29.16 23.87C28.14 22.86 27.13 21.84 26.11 20.83C25.21 19.93 24.31 19.02 23.4 18.12C22.77 17.49 21.4 16.62 21.58 15.58C21.73 14.72 22.9 13.94 23.56 13.45C24.5 12.74 25.47 12.07 26.46 11.41C34.66 5.92998 44.72 2.69998 54.62 3.02998C60.12 3.21998 65.53 4.50998 70.62 6.58998C73.3601 7.70998 76.03 9.06998 78.56 10.61C79.67 11.29 80.69 12.08 81.73 12.86C82.7701 13.64 83.98 14.21 84.67 15.29C85.7 16.92 88.3 15.41 87.26 13.78C86.66 12.84 85.92 12.15 85 11.52C83.81 10.71 82.68 9.81998 81.51 8.97998C79.1 7.25998 76.38 5.88998 73.69 4.67998C68.64 2.39998 63.33 0.849979 57.82 0.259979C46.68 -0.920021 35.16 2.30998 25.76 8.28998C23.7 9.59998 21.33 11.03 19.74 12.91C18.15 14.79 18.29 17.09 19.94 18.89C21.97 21.12 24.24 23.18 26.37 25.31C28.16 27.09 30.14 29.77 33.01 28.81C34.22 28.41 35.12 27.41 36.12 26.67C37.26 25.83 38.46 25.07 39.72 24.4C42.07 23.16 44.61 22.37 47.2 21.83C52.06 20.82 57.08 21.03 61.8 22.59C64.49 23.48 67.01 24.8 69.35 26.39C71.69 27.98 73.76 30.28 76.55 28.47C77.93 27.57 79.06 26.12 80.21 24.96C81.36 23.8 82.58 22.57 83.78 21.38C85.9 19.28 88.37 17.43 87.4 14.12C86.86 12.27 83.96 13.06 84.51 14.92H84.5Z" fill="#231F20"/>
+                                            <path d="M91.34 20.6099C89.91 20.1199 88.79 20.5099 87.73 21.6099C84.95 24.4999 82.08 27.2999 79.24 30.1399C77.94 31.4399 77.86 32.6399 78.99 34.0599C85.96 42.8299 87.92 52.5599 84.57 63.2899C83.45 66.8599 81.59 70.0399 79.17 72.8999C78.07 74.1999 78.07 75.5499 79.28 76.7699C82.19 79.7199 85.15 82.6299 88.06 85.5799C88.97 86.4999 90.02 86.6699 91.21 86.3199C91.57 86.0699 91.97 85.7499 92.37 85.3699C92.91 84.85 93.33 84.3399 93.64 83.8899C94.32 82.9999 95.14 81.8299 96.05 80.4499C96.31 80.0599 96.56 79.6599 96.8 79.2499C106.98 61.8799 106.9 44.5399 96.55 27.2599C95.51 25.5299 94.15 24.0299 93.05 22.3399C92.88 22.0499 92.62 21.6799 92.24 21.3099C91.92 20.9999 91.6 20.7799 91.34 20.6199V20.6099Z" fill="#C1D9E5"/>
+                                            <path d="M14.14 88.25C17 89.09 18.68 87.39 20.55 85.48C22.68 83.3 24.86 81.17 27.02 79.01C27.87 78.16 28.78 77.28 29.07 76.07C29.36 74.86 28.91 73.61 28.18 72.59C26.66 70.49 25.18 68.44 24.03 66.1C19.48 56.87 20.55 45.23 26.67 36.95C27.41 35.96 28.42 35.04 28.8 33.84C29.18 32.64 28.99 31.43 28.31 30.39C27.56 29.26 26.42 28.33 25.47 27.37C24.4 26.3 23.33 25.23 22.25 24.16C21.17 23.09 20.12 22 19.04 20.94C18.2 20.12 17.23 19.51 16.02 19.43C13.45 19.27 11.88 21.46 10.51 23.33C3.94999 32.3 -0.160008 43.46 -8.07364e-06 54.63C0.0899919 60.76 1.44999 66.83 3.77999 72.49C5.04999 75.58 6.53999 78.67 8.35999 81.48C9.17999 82.75 10.16 83.9 11.03 85.14C11.85 86.3 12.54 87.33 13.77 88.11C15.4 89.15 16.91 86.55 15.28 85.52C14.4 84.96 13.96 84.1 13.36 83.28C12.6 82.23 11.78 81.23 11.06 80.15C9.65999 78.05 8.49999 75.75 7.43999 73.47C5.34999 68.95 3.85999 64.07 3.27999 59.12C2.11999 49.18 4.61999 39.37 9.37999 30.66C10.54 28.54 11.86 26.53 13.3 24.59C13.8 23.92 14.56 22.73 15.4 22.48C16.49 22.16 17.44 23.65 18.08 24.29C19.94 26.15 21.81 28.01 23.66 29.87C24.3 30.51 25.92 31.63 25.98 32.59C26.04 33.55 24.6 34.74 24.05 35.48C18.74 42.68 16.92 52.57 19.03 61.23C19.62 63.65 20.53 65.99 21.67 68.2C22.23 69.29 22.86 70.36 23.54 71.38C24.27 72.49 25.27 73.51 25.91 74.67C26.55 75.83 25.08 76.71 24.35 77.44C23.27 78.52 22.19 79.59 21.11 80.67C20.09 81.69 19.07 82.71 18.06 83.75C17.11 84.73 16.39 85.84 14.9 85.4C13.04 84.86 12.25 87.75 14.1 88.29L14.14 88.25Z" fill="#231F20"/>
+                                            </g>
+                                            <defs>
+                                            <linearGradient id="paint0_linear_75_3282" x1="42.47" y1="51.04" x2="62.79" y2="51.04" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#8DCC9A"/>
+                                                <stop offset="1" stop-color="#5DC4C6"/>
+                                            </linearGradient>
+                                            <clipPath id="clip0_75_3282">
+                                                <rect width="104.37" height="88.47" fill="white"/>
+                                            </clipPath>
+                                            </defs>
+                                            </svg>
+                                        <div style="flex: 1;">
+                                            <div style="font-weight:600;font-size:14px;margin-bottom:4px;" class="home-card-name">Seu dia está correndo!</div>
+                                            <div style="font-size:11px;color:#6b7280;">Acompanhe seu registro de ponto<br>e veja como está seu banco de<br>horas hoje!</div>
+                                        </div>
+                                        <!-- Círculo de progresso do score -->
+                                        <div id="scoreCardCreditoCircleContainer" class="score-card-credito-circle-container" style="margin-top: -8px;">
+                                            <svg class="score-card-credito-circle" width="48" height="48" viewBox="0 0 48 48">
+                                                <circle class="score-card-credito-circle-bg" cx="24" cy="24" r="20" stroke="var(--app-primary-color)" stroke-width="3" fill="none" opacity="0.3"/>
+                                                <circle id="scoreCardCreditoCircleFill" class="score-card-credito-circle-fill" cx="24" cy="24" r="20" stroke="var(--app-primary-color)" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="125.6" stroke-dashoffset="125.6"/>
+                                            </svg>
+                                            <div id="scoreCardCreditoValue" class="score-card-credito-value">0</div>
+                                        </div>
+                                        </div>
+                                        <!-- Linha divisória -->
+                                        <div class="border-t border-gray-200 my-3"></div>
+                                        <!-- Link acessar -->
+                                        <a href="/score-credito/" data-transition="f7-push" class="flex items-center justify-between active-state" style="text-decoration: none;">
+                                            <span class="text-gray-600 text-sm">Conferir</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" style="color:#9ca3af;"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-6" style="display:none;">
+                            <div class="px-4 mb-4">
+                                <h2 class="text-lg font-bold text-gray-900">Clube nandinho</h2>
+                            </div>
+                            <div class="swiper-container clube-nandinho-swiper" style="padding-left: 16px; padding-right: 16px; padding-top: 12px;">
+                                <div class="swiper-wrapper">
+                                                                 <a href="#" onclick="clube_redirecionarParaClube(); event.preventDefault();" class="flex items-center justify-between active-state" style="text-decoration: none;">
+                                            <span class="text-gray-600 text-sm">Saiba mais</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color:#9ca3af;"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Espaçamento final -->
+                        <div style="height: 300px;"></div>
+                </div>
+                <!-- FIM page-content -->
+            </div>
+        </div>
+    </div>
+    <!-- Framework7 Library -->
+    <script src="lib/framework7-bundle.min.js"></script>
+    <!-- App scripts -->
+    <script src="js/routes.js"></script>
+
+    <!-- Overlay menu perfil -->
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Parcelamento - NandoPay</title>
+    
+    <!-- Framework7 CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="css/personalizado.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Página de detalhes do parcelamento -->
+        <div data-name="detalhes-parcelamento" class="page">
+                    <!-- Header simples (igual ao histórico de faturas) -->
+        <div class="navbar shadow-none px-4 py-4 pb-8 sticky top-0 z-30" style="min-height: 120px;">
+            <div class="navbar-bg" style=""></div>
+            <div class="navbar-inner flex flex-col items-start px-4" style="">
+                <div class="flex items-center w-full mb-2 pt-2" style="margin-top: 24px;">
+                    <a href="#" onclick="app.views.main.router.back()" class="w-12 h-12 text-gray-600 rounded-full flex items-center justify-center cursor-pointer bg-gray-50" style="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+                         <!-- Conteúdo da página -->
+             <div class="page-content" style="padding-top: 120px;">
+                 <!-- Container principal -->
+                 <div class="px-4 py-6">
+                    <!-- Loading inicial -->
+                    <div id="loading-container" class="text-center py-12">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                        <div class="mt-4 text-gray-600">Carregando detalhes...</div>
+                    </div>
+
+                    <!-- Container dos detalhes -->
+                    <div id="detalhes-container" class="hidden">
+                        <!-- Cabeçalho da transferência -->
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M20 10h-16l5.5 -6" />
+                                    <path d="M4 14h16l-5.5 6" />
+                                </svg>
+                            </div>
+                            <h1 class="text-2xl font-bold text-gray-800 mb-2">Transferência Parcelada</h1>
+                            <div class="text-lg font-semibold text-blue-600" id="valor-total"></div>
+                        </div>
+
+                        <!-- Informações principais -->
+                        <div class="bg-white rounded-lg border border-gray-200 mb-6">
+                            <div class="p-4">
+                                <!-- Status -->
+                                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                                    <span class="text-gray-600">Status</span>
+                                    <span id="status-parcelamento" class="font-medium"></span>
+                                </div>
+
+                                <!-- Destinatário -->
+                                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                                    <span class="text-gray-600">Destinatário</span>
+                                    <span id="nome-destinatario" class="font-medium text-gray-800"></span>
+                                </div>
+
+                                <!-- Data da transferência -->
+                                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                                    <span class="text-gray-600">Data da transferência</span>
+                                    <span id="data-transferencia" class="font-medium text-gray-800"></span>
+                                </div>
+
+                                <!-- Quantidade de parcelas -->
+                                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                                    <span class="text-gray-600">Quantidade de parcelas</span>
+                                    <span id="quantidade-parcelas" class="font-medium text-gray-800"></span>
+                                </div>
+
+                                <!-- Valor por parcela -->
+                                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                                    <span class="text-gray-600">Valor por parcela</span>
+                                    <span id="valor-parcela" class="font-medium text-gray-800"></span>
+                                </div>
+
+                                <!-- Primeiro vencimento -->
+                                <div class="flex justify-between items-center py-3">
+                                    <span class="text-gray-600">Primeiro vencimento</span>
+                                    <span id="primeiro-vencimento" class="font-medium text-gray-800"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lista de parcelas -->
+                        <div class="bg-white rounded-lg border border-gray-200">
+                            <div class="p-4 border-b border-gray-100">
+                                <h2 class="text-lg font-semibold text-gray-800">Parcelas</h2>
+                            </div>
+                            <div class="p-4">
+                                <div id="lista-parcelas" class="space-y-3">
+                                    <!-- Parcelas serão carregadas aqui -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Container de erro -->
+                    <div id="erro-container" class="hidden text-center py-12">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Erro ao carregar</h3>
+                        <p class="text-gray-600 mb-4" id="mensagem-erro">Não foi possível carregar os detalhes do parcelamento.</p>
+                        <button onclick="carregarDetalhes()" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors">
+                            Tentar novamente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Framework7 JS -->
+    <script src="lib/framework7-bundle.min.js"></script>
+    
+    <!-- User Service -->
+    <script src="js/user-service.js"></script>
+    
+    <!-- Script da página -->
+    <script src="js/detalhes-parcelamento.js"></script>
+</body>
+</html>

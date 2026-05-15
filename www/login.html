@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="white">
+    <!-- Your app title -->
+    <title>Login - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/personalizado.css">
+
+    <script>
+        console.log('[LOGIN.HTML] Página login.html carregada');
+        console.log('[LOGIN.HTML] URL atual:', window.location.href);
+        
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="login" class="page">
+                <!-- Navbar -->
+                <div class="navbar" style="background: #ffffff !important;">
+                  <div class="navbar-bg" style="background: #ffffff !important;"></div>
+                  <div class="navbar-inner" style="background: #ffffff !important;">
+                    <div class="left">
+                      <a class="link back" href="/index/" style="border: none; outline: none; cursor: pointer; padding: 0;">
+                        <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Page content -->
+                <div class="page-content">
+                  <div class="block block-strong inset">
+                    <p>Acesse sua conta ou crie uma nova</p>
+                  </div>
+                  
+                  <div class="list">
+                    <ul style="display: flex; gap: 8px; padding: 0 16px;">
+
+                      <!-- Campo País (fixo: Brasil) -->
+                      <li class="item-content item-input item-input-outline" style="flex: 0 0 auto; width: 90px; list-style: none; margin: 0;">
+                        <div class="item-inner" style="padding: 0 10px;">
+                          <div class="item-input-wrap" style="display: flex; align-items: center; gap: 6px; pointer-events: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="15" viewBox="0 0 24 17" style="border-radius: 2px; flex-shrink:0;">
+                              <rect width="24" height="17" fill="#009c3b"/>
+                              <polygon points="12,1.5 22.5,8.5 12,15.5 1.5,8.5" fill="#FEDF00"/>
+                              <circle cx="12" cy="8.5" r="3.5" fill="#002776"/>
+                              <path d="M8.6,7.2 Q12,6.2 15.4,7.8" stroke="white" stroke-width="0.7" fill="none"/>
+                            </svg>
+                            <span style="font-size: 13px; font-weight: 600; color: #374151;">+55</span>
+                          </div>
+                        </div>
+                      </li>
+
+                      <!-- Campo Telefone -->
+                      <li class="item-content item-input item-input-outline" style="flex: 1; list-style: none; margin: 0;">
+                        <div class="item-inner">
+                          <div class="item-title item-floating-label">Telefone</div>
+                          <div class="item-input-wrap">
+                            <input type="text" name="telefone" id="telefone" placeholder="(00) 00000-0000" maxlength="15" inputmode="numeric" oninput="this.value = aplicarMascaraTelefone(this.value)" required />
+                          </div>
+                        </div>
+                      </li>
+
+                    </ul>
+                  </div>
+
+
+
+                  <!-- Cadastro -->
+                  <div class="block inset text-center mt-6">
+                    <p class="text-gray-600 text-sm">
+                      Ainda não está cadastrado? 
+                      <a href="/beneficios/" class="text-bank-blue font-semibold">Cadastre-se</a>
+                    </p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+
+    <!-- Scripts essenciais para funcionamento global -->
+    <script type="text/javascript" src="js/user-service.js"></script>
+    <script type="text/javascript" src="js/home/index.js"></script>
+    <!-- Scripts essenciais apenas para login -->
+    <script type="text/javascript" src="js/senha.js"></script>
+    <script type="text/javascript" src="js/metodos-verificacao.js"></script>
+    <script type="text/javascript" src="js/verificar-codigo-whatsapp.js"></script>
+    <!-- Cordova.js - necessário para plugins -->
+    <script type="text/javascript" src="cordova.js"></script>
+    
+    
+    <!-- Roteamento do app-->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <!-- Script do Login -->
+    <!-- Script sem-conexao.js removido - não será mais usado -->
+    <script type="text/javascript" src="js/login.js"></script>
+
+    <script>
+      // Função de Sign In com validações
+      function signIn() {
+        var telefone = document.getElementById('telefone').value;
+        
+        if (!telefone) {
+          alert('Por favor, preencha o telefone');
+          return;
+        }
+        
+        // Remover caracteres especiais para validação
+        var telefoneLimpo = telefone.replace(/\D/g, '');
+        
+        if (telefoneLimpo.length !== 11) {
+          alert('Telefone deve ter 11 dígitos');
+          return;
+        }
+        
+        console.log('[LOGIN.HTML] Telefone informado:', telefone);
+        // Aqui você pode adicionar lógica de autenticação com o backend
+      }
+    </script>
+
+</body>
+</html>

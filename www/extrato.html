@@ -1,0 +1,164 @@
+<div class="page page-scrollable" data-name="extrato">
+
+        
+        <div class="pb-6">
+          <div class="flex items-center justify-between px-4 py-3 bg-white sticky top-0 z-30" style="padding-top: 40px;">
+            <div class="flex items-center">
+              <a href="#" onclick="app.views.main.router.back()" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 6l-6 6l6 6" />
+                  </svg>
+                </a>
+            </div>
+                <div class="ml-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-3">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M10 6h10" />
+                    <path d="M4 12h16" />
+                    <path d="M7 12h13" />
+                    <path d="M4 18h10" />
+                  </svg>
+            </div>
+          </div>
+          <div class="px-4 pt-4 pb-4 flex flex-col gap-2 w-full mt-4">
+            <!-- Título e Descrição -->
+            <div class="mb-6">
+                <h1 class="text-2xl font-bold mb-2">Extrato</h1>
+                <p class="text-gray-600 text-sm">Acompanhe todas as suas transações</p>
+            </div>
+
+            <div id="extrato-cards">
+            <!-- Skeleton de carregamento -->
+            <div id="extrato-skeleton">
+              <!-- Data header skeleton -->
+              <div class="w-full flex justify-start mb-2">
+                <span class="text-sm font-semibold text-gray-500 px-3 py-1">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 16px; width: 96px; border-radius: 8px;"></div>
+                </span>
+              </div>
+              
+              <!-- Transação 1 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 128px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 96px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 80px; border-radius: 7px;"></div>
+                </div>
+              </div>
+              
+              <!-- Transação 2 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 112px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 80px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 96px; border-radius: 7px;"></div>
+                </div>
+              </div>
+              
+              <!-- Transação 3 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 144px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 112px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 72px; border-radius: 7px;"></div>
+                </div>
+              </div>
+              
+              <!-- Transação 4 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 120px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 88px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 88px; border-radius: 7px;"></div>
+                </div>
+              </div>
+              
+              <!-- Transação 5 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 136px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 104px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 80px; border-radius: 7px;"></div>
+                </div>
+              </div>
+              
+              <!-- Transação 6 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 104px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 72px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 96px; border-radius: 7px;"></div>
+                </div>
+              </div>
+              
+              <!-- Transação 7 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 152px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 120px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 64px; border-radius: 7px;"></div>
+                </div>
+              </div>
+              
+              <!-- Transação 8 skeleton -->
+              <div class="flex items-center justify-between py-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                  <div class="flex-1">
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 128px; border-radius: 7px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 96px; border-radius: 6px; margin-bottom: 4px;"></div>
+                    <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 64px; border-radius: 6px;"></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 88px; border-radius: 7px;"></div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div> 

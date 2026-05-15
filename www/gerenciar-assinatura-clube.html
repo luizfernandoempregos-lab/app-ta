@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Gerenciar Assinatura Clube nandinho</title>
+  <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/personalizado.css">
+  <link rel="stylesheet" href="css/gerenciar-assinatura-clube.css">
+</head>
+<body>
+  <div id="app">
+    <div class="view view-main">
+      <div class="page" data-name="gerenciar-assinatura-clube">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-4 pb-2" style="padding-top: 40px; background: white;">
+          <button onclick="app.views.main.router.back(); return false;" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 6l-6 6l6 6" />
+            </svg>
+          </button>
+          <img src="img/banho-e-tosa.png" alt="Clube Nandinho" class="h-14" style="object-fit: contain;">
+          <button onclick="abrirHistorico()" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6h18"/>
+              <path d="M3 12h18"/>
+              <path d="M3 18h18"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Page content -->
+        <div class="page-content">
+          <div class="px-4 py-6">
+
+            <!-- Resumo de Ganhos -->
+            <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+              <div class="mb-3">
+                <div>
+                  <p class="text-xs text-gray-500 mb-1">Cuidados Extras</p>
+                  <p class="text-lg font-bold text-gray-800" id="totalCuidados">R$ 0,00</p>
+                  <p class="text-xs text-green-600 font-semibold">Lucro: <span id="lucroCuidados">R$ 0,00</span></p>
+                </div>
+              </div>
+              <div class="pt-3 border-t border-gray-100">
+                <p class="text-xs text-gray-500 mb-2">Meta Gatilho: <span id="metaGatilho" class="font-semibold">R$ 0 / R$ 6.000</span></p>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div id="progressoMeta" class="bg-blue-500 h-2 rounded-full transition-all" style="width: 0%"></div>
+                </div>
+                <p class="text-xs text-green-600 font-semibold mt-2">Lucro: <span id="lucroGatilho">R$ 0,00</span></p>
+              </div>
+            </div>
+
+            <!-- Filtros de Período -->
+            <div class="px-4 mb-4">
+              <div class="ranking-filtros-container">
+                <button class="ranking-filtro-btn active" data-periodo="hoje" onclick="filtrarPeriodo('hoje')">Hoje</button>
+                <button class="ranking-filtro-btn" data-periodo="semana" onclick="filtrarPeriodo('semana')">Semana</button>
+                <button class="ranking-filtro-btn" data-periodo="mes" onclick="filtrarPeriodo('mes')">Mês</button>
+                <button class="ranking-filtro-btn" data-periodo="todos" onclick="filtrarPeriodo('todos')">Todos</button>
+                <button class="ranking-filtro-btn" data-periodo="personalizado" onclick="abrirFiltroPersonalizado()">Personalizado</button>
+              </div>
+              
+              <!-- Filtro Personalizado -->
+              <div id="filtroPersonalizado" class="filtro-personalizado-wrap" style="display: none;">
+                <div class="flex gap-2 mt-3">
+                  <div class="flex-1">
+                    <label class="text-xs text-gray-500 mb-1 block">De:</label>
+                    <input type="date" id="dataInicio" class="filtro-date-input" onchange="aplicarFiltroPersonalizado()">
+                  </div>
+                  <div class="flex-1">
+                    <label class="text-xs text-gray-500 mb-1 block">Até:</label>
+                    <input type="date" id="dataFim" class="filtro-date-input" onchange="aplicarFiltroPersonalizado()">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-animated-wrap">
+              <div class="tabs">
+                <div id="tab-gatilho" class="tab tab-active">
+                  <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+                    <h2 class="text-lg font-bold mb-2">Gatilho</h2>
+                    <p class="text-xs text-gray-500 mb-4">Ganho: 27% se bater meta de R$ 6.000</p>
+                    
+                    <!-- Lista de Serviços para Selecionar -->
+                    <div id="listaServicosGatilho" class="space-y-2">
+                      <!-- Serviços serão carregados aqui -->
+                    </div>
+                  </div>
+                </div>
+
+                <div id="tab-cuidados" class="tab">
+                  <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+                    <h2 class="text-lg font-bold mb-2">Cuidados Extras</h2>
+                    <p class="text-xs text-gray-500 mb-4">Ganho: 40% sobre cada serviço</p>
+                    
+                    <!-- Lista de Serviços para Selecionar -->
+                    <div id="listaServicosCuidados" class="space-y-2">
+                      <!-- Serviços serão carregados aqui -->
+                    </div>
+                  </div>
+                </div>
+
+                <div id="tab-calcular" class="tab">
+                  <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+                    <h2 class="text-lg font-bold mb-2">Calcular Lucro</h2>
+                    <p class="text-xs text-gray-500 mb-4">Calcule seu ganho de 40%</p>
+                    
+                    <!-- Calculadora -->
+                    <div class="space-y-3">
+                      <!-- Display -->
+                      <div class="bg-gray-100 rounded-lg p-4 text-right">
+                        <div class="text-xs text-gray-500 mb-1">Valor</div>
+                        <div id="displayCalculadora" class="text-2xl font-bold text-gray-900">0</div>
+                      </div>
+                      
+                      <!-- Teclado Numérico -->
+                      <div class="grid grid-cols-3 gap-2">
+                        <button onclick="adicionarNumero('7')" class="btn-calc">7</button>
+                        <button onclick="adicionarNumero('8')" class="btn-calc">8</button>
+                        <button onclick="adicionarNumero('9')" class="btn-calc">9</button>
+                        
+                        <button onclick="adicionarNumero('4')" class="btn-calc">4</button>
+                        <button onclick="adicionarNumero('5')" class="btn-calc">5</button>
+                        <button onclick="adicionarNumero('6')" class="btn-calc">6</button>
+                        
+                        <button onclick="adicionarNumero('1')" class="btn-calc">1</button>
+                        <button onclick="adicionarNumero('2')" class="btn-calc">2</button>
+                        <button onclick="adicionarNumero('3')" class="btn-calc">3</button>
+                        
+                        <button onclick="adicionarNumero('0')" class="btn-calc">0</button>
+                        <button onclick="adicionarNumero('.')" class="btn-calc">.</button>
+                        <button onclick="apagarUltimo()" class="btn-calc bg-red-50 text-red-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/>
+                            <line x1="18" y1="9" x2="12" y2="15"/>
+                            <line x1="12" y1="9" x2="18" y2="15"/>
+                          </svg>
+                        </button>
+                      </div>
+                      
+                      <!-- Botões de Ação -->
+                      <div class="grid grid-cols-2 gap-2">
+                        <button onclick="limparCalculadora()" class="py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold">
+                          Limpar
+                        </button>
+                        <button onclick="calcularLucroFinal()" class="py-3 bg-primary text-white rounded-lg font-semibold">
+                          = Calcular
+                        </button>
+                      </div>
+                      
+                      <!-- Resultado -->
+                      <div id="resultadoCalculadora" class="bg-green-50 rounded-lg p-4" style="display: none;">
+                        <div class="flex justify-between items-center mb-2">
+                          <span class="text-sm text-gray-600">Valor Total</span>
+                          <span class="text-lg font-bold text-gray-900" id="resultadoTotal">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-green-100">
+                          <span class="text-sm text-gray-600">Seu Lucro (40%)</span>
+                          <span class="text-xl font-bold text-green-600" id="resultadoLucro">R$ 0,00</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="toolbar toolbar-bottom tabbar">
+                <div class="toolbar-inner">
+                  <a href="#tab-gatilho" class="tab-link tab-link-active">
+                    <span class="tabbar-label">Gatilho</span>
+                  </a>
+                  <a href="#tab-cuidados" class="tab-link">
+                    <span class="tabbar-label">Cuidados Extras</span>
+                  </a>
+                  <a href="#tab-calcular" class="tab-link">
+                    <span class="tabbar-label">Calcular</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botão Carrinho Flutuante -->
+        <div id="btnCarrinho" class="carrinho-flutuante bg-primary" style="display: none;" onclick="abrirCarrinho()">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"/>
+                  <circle cx="20" cy="21" r="1"/>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+                <span id="badgeCarrinho" class="badge-carrinho">0</span>
+              </div>
+              <div>
+                <p class="text-xs text-white opacity-80">Ver carrinho</p>
+                <p class="text-sm font-bold text-white" id="totalCarrinho">R$ 0,00</p>
+              </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"/>
+              <path d="m12 5 7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Sheet do Carrinho -->
+        <div class="sheet-modal sheet-carrinho" id="sheetCarrinho">
+          <div class="sheet-modal-inner">
+            <div class="sheet-modal-swipe-step">
+              <div class="page-content" style="padding-bottom: 0;">
+                <!-- Handle -->
+                <div style="display: flex; justify-content: center; padding-top: 8px; padding-bottom: 8px;">
+                  <div style="width: 36px; height: 4px; border-radius: 2px; background: #CBD5E1;"></div>
+                </div>
+                
+                <!-- Header do Carrinho -->
+                <div class="px-4 py-4 border-b border-gray-200">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h2 class="text-xl font-bold text-gray-900">Carrinho</h2>
+                      <p class="text-sm text-gray-500 mt-1"><span id="qtdItensCarrinho">0</span> itens selecionados</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Lista de Itens no Carrinho -->
+                <div id="listaItensCarrinho" class="px-4">
+                  <p class="text-sm text-gray-400 text-center py-8">Nenhum serviço no carrinho</p>
+                </div>
+
+                <!-- Campo de Comentário -->
+                <div id="containerComentario" class="px-4 pb-4">
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Comentário (opcional)</label>
+                  <div class="flex items-start gap-2">
+                    <input type="text" id="comentarioCarrinho" placeholder="Adicione uma observação..." class="flex-1 px-4 py-2 rounded-full text-sm bg-gray-100" style="border: none; outline: none;" oninput="alternarIconeComentario()" />
+                    <button id="btnAnexoComentario" onclick="abrirSeletorImagem()" class="w-10 h-10 flex items-center justify-center text-gray-600 rounded-full bg-gray-100 hover:bg-gray-200 relative flex-shrink-0" style="border:none;outline:none;cursor:pointer;">
+                      <!-- Ícone de Clipe -->
+                      <svg id="iconClipe" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                      </svg>
+                      <!-- Ícone de Send (inicialmente escondido) -->
+                      <svg id="iconSend" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                        <path d="m22 2-7 20-4-9-9-4Z"/>
+                        <path d="M22 2 11 13"/>
+                      </svg>
+                      <span id="badgeAnexos" class="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold" style="display: none;">0</span>
+                    </button>
+                  </div>
+                  <input type="file" id="inputImagemCarrinho" accept="image/*" multiple style="display: none;" onchange="adicionarImagensCarrinho(event)">
+                  
+                  <!-- Preview do Comentário -->
+                  <div id="previewComentario" class="mt-3 p-3 bg-blue-50 rounded-lg" style="display: none;">
+                    <div class="flex items-start justify-between gap-2">
+                      <p class="text-sm text-gray-700 flex-1" id="textoPreviewComentario"></p>
+                      <button onclick="removerComentario()" class="text-gray-400 hover:text-red-500 flex-shrink-0" style="border:none;background:transparent;cursor:pointer;padding:0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M18 6L6 18"/>
+                          <path d="M6 6l12 12"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <!-- Preview das Imagens -->
+                  <div id="previewImagensCarrinho" class="grid grid-cols-4 gap-2 mt-3" style="display: none;">
+                    <!-- Imagens aparecerão aqui -->
+                  </div>
+                </div>
+
+                <!-- Resumo e Botão Confirmar (fixo no bottom) -->
+                <div class="px-4 py-4 border-t border-gray-200 bg-white" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; padding-bottom: calc(16px + env(safe-area-inset-bottom));">
+                  <div class="mb-4">
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm text-gray-600">Subtotal</span>
+                      <span class="text-sm font-semibold text-gray-800" id="subtotalCarrinho">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm text-gray-600">Seus Ganhos</span>
+                      <span class="text-sm font-semibold text-green-600" id="ganhosCarrinho">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between pt-2 border-t border-gray-200">
+                      <span class="text-base font-bold text-gray-900">Total</span>
+                      <span class="text-base font-bold text-gray-900" id="totalCarrinhoSheet">R$ 0,00</span>
+                    </div>
+                  </div>
+                  <button onclick="confirmarCarrinho()" class="w-full bg-primary text-white py-3 px-4 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                    Confirmar Registro
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sheet de Histórico -->
+        <div class="sheet-modal sheet-historico" id="sheetHistorico">
+          <div class="sheet-modal-inner">
+            <div class="sheet-modal-swipe-step">
+              <div class="page-content" style="padding-bottom: 0;">
+                <!-- Handle -->
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 16px;">
+                  <div style="width: 36px; height: 4px; border-radius: 2px; background: #CBD5E1; margin: 0 auto;"></div>
+                  <button onclick="fecharHistorico()" class="text-gray-400 hover:text-gray-600" style="border:none;outline:none;cursor:pointer;padding:0;background:transparent;position:absolute;right:16px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 6L6 18"/>
+                      <path d="M6 6l12 12"/>
+                    </svg>
+                  </button>
+                </div>
+                
+                <!-- Header do Histórico -->
+                <div class="px-4 py-4 border-b border-gray-200 bg-white">
+                  <h2 class="text-xl font-bold text-gray-900">Registros Confirmados</h2>
+                  <p class="text-sm text-gray-500 mt-1">Todos os serviços registrados</p>
+                </div>
+
+                <!-- Tabs do Histórico -->
+                <div class="px-4 py-2 border-b border-gray-200 flex gap-4">
+                  <button id="tabHistCuidados" onclick="trocarTabHistorico('cuidados')" class="py-2 px-4 font-medium text-sm border-b-2 transition-colors" style="border-color: var(--app-primary-color); color: var(--app-primary-color);">
+                    Cuidados Extras
+                  </button>
+                  <button id="tabHistGatilho" onclick="trocarTabHistorico('gatilho')" class="py-2 px-4 font-medium text-sm border-b-2 border-transparent text-gray-500 transition-colors">
+                    Gatilho
+                  </button>
+                </div>
+
+                <!-- Filtros de Período no Histórico -->
+                <div class="px-4 py-3 border-b border-gray-200 bg-gray-50">
+                  <div class="ranking-filtros-container">
+                    <button class="ranking-filtro-btn active" data-periodo-hist="hoje" onclick="filtrarHistorico('hoje')">Hoje</button>
+                    <button class="ranking-filtro-btn" data-periodo-hist="semana" onclick="filtrarHistorico('semana')">Semana</button>
+                    <button class="ranking-filtro-btn" data-periodo-hist="mes" onclick="filtrarHistorico('mes')">Mês</button>
+                    <button class="ranking-filtro-btn" data-periodo-hist="todos" onclick="filtrarHistorico('todos')">Todos</button>
+                  </div>
+                </div>
+
+                <!-- Conteúdo do Histórico -->
+                <div id="conteudoHistorico" class="px-4 py-4">
+                  <p class="text-sm text-gray-400 text-center py-8">Nenhum registro confirmado</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+  <script>
+    // Garantir que o script seja carregado
+    if (typeof inicializar === 'function') {
+      inicializar();
+    }
+  </script>
+  <script src="js/gerenciar-assinatura-clube.js"></script>
+</body>
+</html>

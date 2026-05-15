@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#1e40af">
+    <!-- Your app title -->
+    <title>Ranking - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="ranking" class="page">
+                <!-- Header -->
+                <div class="ranking-header">
+                    <div class="flex items-center">
+                        <button onclick="app.views.main.router.back(); return false;" class="ranking-back-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 6l-6 6l6 6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Page content -->
+                <div class="page-content">
+                    <!-- Header com período e filtros -->
+                    <div class="px-4 pt-4 pb-2">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">Desempenho</h2>
+                                <p class="text-sm text-gray-500" id="rankingLabelPeriodo">Mostrando todos os registros</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Filtros -->
+                        <div class="ranking-filtros-container">
+                            <button class="ranking-filtro-btn active" data-periodo="hoje" onclick="rankingFiltrar('hoje')">Hoje</button>
+                            <button class="ranking-filtro-btn" data-periodo="semana" onclick="rankingFiltrar('semana')">Semana</button>
+                            <button class="ranking-filtro-btn" data-periodo="mes" onclick="rankingFiltrar('mes')">Mês</button>
+                            <button class="ranking-filtro-btn" data-periodo="todos" onclick="rankingFiltrar('todos')">Todos</button>
+                        </div>
+                        
+                        <!-- Tabs -->
+                        <div class="ranking-tabs-container">
+                            <button class="ranking-tab active" data-tab="assinaturas" onclick="rankingMudarTab('assinaturas')">Assinaturas</button>
+                            <button class="ranking-tab" data-tab="selection" onclick="rankingMudarTab('selection')">Selection</button>
+                        </div>
+                    </div>
+
+                    <!-- Cards de estatísticas -->
+                    <div class="px-4 mb-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Total de Assinaturas -->
+                            <div class="card card-strong rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs text-gray-500 font-medium">Assinaturas</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg>
+                                </div>
+                                <div class="stat-value text-2xl font-bold text-gray-900">0</div>
+                                <div class="text-xs text-green-600 font-semibold mt-1">Total do mês</div>
+                            </div>
+
+                            <!-- Meta do Mês -->
+                            <div class="card card-strong rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs text-gray-500 font-medium">Meta do Mês</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                </div>
+                                <div class="stat-value text-2xl font-bold text-gray-900">0%</div>
+                                <div class="text-xs text-blue-600 font-semibold mt-1">0 / 1.500 vendas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Pizza - Distribuição por Plano -->
+                    <div class="px-4 mb-4">
+                        <div class="card card-strong rounded-xl p-4">
+                            <h3 class="text-base font-bold text-gray-900 mb-3">Distribuição por Plano</h3>
+                            <div class="ranking-chart-container">
+                                <canvas id="chartPizza"></canvas>
+                            </div>
+                            <div class="mt-4 space-y-2 legenda-planos">
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <div class="legenda-cor legenda-cor-prata"></div>
+                                        <span class="text-gray-600">Prata (R$ 82,80)</span>
+                                    </div>
+                                    <span class="font-semibold text-gray-900 legenda-prata">0 vendas</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <div class="legenda-cor legenda-cor-ouro"></div>
+                                        <span class="text-gray-600">Ouro (R$ 154,80)</span>
+                                    </div>
+                                    <span class="font-semibold text-gray-900 legenda-ouro">0 vendas</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <div class="legenda-cor legenda-cor-diamante"></div>
+                                        <span class="text-gray-600">Diamante (R$ 298,80)</span>
+                                    </div>
+                                    <span class="font-semibold text-gray-900 legenda-diamante">0 vendas</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <div class="legenda-cor legenda-cor-selection"></div>
+                                        <span class="text-gray-600">Selection</span>
+                                    </div>
+                                    <span class="font-semibold text-gray-900 legenda-selection">0 vendas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Barras - Assinaturas por Semana -->
+                    <div class="px-4 mb-4">
+                        <div class="card card-strong rounded-xl p-4">
+                            <h3 class="text-base font-bold text-gray-900 mb-3">Assinaturas por Semana</h3>
+                            <div class="ranking-chart-container-barras">
+                                <canvas id="chartBarras"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top 3 Vendedores -->
+                    <div class="px-4 mb-4">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">🏆 Top 3 Vendedores</h3>
+                        
+                        <div class="top-vendedores">
+                            <!-- 1º Lugar -->
+                            <div class="top-vendedor top-vendedor-ouro card card-strong rounded-xl p-4 mb-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-3xl">🥇</div>
+                                        <div class="vendedor-avatar w-12 h-12 rounded-full bg-white flex items-center justify-center">
+                                            <span class="vendedor-iniciais text-lg font-bold text-gray-900">--</span>
+                                        </div>
+                                        <div>
+                                            <div class="vendedor-nome text-base font-bold text-gray-900">Sem dados</div>
+                                            <div class="text-sm text-gray-700"><span class="vendedor-vendas">0 vendas</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="vendedor-total text-lg font-bold text-gray-900">0</div>
+                                        <div class="text-xs text-gray-700">vendas</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2º Lugar -->
+                            <div class="top-vendedor top-vendedor-prata card card-strong rounded-xl p-4 mb-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-3xl">🥈</div>
+                                        <div class="vendedor-avatar w-12 h-12 rounded-full bg-white flex items-center justify-center">
+                                            <span class="vendedor-iniciais text-lg font-bold text-gray-900">--</span>
+                                        </div>
+                                        <div>
+                                            <div class="vendedor-nome text-base font-bold text-gray-900">Sem dados</div>
+                                            <div class="text-sm text-gray-700"><span class="vendedor-vendas">0 vendas</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="vendedor-total text-lg font-bold text-gray-900">0</div>
+                                        <div class="text-xs text-gray-700">vendas</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3º Lugar -->
+                            <div class="top-vendedor top-vendedor-bronze card card-strong rounded-xl p-4 mb-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-3xl">🥉</div>
+                                        <div class="vendedor-avatar w-12 h-12 rounded-full bg-white flex items-center justify-center">
+                                            <span class="vendedor-iniciais text-lg font-bold text-gray-900">--</span>
+                                        </div>
+                                        <div>
+                                            <div class="vendedor-nome text-base font-bold text-gray-900">Sem dados</div>
+                                            <div class="text-sm text-gray-700"><span class="vendedor-vendas">0 vendas</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="vendedor-total text-lg font-bold text-gray-900">0</div>
+                                        <div class="text-xs text-gray-700">vendas</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ranking Completo -->
+                    <div class="px-4 mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Ranking Completo</h3>
+                        
+                        <div class="ranking-completo space-y-2">
+                            <div class="ranking-loading">Carregando...</div>
+                        </div>
+                    </div>
+
+                    <div class="ranking-spacer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Script personalizado -->
+    <script type="text/javascript" src="js/ranking.js"></script>
+</body>
+</html>

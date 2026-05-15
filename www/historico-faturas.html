@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Histórico de Faturas</title>
+  <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/personalizado.css">
+  <link rel="stylesheet" href="css/materialdesignicons.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div id="app">
+    <div class="view view-main">
+      <div class="page page-scrollable" data-name="historico-faturas">
+
+        
+        <!-- Header fixo -->
+        <div class="sticky top-0 z-30 bg-white">
+          <div class="flex items-center justify-between px-4 py-3 bg-white" style="padding-top: 40px;">
+            <div class="flex items-center">
+              <a href="/cartoes/" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full" style="background: rgba(255,255,255,0.9); border:none;outline:none;cursor:pointer;padding:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 6l-6 6l6 6" />
+                </svg>
+              </a>
+              <div class="font-bold text-lg text-gray-800 ml-4">faturas</div>
+            </div>
+            <div class="flex items-center">
+              <button class="w-8 h-8 flex items-center justify-center text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="19" cy="12" r="1"></circle>
+                  <circle cx="5" cy="12" r="1"></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Indicadores de mês estilo tabs -->
+          <div class="px-4 pb-4 bg-white">
+            <div id="seletores-mensais" class="flex gap-2 overflow-x-auto">
+              <!-- Os seletores mensais serão inseridos dinamicamente aqui -->
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-6 bg-white min-h-screen">
+          <!-- Container principal para faturas e parcelamentos -->
+          <div id="faturas-container" class="space-y-6 px-4">
+            <!-- Cada fatura terá seu card + seção de parcelamentos aqui -->
+          </div>
+
+          <!-- Espaço no final -->
+          <div class="block pb-8"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lib/framework7-bundle.min.js"></script>
+  <script src="js/historico-faturas.js"></script>
+</body>
+</html>

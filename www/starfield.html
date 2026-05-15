@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfield</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #0a0a1a 0%, #000000 100%);
+            min-height: 100vh;
+            cursor: none;
+        }
+
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 150, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        const cursorGlow = document.getElementById('cursorGlow');
+
+        let stars = [];
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let targetMouseX = mouseX;
+        let targetMouseY = mouseY;
+
+        const STAR_COUNT = 200;
+        const STAR_LAYERS = 3;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            for (let layer = 0; layer < STAR_LAYERS; layer++) {
+                const layerStars = Math.floor(STAR_COUNT / STAR_LAYERS);
+                const layerDepth = (layer + 1) / STAR_LAYERS;
+                const layerSpeed = 0.02 + (layer * 0.03);
+                const layerSize = 0.5 + (layer * 0.8);
+
+                for (let i = 0; i < layerStars; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        baseX: 0,
+                        baseY: 0,
+                        size: Math.random() * layerSize + 0.3,
+                        layer: layerDepth,
+                        speed: layerSpeed,
+                        twinkleSpeed: Math.random() * 0.02 + 0.005,
+                        twinkleOffset: Math.random() * Math.PI * 2,
+                        brightness: Math.random() * 0.5 + 0.5,
+                        color: getStarColor(layer)
+                    });
+                    stars[stars.length - 1].baseX = stars[stars.length - 1].x;
+                    stars[stars.length - 1].baseY = stars[stars.length - 1].y;
+                }
+            }
+        }
+
+        function getStarColor(layer) {
+            const colors = [
+                { r: 200, g: 220, b: 255 },
+                { r: 255, g: 240, b: 200 },
+                { r: 180, g: 200, b: 255 }
+            ];
+            return colors[layer % colors.length];
+        }
+
+        function drawStar(star, time) {
+            const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset);
+            const opacity = star.brightness * (0.5 + twinkle * 0.5);
+            const alpha = Math.max(0.1, Math.min(1, opacity));
+
+            const offsetX = (mouseX - canvas.width / 2) * star.layer * star.speed;
+            const offsetY = (mouseY - canvas.height / 2) * star.layer * star.speed;
+
+            const x = star.baseX - offsetX;
+            const y = star.baseY - offsetY;
+
+            const size = star.size * (0.8 + twinkle * 0.2);
+
+            ctx.beginPath();
+            
+            if (star.layer < 0.5) {
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+            } else {
+                drawFourPointStar(x, y, size, size * 2);
+            }
+
+            ctx.fillStyle = `rgba(${star.color.r}, ${star.color.g}, ${star.color.b}, ${alpha})`;
+            ctx.fill();
+
+            if (star.layer > 0.6) {
+                const glowSize = size * 3;
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, glowSize);
+                gradient.addColorStop(0, `rgba(${star.color.r}, ${star.color.g}, ${star.color.b}, ${alpha * 0.3})`);
+                gradient.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(x, y, glowSize, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawFourPointStar(cx, cy, innerRadius, outerRadius) {
+            const spikes = 4;
+            let rot = Math.PI / 2;
+            let x = cx;
+            let y = cy;
+            const step = Math.PI / spikes;
+
+            ctx.moveTo(cx, cy - outerRadius);
+            for (let i = 0; i < spikes; i++) {
+                x = cx + Math.cos(rot) * outerRadius;
+                y = cy + Math.sin(rot) * outerRadius;
+                ctx.lineTo(x, y);
+                rot += step;
+
+                x = cx + Math.cos(rot) * innerRadius;
+                y = cy + Math.sin(rot) * innerRadius;
+                ctx.lineTo(x, y);
+                rot += step;
+            }
+            ctx.lineTo(cx, cy - outerRadius);
+        }
+
+        function animate(time) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            mouseX += (targetMouseX - mouseX) * 0.05;
+            mouseY += (targetMouseY - mouseY) * 0.05;
+
+            const sortedStars = [...stars].sort((a, b) => a.layer - b.layer);
+
+            for (const star of sortedStars) {
+                drawStar(star, time * 0.001);
+            }
+
+            drawConnectingLines();
+
+            requestAnimationFrame(animate);
+        }
+
+        function drawConnectingLines() {
+            const maxDistance = 150;
+            const mouseProximity = 100;
+
+            for (let i = 0; i < stars.length; i++) {
+                const star = stars[i];
+                const offsetX = (mouseX - canvas.width / 2) * star.layer * star.speed;
+                const offsetY = (mouseY - canvas.height / 2) * star.layer * star.speed;
+                const x = star.baseX - offsetX;
+                const y = star.baseY - offsetY;
+
+                const distToMouse = Math.sqrt(
+                    Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2)
+                );
+
+                if (distToMouse < mouseProximity) {
+                    for (let j = i + 1; j < stars.length; j++) {
+                        const star2 = stars[j];
+                        const offsetX2 = (mouseX - canvas.width / 2) * star2.layer * star2.speed;
+                        const offsetY2 = (mouseY - canvas.height / 2) * star2.layer * star2.speed;
+                        const x2 = star2.baseX - offsetX2;
+                        const y2 = star2.baseY - offsetY2;
+
+                        const dist = Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
+
+                        if (dist < maxDistance) {
+                            const opacity = (1 - dist / maxDistance) * 0.15 * (1 - distToMouse / mouseProximity);
+                            ctx.beginPath();
+                            ctx.moveTo(x, y);
+                            ctx.lineTo(x2, y2);
+                            ctx.strokeStyle = `rgba(100, 150, 255, ${opacity})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            targetMouseX = e.clientX;
+            targetMouseY = e.clientY;
+            
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            targetMouseX = canvas.width / 2;
+            targetMouseY = canvas.height / 2;
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        resizeCanvas();
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>

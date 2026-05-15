@@ -1,0 +1,133 @@
+oi<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#1e40af">
+    <!-- Your app title -->
+    <title>Validação Facial - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/personalizado.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="validar-facial" class="page" style="border-radius: 16px 16px 0 0; overflow: hidden;">
+                <!-- Header -->
+                <div class="px-4 pb-2" style="padding-top: 40px;">
+                    <div class="flex items-center mb-4">
+                        <a href="#" onclick="app.views.main.router.back()" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Page content -->
+                <div class="page-content">
+                    <div class="px-6 py-8 flex flex-col min-h-full">
+                        <!-- Imagem centralizada -->
+                        <div class="mb-8 flex justify-center">
+                            <img src="img/FACIAL.png" alt="Validação Facial" class="w-full max-w-sm mx-auto">
+                        </div>
+                        
+                        <!-- Conteúdo alinhado à esquerda -->
+                        <div class="w-full text-left">
+                            <!-- Título -->
+                            <h1 class="text-2xl font-bold text-gray-900 mb-3">Validação Facial</h1>
+                            
+                            <!-- Subtítulo -->
+                            <p class="text-base text-gray-600 mb-6">Iremos confirmar sua identidade</p>
+                            
+                            <!-- Ícone de câmera + texto -->
+                            <div class="flex items-center gap-3 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-700">
+                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                                <span class="text-base text-gray-700">É rápido e seguro</span>
+                            </div>
+                            
+                            <!-- Ícone de cadeado + texto -->
+                            <div class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-700">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                <span class="text-base text-gray-700">Preservamos seus dados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer com botão -->
+                <div style="position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; padding-bottom: 60px; z-index: 1000;">
+                    <button
+                        onclick="iniciarValidacaoFacial()"
+                        class="w-full text-white font-semibold py-2 pl-4 pr-1 rounded-full transition-colors flex items-center justify-between"
+                        style="background: #1e40af;"
+                    >
+                        <span class="ml-4" style="font-family: 'Moranga Medium', sans-serif;">Continuar</span>
+                        <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Script da Validação Facial -->
+    <script type="text/javascript" src="js/validar-facial.js"></script>
+
+    <style>
+        body {
+        }
+
+        /* Garantir que a página não tenha rolagem */
+        .page {
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .page-content {
+            height: calc(100vh - 200px); /* Subtrair altura do header e footer */
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+    </style>
+
+</body>
+</html>

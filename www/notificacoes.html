@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="white">
+    <!-- Your app title -->
+    <title>Notificações - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+  
+    <!-- CSS para página de notificações -->
+    <link rel="stylesheet" href="css/notificacoes.css">
+    <!--Ícones Material Design-->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+
+            <div data-name="notificacoes" class="page page-scrollable">
+
+                    <!-- Header -->
+                    <header class="bg-white text-black px-4 pb-3 sticky top-0 z-30" style="border-radius: 16px 16px 0 0; padding-top: 40px;">
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2 items-center">
+                                <a href="#" onclick="if(window.app&&app.views&&app.views.main&&app.views.main.router){app.views.main.router.back();}else{history.back();}return false;" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+                                </a>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="relative">
+                                    <button id="btnLimparTodas" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-300 transition-colors" style="padding:0;margin:0; box-shadow: none;" title="Opções">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="1"/>
+                                            <circle cx="19" cy="12" r="1"/>
+                                            <circle cx="5" cy="12" r="1"/>
+                                        </svg>
+                                    </button>
+                                    <!-- Menu dropdown -->
+                                    <div id="menuDropdown" class="absolute right-0 top-12 rounded-lg shadow-lg border border-gray-200 py-2 min-w-[140px] hidden" style="z-index: 9999;">
+                                        <button id="btnLimparTodasMenu" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18"/>
+                                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                                            </svg>
+                                            Limpar todas
+                                        </button>
+                                        <button id="btnSelecionarMenu" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M9 11l3 3l8-8"/>
+                                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9s4.03-9 9-9c2.12 0 4.07.74 5.61 1.98"/>
+                                            </svg>
+                                            Selecionar
+                                        </button>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Seção principal com rolagem -->
+                    <section class="px-0 pt-4 pb-14 text-black w-full">
+                        <!-- Título e Descrição -->
+                        <div class="mb-6 px-4">
+                            <h1 class="text-2xl font-bold mb-2">Notificações</h1>
+                            <p class="text-gray-600 text-sm">Fique por dentro de todas as suas atividades</p>
+                        </div>
+
+                        <!-- Conteúdo das notificações -->
+                        <div class="pb-6">
+                    <!-- Lista de notificações -->
+                    <div class="list" id="listaNotificacoes">
+                        <ul id="ulNotificacoes">
+                            <!-- As notificações serão carregadas dinamicamente aqui -->
+                        </ul>
+                    </div>
+
+                    <!-- Estado vazio (inicialmente oculto) -->
+                    <div id="estadoVazio" class="hidden text-center py-12">
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M11.5 17h-7.5a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3c.016 .129 .037 .256 .065 .382" />
+                                <path d="M9 17v1a3 3 0 0 0 2.502 2.959" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Nenhuma notificação</h3>
+                        <p class="text-gray-600">Você está em dia com suas notificações!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Framework7 Library -->
+    <script src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Notificações Script (DEVE ser carregado ANTES de routes.js) -->
+    <script type="text/javascript" src="js/notificacoes.js"></script>
+    <!-- Routes -->
+    <script type="text/javascript" src="js/routes.js"></script>
+
+
+
+</body>
+
+</html> 

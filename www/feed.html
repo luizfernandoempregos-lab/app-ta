@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <title>Feed</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/feed.css">
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="feed" class="page">
+
+                <!-- Navbar fixa -->
+                <div class="feed-navbar">
+                    <div class="feed-navbar-inner">
+                        <button class="feed-back-btn" onclick="feedVoltar()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6l6 6"/></svg>
+                        </button>
+                        <span class="feed-navbar-title">Feed</span>
+                        <button class="feed-chat-btn" onclick="feedIrChat()" style="flex-direction:column;gap:2px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+                            <span style="font-size:10px;font-weight:600;color:currentColor;line-height:1;">Conversas</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- page-content com scroll -->
+                <div class="page-content feed-page-content">
+
+                    <!-- Seção de stories -->
+                    <div class="feed-stories-section">
+                        <div class="px-4 mb-2">
+                            <h2 class="text-lg font-bold text-gray-900">Novidades da equipe</h2>
+                            <p class="text-gray-600 text-sm">Veja o que seus colegas estão compartilhando</p>
+                        </div>
+                        <div class="feed-stories-scroll" id="feedStoriesScroll">
+                            <!-- gerado pelo JS -->
+                        </div>
+                    </div>
+
+                    <!-- Divisor -->
+                    <div class="feed-divider"></div>
+
+                    <!-- Posts do feed -->
+                    <div class="feed-posts" id="feedPosts">
+                        <!-- gerado pelo JS -->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/framework7-bundle.min.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/feed.js"></script>
+</body>
+</html>

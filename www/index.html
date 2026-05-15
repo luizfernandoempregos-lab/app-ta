@@ -1,0 +1,4038 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="white">
+    <!-- Your app title -->
+    <title>Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/personalizado.css?v=2">
+    <link rel="stylesheet" href="css/detalhes-dados-para-pagamento-fatura.css">
+    <!-- CSS para página do clube nandinho -->
+    <link rel="stylesheet" href="css/clube-nandinho.css">
+    <!-- CSS para página de pagamento do clube nandinho -->
+    <link rel="stylesheet" href="css/clube-nandinho-pagamento.css">
+    <!-- CSS para página do clube nandinho ativo -->
+    <link rel="stylesheet" href="css/clube-nandinho-ativo.css">
+    <!-- CSS para página de usuário na lista -->
+    <link rel="stylesheet" href="css/usuario-esta-na-lista.css">
+    <!-- CSS para página de validação facial -->
+    <link rel="stylesheet" href="css/validar-face.css">
+    <!-- CSS para página de confirmação de indicação (removida temporariamente — arquivo ausente) -->
+    <!-- <link rel="stylesheet" href="css/confirmacao-indicacao.css"> -->
+    <!-- CSS para página de chat -->
+    <link rel="stylesheet" href="css/chat.css">
+
+    <!-- CSS para página de conversas atendimento -->
+    <link rel="stylesheet" href="css/conversas-usuarios.css">
+    <!-- CSS para página de PIX copia e cola -->
+    <link rel="stylesheet" href="css/pix-copia-cola.css">
+    <!-- CSS para página de finalização PIX copia e cola -->
+    <link rel="stylesheet" href="css/finalizacao-pix-copie-cola.css">
+    <!-- CSS para página de pagar fatura -->
+    <link rel="stylesheet" href="css/pagar-fatura.css">
+    <!-- CSS para página de negociação de faturas (simulação) -->
+    <link rel="stylesheet" href="css/negociacao-faturas.css">
+    <!-- CSS para página de score de crédito -->
+    <link rel="stylesheet" href="css/registro-ponto.css">
+    <!-- CSS para página de limite -->
+    <link rel="stylesheet" href="css/limite.css">
+    <!-- CSS para página de cadastro da lista de espera -->
+    <link rel="stylesheet" href="css/lista-espera-cadastro.css">
+    <!-- CSS para página de benefícios -->
+    <link rel="stylesheet" href="css/beneficios.css">
+    <!-- CSS para página de cadastro de vencimento -->
+    <link rel="stylesheet" href="css/cadastro-vencimento.css">
+    <!-- CSS para página de cadastro pessoal -->
+    <link rel="stylesheet" href="css/cadastro-pessoal.css">
+    <!-- CSS para página QR Scanner -->
+    <link rel="stylesheet" href="area-pix/css/qr-scanner.css">
+    <!-- CSS para página de cadastro de endereço -->
+    <link rel="stylesheet" href="css/cadastro-endereco.css">
+    <!-- CSS para página de análise de cadastro -->
+    <link rel="stylesheet" href="css/analisando-cadastro.css">
+    <!-- CSS para página de login -->
+    <link rel="stylesheet" href="css/login.css">
+    <!-- CSS para página de empréstimos -->
+    <link rel="stylesheet" href="css/emprestimos.css">
+    <!-- CSS para página de feed (stories) -->
+    <link rel="stylesheet" href="css/feed.css">
+    <!-- CSS para página de informações de empréstimo -->
+    <link rel="stylesheet" href="css/informacoes-emprestimo.css">
+    <!-- CSS para página de gerenciar assinatura clube -->
+    <link rel="stylesheet" href="css/gerenciar-assinatura-clube.css">
+    <!-- CSS para página de meus empréstimos -->
+    <link rel="stylesheet" href="css/meus-emprestimos.css">
+    <!-- CSS para página de detalhes de empréstimos contratados -->
+    <link rel="stylesheet" href="css/detalhes-emprestimos-contratados.css">
+    <!-- CSS para página de confirmação PIX OUT -->
+    <link rel="stylesheet" href="css/confirmacao-pix-out.css">
+    <!-- CSS para página de confirmação de transferência -->
+    <link rel="stylesheet" href="css/confirmacao.css">
+    <!-- CSS para página confirmar pagamento fatura -->
+    <!-- CSS para página de ligação -->
+    <link rel="stylesheet" href="css/ligacao.css">
+    <!-- CSS para página de taxas do usuário -->
+    <link rel="stylesheet" href="css/taxas-usuario.css">
+    <!-- CSS para página home -->
+    <link rel="stylesheet" href="css/home.css">
+    <!-- CSS para página boletos / Stories -->
+    <link rel="stylesheet" href="css/stories.css">
+    <!-- CSS para página identidade documento -->
+    <link rel="stylesheet" href="css/identidade-documento.css">
+    <!-- CSS para página extrato -->
+    <link rel="stylesheet" href="css/extrato.css">
+    <!-- CSS para página de valor de transferência -->
+    <link rel="stylesheet" href="area-pix/transferencia/css/valor.css">
+    <!-- CSS para página destinatario de transferência -->
+    <link rel="stylesheet" href="area-pix/transferencia/css/destinatario-transferencia.css">
+    <!-- CSS para página senha -->
+    <link rel="stylesheet" href="css/senha.css">
+    <!-- CSS para página validar código iToken -->
+    <link rel="stylesheet" href="css/validar-codigo-itoken.css">
+    <!-- CSS para página registrar dispositivo -->
+    <link rel="stylesheet" href="css/registrar-dispositivo.css">
+    <!-- CSS para página PIX -->
+    <link rel="stylesheet" href="css/pix.css">
+    <!-- CSS para página carteira -->
+    <link rel="stylesheet" href="css/carteira.css">
+    <!-- CSS para página checklist_users -->
+    <link rel="stylesheet" href="css/checklist_users.css">
+    <!-- CSS para página admin -->
+    <link rel="stylesheet" href="css/admin.css">
+    
+    <!-- CSS para página ranking -->
+    <link rel="stylesheet" href="css/ranking.css">
+
+    <!-- CSS para página transferencia-opcoes -->
+    <link rel="stylesheet" href="css/transferencia-opcoes.css">
+    <!-- CSS para página senha transferência -->
+    <link rel="stylesheet" href="area-pix/transferencia/css/senha-transferencia.css">
+    <!-- CSS para página nosso-banco -->
+    <link rel="stylesheet" href="css/nosso-banco.css">
+    <!-- CSS para página index -->
+    <link rel="stylesheet" href="css/index.css">
+    <!-- CSS para página meus-dispositivos -->
+    <link rel="stylesheet" href="css/story-preview.css">
+    <!-- CSS para página de configurações do usuário -->
+    <link rel="stylesheet" href="css/configuracoes-usuario.css">
+    <!-- CSS para página de dados pessoais -->
+    <link rel="stylesheet" href="css/dados-pessoais.css">
+    <!-- CSS para página de dados completos -->
+    <link rel="stylesheet" href="css/dados-completos.css">
+    <!-- CSS para página de cofrinhos -->
+    <link rel="stylesheet" href="css/cofrinhos.css">
+    <!-- CSS para página de resgate de cofrinhos -->
+    <link rel="stylesheet" href="css/resgate-cofrinhos.css">
+    <!-- CSS para página de reservar em cofrinho -->
+    <link rel="stylesheet" href="css/reservar-cofrinho.css">
+    <link rel="stylesheet" href="css/libere-limite-informacoes.css">
+    <!-- CSS para página de sucesso de reserva em cofrinho -->
+    <link rel="stylesheet" href="css/reservar-cofrinho-sucesso.css">
+    <!-- CSS para página de frente do documento -->
+    <link rel="stylesheet" href="css/frente-documento.css">
+    <!-- CSS para página de verso do documento -->
+    <link rel="stylesheet" href="css/verso-documento.css">
+    <!-- CSS para página de análise de abertura de conta -->
+    <link rel="stylesheet" href="css/analise-abertura-conta.css">
+    <!-- CSS para página de indicação -->
+    <link rel="stylesheet" href="css/story-seletor.css">
+    <!-- CSS para página de indicação-todos -->
+    <link rel="stylesheet" href="css/indicacao-todos.css">
+    <!-- CSS para página de notificações -->
+    <link rel="stylesheet" href="css/notificacoes.css">
+    <!-- CSS para página de preferências de acesso -->
+    <link rel="stylesheet" href="css/preferencias-de-acesso.css">
+    <!-- CSS para página de métodos de verificação de liberação do dispositivo -->
+    <link rel="stylesheet" href="css/metodos-verificacao-liberacao-dispositivo.css">
+    <!-- CSS para página de métodos de verificação -->
+    <link rel="stylesheet" href="css/metodos-verificacao.css">
+    <!-- CSS para página de validar código iToken -->
+    <link rel="stylesheet" href="css/validar-codigo-itoken.css">
+    <!-- Fonte Moranga -->
+    <link rel="stylesheet" href="fonts/moranga.css">
+    <!--Ícones Material Design-->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css?v=2">
+    <!-- Material Design 3 (Material Components for the Web) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- html2canvas para capturar tela -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+
+    <script>
+
+        
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    },
+                    fontFamily: {
+                        'sora': ['Sora', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    
+</head>
+
+<body>
+    <!-- Barra de Progresso Global da WebView -->
+
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+
+            <div data-name="index" class="page page-scrollable flex flex-col min-h-screen relative" id="indexPage">
+                <!-- Animação de células conectadas por linhas -->
+                <canvas id="cellCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: auto;"></canvas>
+                
+
+                
+                <!-- Área flexível para empurrar rodapé para baixo -->
+                <div class="flex-grow" style="position: relative; z-index: 1;"></div>
+                
+                <!-- Seção do rodapé -->
+                <div class="mt-auto flex-shrink-0" style="position: relative; z-index: 1;">
+                    
+                    <!-- Botão Entre ou Cadastre-se -->
+                    <div class="px-4 mb-4">
+                        <div class="w-full">
+                            <button id="btnEntrar" class="w-full text-white font-semibold py-2 pl-4 pr-1 rounded-full transition-colors flex items-center justify-between btn-entrar">
+                                <span class="ml-4 btn-entrar-text">Entre ou cadastre-se</span>
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"/>
+                                        <path d="m12 5 7 7-7 7"/>
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                 <div class="spacer-40"></div>
+             </div>
+             
+             <!-- Sheet Editar Email (DENTRO da view-main) -->
+             <div class="sheet-modal sheet-modal-bottom" id="sheetEditarEmail" data-swipe-to-close="true">
+                 <style>
+                   #sheetEditarEmail .item-title.item-floating-label {
+                     background-color: white !important;
+                   }
+                   #sheetEditarEmail .item-input-outline {
+                     --f7-input-outline-border-radius: 9999px;
+                   }
+                   #sheetEditarEmail .item-input-outline .item-input-wrap input {
+                     background-color: #ffffff !important;
+                   }
+                 </style>
+<div class="sheet-modal-inner">
+              <div class="page-content" style="padding-top: 12px;">
+                         <div class="block mb-4" style="padding-left: 32px;">
+                             <h3 class="text-lg font-semibold text-gray-900">Editar Email</h3>
+                         </div>
+                         
+<div class="block mb-6">
+                              <div class="list">
+                                  <ul>
+                                      <li class="item-content item-input item-input-outline">
+                                          <div class="item-media">
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                  <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                              </svg>
+                                          </div>
+                                          <div class="item-inner">
+                                              <div class="item-title item-floating-label">Novo Email</div>
+                                              <div class="item-input-wrap">
+                                                  <input 
+                                                      type="email" 
+                                                      id="inputEmailEditarIndex" 
+                                                      placeholder="Digite seu email"
+                                                      inputmode="email"
+                                                  />
+                                              </div>
+                                          </div>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                         
+                         <div class="block mt-6" style="padding-left: 32px; padding-right: 32px;">
+                             <div class="flex" style="gap: 12px;">
+                                 <button class="button button-outline color-gray sheet-close" style="flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 9999px; height: 50px; color: #6b7280; font-weight: 500; border-color: #e5e7eb;">Cancelar</button>
+                                 <button class="button button-fill" id="btnSalvarEmailIndex" style="flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 9999px; height: 50px; color: #ffffff; font-weight: 500; border: none; cursor: not-allowed;">Salvar</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+</div>
+          </div>
+      </div>
+      
+      <!-- Sheet Editar Telefone -->
+      <div class="sheet-modal sheet-modal-bottom" id="sheetEditarTelefone" data-swipe-to-close="true">
+          <style>
+            #sheetEditarTelefone .item-title.item-floating-label { background-color: white !important; }
+            #sheetEditarTelefone .item-input-outline { --f7-input-outline-border-radius: 9999px; }
+            #sheetEditarTelefone .item-input-outline .item-input-wrap input { background-color: #ffffff !important; }
+          </style>
+          <div class="sheet-modal-inner">
+              <div class="page-content">
+                  <div class="block mb-4" style="padding-left: 32px;">
+                      <h3 class="text-lg font-semibold text-gray-900">Editar Telefone</h3>
+                  </div>
+                  <div class="block mb-6">
+                      <div class="list">
+                          <ul>
+                              <li class="item-content item-input item-input-outline">
+                                  <div class="item-media">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                      </svg>
+                                  </div>
+                                  <div class="item-inner">
+                                      <div class="item-title item-floating-label">Novo Telefone</div>
+                                      <div class="item-input-wrap">
+                                          <input type="tel" id="inputTelefoneEditar" placeholder="(00) 00000-0000" inputmode="tel"/>
+                                      </div>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="block mt-6" style="padding-left: 32px; padding-right: 32px;">
+                      <div class="flex" style="gap: 12px;">
+                          <button class="button button-outline color-gray sheet-close" style="flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 9999px; height: 50px; color: #6b7280; font-weight: 500; border-color: #e5e7eb;">Cancelar</button>
+                          <button class="button button-fill" id="btnSalvarTelefone" style="flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 9999px; height: 50px; color: #ffffff; font-weight: 500; border: none; cursor: not-allowed;">Salvar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+<!-- Sheet Telefone Não Cadastrado -->
+      <div class="sheet-modal sheet-modal-bottom" id="sheetTelefoneNaoCadastrado" data-swipe-to-close="true" style="height: auto; max-height: 90vh;">
+          <div class="sheet-modal-inner">
+              <div class="page-content" style="padding: 0; --f7-safe-area-bottom: 0px;">
+
+                  <!-- Handle -->
+                  <div style="display: flex; justify-content: center; padding: 12px 0 8px;">
+                      <div style="width: 36px; height: 4px; background: #d1d5db; border-radius: 2px;"></div>
+                  </div>
+
+                  <!-- Ilustração unDraw "Access Denied" local — cor #1e40af -->
+                  <div style="display: flex; justify-content: center; margin: 16px 0 4px;">
+                      <img
+                          src="img/undraw_access-denied_krem.svg"
+                          alt="Telefone não cadastrado"
+                          style="width: 180px; height: 180px; object-fit: contain;"
+                      />
+                  </div>
+
+                  <!-- Título -->
+                  <h2 style="text-align: center; font-size: 20px; font-weight: 700; color: #111827; margin: 0 24px 10px;">Telefone não encontrado</h2>
+
+                  <!-- Descrição -->
+                  <p style="text-align: center; font-size: 14px; color: #6b7280; line-height: 1.6; margin: 0 32px 16px;">
+                      Este número não está cadastrado no sistema. Deseja criar uma conta?
+                  </p>
+
+                  <!-- Botões -->
+                  <div style="padding: 0 24px 8px; display: flex; flex-direction: column; gap: 12px;">
+                      <button onclick="sheetTelefoneNaoCadastradoIrCadastro()" class="button button-fill" style="width: 100%; height: 50px; border-radius: 9999px; background: #1e40af; color: #fff; font-size: 15px; font-weight: 600; border: none;">
+                          Criar conta
+                      </button>
+                      <button onclick="sheetTelefoneNaoCadastradoFechar()" class="button" style="width: 100%; height: 50px; border-radius: 9999px; background: #f3f4f6; color: #374151; font-size: 15px; font-weight: 500; border: none;">
+                          Tentar outro número
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+<!-- Sheet Cupom de Desconto -->
+      <div class="sheet-modal sheet-modal-bottom sheet-cupom-desconto" id="sheetCupomDesconto" data-swipe-to-close="true" style="--sheet-height: 320px; --f7-sheet-height: 320px; max-height: 320px;">
+          <style>
+            #sheetCupomDesconto .item-title.item-floating-label { background-color: white !important; }
+            #sheetCupomDesconto .item-input-outline { --f7-input-outline-border-radius: 9999px; }
+            #sheetCupomDesconto .item-input-outline .item-input-wrap input { background-color: #ffffff !important; }
+          </style>
+          <div class="sheet-modal-inner">
+              <div class="page-content">
+                  <div class="block mb-4" style="padding-left: 32px; padding-right: 32px;">
+                      <div class="flex items-center justify-between">
+                          <h3 id="tituloSheetCupom" class="text-lg font-semibold text-gray-900">Adicionar cupom</h3>
+                          <button id="fecharSheetCupom" onclick="fecharSheetCupom()" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M18 6L6 18"></path>
+                                  <path d="M6 6l12 12"></path>
+                              </svg>
+                          </button>
+                      </div>
+                  </div>
+                  
+                  <!-- Área de Input do Cupom -->
+                  <div id="areaInputCupom" class="block mb-4" style="padding-left: 32px; padding-right: 32px;">
+                      <div class="list">
+                          <ul>
+                              <li class="item-content item-input item-input-outline">
+                                  <div class="item-media">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                          <path d="M15 5l0 2"/>
+                                          <path d="M15 11l0 2"/>
+                                          <path d="M15 17l0 2"/>
+                                          <path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"/>
+                                      </svg>
+                                  </div>
+                                  <div class="item-inner">
+                                      <div class="item-title item-floating-label">Código do cupom</div>
+                                      <div class="item-input-wrap">
+                                          <input type="text" id="inputCodigoCupomSheet" placeholder="Digite o código" inputmode="text"/>
+                                      </div>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+
+                  <!-- Área de Erro -->
+                  <div id="areaErroCupom" class="hidden block mb-4" style="padding-left: 32px; padding-right: 32px;">
+                      <p id="mensagemErroCupom" class="text-sm text-red-600 text-center"></p>
+                  </div>
+
+                  <!-- Área de Cupom Aplicado -->
+                  <div id="areaCupomAplicado" class="hidden block mb-4 text-center">
+                      <p class="text-sm text-gray-500 mb-1">Cupom aplicado</p>
+                      <p id="codigoCupomSheet" class="text-base font-medium text-gray-700"></p>
+                      <p id="valorDescontoSheet" class="text-lg font-bold text-blue-600 mt-1"></p>
+                  </div>
+                  
+                  <div id="botoesCupomArea" class="block mt-6" style="padding-left: 32px; padding-right: 32px; padding-bottom: 32px;">
+                      <button class="button button-fill" id="btnAplicarCupom" onclick="aplicarCupom()" style="width: 100%; display: flex; align-items: center; justify-content: center; border-radius: 9999px; height: 50px; color: #ffffff; font-weight: 500; border: none; background: #1e40af;">Aplicar</button>
+                  </div>
+                  
+                  <div id="botaoEntendiArea" class="hidden block mt-6" style="padding-left: 32px; padding-right: 32px; padding-bottom: 32px;">
+                      <button class="button button-fill sheet-close" style="width: 100%; display: flex; align-items: center; justify-content: center; border-radius: 9999px; height: 50px; color: #ffffff; font-weight: 500; border: none; background: #1e40af;">Entendi</button>
+                  </div>
+                  
+                  <div id="botaoContinuarArea" class="hidden block mt-6" style="padding-left: 32px; padding-right: 32px; padding-bottom: 32px;">
+                      <button class="button button-fill sheet-close" style="width: 100%; display: flex; align-items: center; justify-content: center; border-radius: 9999px; height: 50px; color: #ffffff; font-weight: 500; border: none; background: #1e40af;">Continuar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    </div>
+
+    <!-- Overlay de progresso do cadastro -->
+    <div id="cadastroOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; z-index:9999; flex-direction:column; align-items:center; justify-content:center;">
+        <div style="text-align:center; padding:0 40px; width:100%;">
+            <div id="cadastroOverlayIcone" style="margin-bottom:24px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="animation:cadastroSpin 1s linear infinite;">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+            </div>
+            <div id="cadastroOverlayMsg" style="font-size:18px; font-weight:600; color:#111827; margin-bottom:8px;">Cadastrando usuário</div>
+            <div id="cadastroOverlaySub" style="font-size:14px; color:#6b7280; margin-bottom:32px;">Aguarde um momento...</div>
+            <div style="width:100%; background:#f3f4f6; border-radius:99px; height:6px; overflow:hidden;">
+                <div id="cadastroProgressBar" style="height:100%; border-radius:99px; background:#1e40af; width:0%; transition:width 0.6s ease;"></div>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes cadastroSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        @keyframes cadastroCheck { 0%{transform:scale(0);opacity:0} 60%{transform:scale(1.2)} 100%{transform:scale(1);opacity:1} }
+    </style>
+
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+	<!-- jQuery -->
+	<script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <!-- QuaggaJS para detecção de códigos de barras e QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <!-- QR Code Scanner Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qr-scanner@1.4.2/qr-scanner.umd.min.js"></script>
+    <!-- Configuração da Status Bar -->
+    
+
+    <script src="cordova.js"></script>
+
+    <!-- Animação de células com linhas grandes + logo Tastime animado -->
+    <script>
+    (function() {
+        function initCellAnimation() {
+            var canvas = document.getElementById('cellCanvas');
+            if (!canvas) return;
+
+            var ctx = canvas.getContext('2d');
+            var W, H, nodes;
+
+            // Cores — paleta do projeto (#1e40af)
+            var BG_TOP    = '#0c1a3a';           // azul muito escuro (versão escura do #1e40af)
+            var BG_BOT    = '#0f2252';           // azul escuro ligeiramente mais claro
+            var CELL_FILL = 'rgba(30,64,175,0.15)';   // #1e40af com baixa opacidade
+            var CELL_STR  = 'rgba(59,130,246,0.5)';   // azul médio (#3b82f6)
+            var LINE_STR  = 'rgba(59,130,246,';        // #3b82f6 para linhas
+            var NODE_CLR  = 'rgba(147,197,253,0.95)';  // azul claro (#93c5fd)
+            var GLOW_CLR  = 'rgba(30,64,175,0.25)';    // glow azul primário
+
+            // Configuração — células grandes
+            var NODE_COUNT = 22;
+            var MAX_DIST   = 220;   // distância para conectar linhas
+            var NODE_R     = 10;    // raio da célula
+            var SPEED      = 0.35;
+            var LINE_W     = 0.6;   // linhas finas
+
+            // Logo animado
+            var logoAlpha  = 0;
+            var logoScale  = 0.6;
+            var logoAnim   = 0; // 0=entrando, 1=pulsando
+            var logoPulse  = 0;
+
+            // Ripples ao clicar
+            var ripples = [];
+
+            function resize() {
+                W = canvas.width  = canvas.offsetWidth  || window.innerWidth;
+                H = canvas.height = canvas.offsetHeight || window.innerHeight;
+            }
+
+            function createNodes() {
+                nodes = [];
+                for (var i = 0; i < NODE_COUNT; i++) {
+                    nodes.push({
+                        x:  Math.random() * W,
+                        y:  Math.random() * H,
+                        vx: (Math.random() - 0.5) * SPEED,
+                        vy: (Math.random() - 0.5) * SPEED,
+                        r:  NODE_R + Math.random() * 6,
+                        phase: Math.random() * Math.PI * 2  // para pulsar individualmente
+                    });
+                }
+            }
+
+            // Ao clicar/tocar: empurra células próximas + cria ripple
+            function onTap(ex, ey) {
+                // Ripple visual
+                ripples.push({ x: ex, y: ey, r: 0, alpha: 0.7 });
+
+                // Empurra nós próximos
+                for (var i = 0; i < nodes.length; i++) {
+                    var n = nodes[i];
+                    var dx = n.x - ex;
+                    var dy = n.y - ey;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 180 && dist > 0) {
+                        var force = (180 - dist) / 180 * 3.5;
+                        n.vx += (dx / dist) * force;
+                        n.vy += (dy / dist) * force;
+                        // Limitar velocidade máxima
+                        var spd = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+                        if (spd > 5) { n.vx = n.vx / spd * 5; n.vy = n.vy / spd * 5; }
+                    }
+                }
+            }
+
+            canvas.addEventListener('click', function(e) {
+                var rect = canvas.getBoundingClientRect();
+                onTap(e.clientX - rect.left, e.clientY - rect.top);
+            });
+            canvas.addEventListener('touchstart', function(e) {
+                var rect = canvas.getBoundingClientRect();
+                var t = e.touches[0];
+                onTap(t.clientX - rect.left, t.clientY - rect.top);
+            }, { passive: true });
+
+            var startTime = Date.now();
+
+            function draw() {
+                var now = Date.now();
+                var elapsed = (now - startTime) / 1000;
+
+                ctx.clearRect(0, 0, W, H);
+
+                // Fundo gradiente
+                var grad = ctx.createLinearGradient(0, 0, 0, H);
+                grad.addColorStop(0, BG_TOP);
+                grad.addColorStop(1, BG_BOT);
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, W, H);
+
+                // Mover nós + fricção suave
+                for (var i = 0; i < nodes.length; i++) {
+                    var n = nodes[i];
+                    n.x += n.vx;
+                    n.y += n.vy;
+                    // Fricção para desacelerar após clique
+                    n.vx *= 0.985;
+                    n.vy *= 0.985;
+                    // Velocidade mínima base
+                    var spd = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+                    if (spd < SPEED * 0.3) {
+                        n.vx += (Math.random() - 0.5) * 0.05;
+                        n.vy += (Math.random() - 0.5) * 0.05;
+                    }
+                    // Rebater nas bordas
+                    if (n.x < n.r)     { n.x = n.r;     n.vx = Math.abs(n.vx); }
+                    if (n.x > W - n.r) { n.x = W - n.r; n.vx = -Math.abs(n.vx); }
+                    if (n.y < n.r)     { n.y = n.r;     n.vy = Math.abs(n.vy); }
+                    if (n.y > H - n.r) { n.y = H - n.r; n.vy = -Math.abs(n.vy); }
+                }
+
+                // Linhas entre células próximas
+                for (var i = 0; i < nodes.length; i++) {
+                    for (var j = i + 1; j < nodes.length; j++) {
+                        var dx = nodes[i].x - nodes[j].x;
+                        var dy = nodes[i].y - nodes[j].y;
+                        var dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < MAX_DIST) {
+                            var alpha = (1 - dist / MAX_DIST) * 0.7;
+                            ctx.beginPath();
+                            ctx.strokeStyle = LINE_STR + alpha + ')';
+                            ctx.lineWidth = LINE_W * (1 - dist / MAX_DIST) + 0.2;
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Células (hexágonos)
+                for (var i = 0; i < nodes.length; i++) {
+                    var n = nodes[i];
+                    var pulse = 1 + Math.sin(elapsed * 1.8 + n.phase) * 0.12;
+                    var r = n.r * pulse;
+
+
+
+                    // Hexágono preenchido
+                    ctx.beginPath();
+                    for (var k = 0; k < 6; k++) {
+                        var angle = (Math.PI / 3) * k - Math.PI / 6;
+                        var hx = n.x + r * Math.cos(angle);
+                        var hy = n.y + r * Math.sin(angle);
+                        if (k === 0) ctx.moveTo(hx, hy); else ctx.lineTo(hx, hy);
+                    }
+                    ctx.closePath();
+                    ctx.fillStyle = CELL_FILL;
+                    ctx.fill();
+                    ctx.strokeStyle = CELL_STR;
+                    ctx.lineWidth = 1.8;
+                    ctx.stroke();
+
+                    // Ponto central brilhante
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, r * 0.28, 0, Math.PI * 2);
+                    ctx.fillStyle = NODE_CLR;
+                    ctx.fill();
+                }
+
+                // Ripples
+                for (var i = ripples.length - 1; i >= 0; i--) {
+                    var rp = ripples[i];
+                    rp.r += 5;
+                    rp.alpha -= 0.022;
+                    if (rp.alpha <= 0) { ripples.splice(i, 1); continue; }
+                    ctx.beginPath();
+                    ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+                    ctx.strokeStyle = 'rgba(59,130,246,' + rp.alpha + ')';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                // Logo "Tastime" animado — entra com scale+fade, depois pulsa suavemente
+                if (logoAlpha < 1) {
+                    logoAlpha  = Math.min(1, logoAlpha + 0.018);
+                    logoScale  = 0.6 + (logoAlpha * 0.4);
+                }
+                logoPulse = 1 + Math.sin(elapsed * 1.2) * 0.025;
+
+                var lx = W / 2;
+                var ly = H * 0.38;
+                var finalScale = logoScale * logoPulse;
+
+                ctx.save();
+                ctx.globalAlpha = logoAlpha;
+                ctx.translate(lx, ly);
+                ctx.scale(finalScale, finalScale);
+
+                // Sombra/glow do texto
+                ctx.shadowColor = 'rgba(59,130,246,0.8)';   // glow azul primário
+                ctx.shadowBlur  = 28;
+
+                // Texto principal "Tastime"
+                ctx.font = 'bold 52px "Sora", "Proxima Nova", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // Gradiente no texto
+                var tGrad = ctx.createLinearGradient(-120, -30, 120, 30);
+                tGrad.addColorStop(0,   '#93c5fd');   // blue-300
+                tGrad.addColorStop(0.5, '#ffffff');
+                tGrad.addColorStop(1,   '#3b82f6');   // blue-500
+                ctx.fillStyle = tGrad;
+                ctx.fillText('Tasktime', 0, 0);
+
+                // Linha decorativa abaixo
+                ctx.shadowBlur = 0;
+                ctx.beginPath();
+                var lineW = 90;
+                var lineGrad = ctx.createLinearGradient(-lineW, 0, lineW, 0);
+                lineGrad.addColorStop(0,   'rgba(59,130,246,0)');
+                lineGrad.addColorStop(0.5, 'rgba(59,130,246,0.9)');
+                lineGrad.addColorStop(1,   'rgba(59,130,246,0)');
+                ctx.strokeStyle = lineGrad;
+                ctx.lineWidth = 1.5;
+                ctx.moveTo(-lineW, 34);
+                ctx.lineTo(lineW, 34);
+                ctx.stroke();
+
+                // Subtítulo
+                ctx.shadowBlur = 0;
+                ctx.font = '500 13px "Sora", sans-serif';
+                ctx.fillStyle = 'rgba(147,197,253,0.65)';   // blue-300
+                ctx.fillText('Controle de Ponto', 0, 56);
+
+                ctx.restore();
+
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', function() {
+                resize();
+                createNodes();
+            });
+
+            resize();
+            createNodes();
+            draw();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCellAnimation);
+        } else {
+            initCellAnimation();
+        }
+    })();
+    </script>
+    
+    <!-- Script de inicialização segura -->
+    <script>
+    // Aguardar carregamento completo antes de executar qualquer coisa
+    document.addEventListener('DOMContentLoaded', function() {
+      // Função global para mostrar campo de busca na página nosso-banco
+      window.mostrarCampoBusca = function() {
+          const iconeLupa = document.getElementById('iconeLupa');
+          const campoBuscaHeader = document.getElementById('campoBuscaHeader');
+          
+          if (iconeLupa && campoBuscaHeader) {
+              // Ocultar ícone de lupa
+              iconeLupa.style.display = 'none';
+              
+              // Mostrar campo de busca
+              campoBuscaHeader.style.display = 'block';
+              
+              // Focar no campo de busca
+              setTimeout(() => {
+                  const input = document.getElementById('buscaUsuario');
+                  if (input) {
+                      input.focus();
+                  }
+              }, 100);
+          }
+      };
+      
+      // Limpar qualquer timer ou verificação automática que possa estar rodando
+      if (typeof window.clearAllIntervals === 'function') {
+        window.clearAllIntervals();
+      }
+      
+      // Garantir que não há redirecionamentos automáticos
+      localStorage.removeItem('auto_redirect');
+
+      // ── Sheet: Telefone Não Cadastrado ──────────────────────────────
+      var _sheetTelNaoCad = null;
+
+      window.abrirSheetTelefoneNaoCadastrado = function() {
+        if (!_sheetTelNaoCad) {
+          _sheetTelNaoCad = window.app.sheet.create({ el: '#sheetTelefoneNaoCadastrado' });
+        }
+        _sheetTelNaoCad.open();
+      };
+
+      window.sheetTelefoneNaoCadastradoFechar = function() {
+        if (_sheetTelNaoCad) _sheetTelNaoCad.close();
+        // Limpa o campo e devolve o foco
+        var inp = document.getElementById('telefone');
+        if (inp) { inp.value = ''; inp.focus(); }
+      };
+
+      window.sheetTelefoneNaoCadastradoIrCadastro = function() {
+        if (_sheetTelNaoCad) _sheetTelNaoCad.close();
+        if (window.app && app.views && app.views.main && app.views.main.router) {
+          app.views.main.router.navigate('/beneficios/', { transition: 'f7-push' });
+        } else {
+          window.location.href = 'beneficios.html';
+        }
+      };
+      // ────────────────────────────────────────────────────────────────
+
+      // Sheet Editar Email
+      let sheetEditarEmailInstance = null;
+      
+      window.abrirSheetEditarEmail = function() {
+        if (!sheetEditarEmailInstance) {
+          sheetEditarEmailInstance = window.app.sheet.create({
+            el: '#sheetEditarEmail'
+          });
+        }
+        
+        var input = document.getElementById('inputEmailEditarIndex');
+        if (input) input.value = '';
+        
+        sheetEditarEmailInstance.open();
+      };
+      
+      function validarEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+      
+      // Listener para salvar email
+      document.getElementById('btnSalvarEmailIndex').addEventListener('click', async function() {
+        var inputEmail = document.getElementById('inputEmailEditarIndex');
+        var novoEmail = inputEmail ? inputEmail.value.trim() : '';
+        
+        if (!validarEmail(novoEmail)) {
+          if (app && app.toast) {
+            app.toast.create({ text: 'Digite um email válido', position: 'center', closeTimeout: 2000, cssClass: 'color-red' }).open();
+          }
+          return;
+        }
+        
+        var textoOriginal = this.textContent;
+        this.disabled = true;
+        this.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
+        
+        try {
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          
+          var cpf = localStorage.getItem('cpf_usuario') || localStorage.getItem('cpfVerificado') || sessionStorage.getItem('cpfVerificado');
+          if (!cpf && app && app.toast) {
+            app.toast.create({ text: 'CPF não encontrado', position: 'center', closeTimeout: 2000, cssClass: 'color-red' }).open();
+            this.textContent = textoOriginal;
+            this.disabled = false;
+            return;
+          }
+          
+          if (window.userService && window.userService.supabase) {
+            var result = await window.userService.supabase.from('usuarios').update({ email: novoEmail }).eq('cpf', cpf);
+            if (result.error) throw result.error;
+            
+            var usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
+            usuarioLogado.email = novoEmail;
+            localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+            
+            if (app && app.toast) {
+              app.toast.create({ text: 'Email atualizado com sucesso', position: 'center', closeTimeout: 2000, cssClass: 'color-green' }).open();
+            }
+            
+            if (sheetEditarEmailInstance) {
+              sheetEditarEmailInstance.close();
+            }
+          }
+          
+          this.textContent = textoOriginal;
+          this.disabled = false;
+        } catch(error) {
+          console.error('[INDEX] Erro ao salvar email:', error);
+          if (app && app.toast) {
+            app.toast.create({ text: 'Erro ao salvar. Tente novamente', position: 'center', closeTimeout: 2000, cssClass: 'color-red' }).open();
+          }
+          this.textContent = textoOriginal;
+          this.disabled = false;
+        }
+      });
+      
+      // Sheet Editar Telefone
+      let sheetEditarTelefoneInstance = null;
+      
+      window.abrirSheetEditarTelefone = function() {
+        if (!sheetEditarTelefoneInstance) {
+          sheetEditarTelefoneInstance = window.app.sheet.create({
+            el: '#sheetEditarTelefone'
+          });
+        }
+        
+        var input = document.getElementById('inputTelefoneEditar');
+        var btn = document.getElementById('btnSalvarTelefone');
+        if (input) {
+          input.value = '';
+          input.onkeyup = function() {
+            var v = this.value.replace(/\D/g, '');
+            var formatted = '';
+            if (v.length > 0) formatted += '(' + v.substring(0, 2);
+            if (v.length >= 2) formatted += ') ' + v.substring(2, 7);
+            if (v.length >= 7) formatted += '-' + v.substring(7, 11);
+            this.value = formatted;
+            if (btn) btn.disabled = v.length < 10 || v.length > 11;
+          };
+        }
+        if (btn) btn.disabled = true;
+        
+        sheetEditarTelefoneInstance.open();
+      };
+      
+      document.getElementById('btnSalvarTelefone').addEventListener('click', async function() {
+        var inputTelefone = document.getElementById('inputTelefoneEditar');
+        var novoTelefone = inputTelefone ? inputTelefone.value.replace(/\D/g, '') : '';
+        
+        if (novoTelefone.length < 10 || novoTelefone.length > 11) {
+          if (app && app.toast) {
+            app.toast.create({ text: 'Digite um telefone válido', position: 'center', closeTimeout: 2000, cssClass: 'color-red' }).open();
+          }
+          return;
+        }
+        
+        var textoOriginal = this.textContent;
+        this.disabled = true;
+        this.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
+        
+        try {
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          
+          var cpf = localStorage.getItem('cpf_usuario') || localStorage.getItem('cpfVerificado') || sessionStorage.getItem('cpfVerificado');
+          if (!cpf && app && app.toast) {
+            app.toast.create({ text: 'CPF não encontrado', position: 'center', closeTimeout: 2000, cssClass: 'color-red' }).open();
+            this.textContent = textoOriginal;
+            this.disabled = false;
+            return;
+          }
+          
+          if (window.userService && window.userService.supabase) {
+            var result = await window.userService.supabase.from('usuarios').update({ telefone: novoTelefone }).eq('cpf', cpf);
+            if (result.error) throw result.error;
+            
+            var usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
+            usuarioLogado.telefone = novoTelefone;
+            localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+            
+            // Atualizar telefone na página dados-completos se estiver aberta
+            var telEl = document.querySelector('#telefoneUsuario');
+            if (telEl) {
+              var fone = novoTelefone;
+              if (fone.length === 11) telEl.textContent = '(' + fone.substring(0,2) + ') ' + fone.substring(2,7) + '-' + fone.substring(7,11);
+              else telEl.textContent = '(' + fone.substring(0,2) + ') ' + fone.substring(2,6) + '-' + fone.substring(6,10);
+            }
+            
+            if (app && app.toast) {
+              app.toast.create({ text: 'Telefone atualizado com sucesso', position: 'center', closeTimeout: 2000, cssClass: 'color-green' }).open();
+            }
+            
+            if (sheetEditarTelefoneInstance) {
+              sheetEditarTelefoneInstance.close();
+            }
+          }
+          
+          this.textContent = textoOriginal;
+          this.disabled = false;
+        } catch(error) {
+          console.error('[INDEX] Erro ao salvar telefone:', error);
+          if (app && app.toast) {
+            app.toast.create({ text: 'Erro ao salvar. Tente novamente', position: 'center', closeTimeout: 2000, cssClass: 'color-red' }).open();
+          }
+          this.textContent = textoOriginal;
+          this.disabled = false;
+        }
+      });
+    });
+    </script>
+
+
+
+    <style>
+      html, body, #app, .view-main, .page {
+        height: 100%;
+      }
+      
+
+      
+      /* Esconder barra de rolagem lateral */
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      
+      /* Para Firefox */
+      * {
+        scrollbar-width: none;
+      }
+      /* Bloquear copiar, colar e seleção */
+      body, .page, #app {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+      }
+      input, textarea, [contenteditable="true"] {
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto;
+        -webkit-touch-callout: default;
+      }
+      .page-scrollable {
+        overflow-y: auto;
+        height: 100vh;
+        box-sizing: border-box;
+      }
+      
+      
+      /* Garantir que os botões funcionem corretamente */
+      #btnEntrar {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        position: relative;
+        z-index: 1000;
+        pointer-events: auto;
+      }
+      
+      /* Transições suaves para as barrinhas */
+      /* Toast de sucesso */
+      .toast-success {
+        background: #10b981 !important;
+        color: white !important;
+      }
+      
+      /* Remover blur do overlay/backdrop de todos os sheets */
+      .sheet-backdrop,
+      .modal-backdrop,
+      .sheet-modal-overlay {
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
+      }
+
+    </style>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
+    <!-- Serviço centralizado de usuário (core services only) -->
+    <script type="text/javascript" src="js/supabase-config.js"></script>
+    <script type="text/javascript" src="js/user-service.js"></script>
+    <!-- Configurações do usuário (temas e preferências) -->
+    <script type="text/javascript" src="js/configuracoes-usuario.js"></script>
+    <!-- Scripts de dados pessoais (carregados no index para estar sempre disponível) -->
+    <script type="text/javascript" src="js/dados-pessoais.js"></script>
+    <script type="text/javascript" src="js/dados-completos.js"></script>
+    <!-- Realtime Service -->
+    <script type="text/javascript" src="js/realtime-service.js"></script>
+
+    <!-- Atualização em tempo real das conversas (global) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('tasktimeMensagensUpdated', function() {
+            if (window._convRecarregarConversas) {
+                window._convRecarregarConversas();
+            }
+        });
+    });
+    </script>
+    <!-- OneSignal Service -->
+    <script type="text/javascript" src="js/onesignal-service.js"></script>
+    <!-- Script de página senha (carregado no index pois depende de funções da index) -->
+    <script type="text/javascript" src="js/senha.js"></script>
+    
+    <!-- Script da página home (carregado no index para estar sempre disponível) -->
+    <script type="text/javascript" src="js/home/index.js"></script>
+
+    <!-- Script frente-documento (carregado no index para garantir permissão de câmera) -->
+    <script type="text/javascript" src="js/frente-documento.js"></script>
+
+    <!-- Script Stories - Novidades da equipe -->
+    <script>
+        // ===== REGISTRO DO DIA — INCREMENTAR BADGE =====
+        async function incrementarBadge(el) {
+            console.log('[BADGE] incrementarBadge chamado');
+            var slide = el.closest('.swiper-slide');
+            if (!slide) {
+                console.warn('[BADGE] Slide não encontrado');
+                return;
+            }
+
+            var badge = slide.querySelector('.badge-contador');
+            var label = slide.querySelector('span.text-xs');
+            var tipo = label ? label.textContent.trim().toLowerCase() : '';
+            console.log('[BADGE] Tipo detectado:', tipo);
+
+            var mapa = { 'prata': 'prata', 'ouro': 'ouro', 'diamante': 'diamante', 'selection': 'selecao', 'pix': 'pix' };
+            var chave = mapa[tipo];
+            if (!chave) { 
+                console.warn('[BADGE] Tipo não reconhecido:', tipo); 
+                return; 
+            }
+            console.log('[BADGE] Chave mapeada:', chave);
+
+            // Atualizar badge visual
+            if (badge) {
+                var atual = parseInt(badge.textContent) || 0;
+                badge.textContent = atual + 1;
+                console.log('[BADGE] Badge atualizado:', atual, '->', atual + 1);
+            }
+
+            // Salvar via rhAlterarAssinatura (que já adiciona o bônus automaticamente no primeiro registro do dia)
+            if (typeof rhAlterarAssinatura === 'function') {
+                console.log('[BADGE] Chamando rhAlterarAssinatura com:', chave, 1);
+                rhAlterarAssinatura(chave, 1);
+            } else {
+                console.error('[BADGE] rhAlterarAssinatura não está definida!');
+            }
+        }
+
+        async function _homeAdicionarBonusCarteira() {
+            try {
+                if (!window.supabaseClient) return;
+
+                // Buscar telefone do localStorage
+                var telefone = localStorage.getItem('telefone_usuario');
+                if (!telefone) {
+                    console.error('[HOME-BONUS] Telefone não encontrado no localStorage');
+                    return;
+                }
+
+                // Buscar usuário completo do banco usando telefone
+                var resUsuario = await window.supabaseClient
+                    .from('usuarios_tasktime')
+                    .select('id_usuario, saldo_carteira')
+                    .eq('telefone', telefone)
+                    .single();
+
+                if (resUsuario.error || !resUsuario.data) {
+                    console.error('[HOME-BONUS] Erro ao buscar usuário:', resUsuario.error);
+                    return;
+                }
+
+                var idUsuario = resUsuario.data.id_usuario;
+                var saldoAtual = parseFloat(resUsuario.data.saldo_carteira) || 0;
+
+                if (!idUsuario) {
+                    console.error('[HOME-BONUS] id_usuario não encontrado');
+                    return;
+                }
+
+                // Gerar bônus entre R$0,10 e R$0,15 — igual ao registro-ponto.js
+                var bonus = Math.round((Math.random() * 5 + 10)) / 100;
+                var novoSaldo = saldoAtual + bonus;
+
+                console.log('[HOME-BONUS] Bônus:', bonus, 'Saldo atual:', saldoAtual, 'Novo saldo:', novoSaldo);
+
+                // Atualizar saldo
+                var upd = await window.supabaseClient
+                    .from('usuarios_tasktime')
+                    .update({ saldo_carteira: novoSaldo.toFixed(2) })
+                    .eq('id_usuario', idUsuario);
+
+                if (upd.error) { console.error('[HOME-BONUS] Erro ao atualizar saldo:', upd.error); return; }
+
+                console.log('[HOME-BONUS] 💰 +R$' + bonus.toFixed(2) + ' → R$' + novoSaldo.toFixed(2));
+
+                // Registrar na tabela carteira_historico_usuarios_tasktime
+                var histResult = await window.supabaseClient
+                    .from('carteira_historico_usuarios_tasktime')
+                    .insert({
+                        id_usuario:    idUsuario,
+                        tipo:          'bonus_registro_dia',
+                        valor:         bonus,
+                        saldo_antes:   saldoAtual,
+                        saldo_depois:  novoSaldo,
+                        descricao:     'Bônus por registro do dia'
+                    });
+
+                if (histResult.error) {
+                    console.error('[HOME-BONUS] ❌ Erro ao inserir histórico:', histResult.error);
+                } else {
+                    console.log('[HOME-BONUS] ✅ Histórico salvo com sucesso!');
+                }
+
+                // Criar notificação — igual ao registro-ponto.js
+                await window.supabaseClient
+                    .from('notificacoes_tasktime')
+                    .insert({
+                        usuario_id: idUsuario,
+                        tipo: 'bonus_registro_dia',
+                        titulo: '💰 Bônus de registro!',
+                        mensagem: 'Você ganhou R$ ' + bonus.toFixed(2).replace('.', ',') + ' na sua carteira por registrar uma venda. Saldo atual: R$ ' + novoSaldo.toFixed(2).replace('.', ','),
+                        status: 'pendente',
+                        dados_adicional: {
+                            bonus: bonus,
+                            saldo_anterior: saldoAtual,
+                            saldo_novo: novoSaldo
+                        }
+                    });
+
+                // Atualizar badge do saldo na navbar
+                if (typeof atualizarBadgeSaldoCarteira === 'function') {
+                    atualizarBadgeSaldoCarteira();
+                }
+
+            } catch (e) {
+                console.error('[HOME-BONUS] Erro:', e);
+            }
+        }
+
+        // ===== ABAS HOME — INÍCIO / FEED =====
+        function homeSwitchTab(tab) {
+            var abaHome = document.getElementById('aba-home');
+            var abaFeed = document.getElementById('aba-feed');
+            var btnHome = document.getElementById('tab-btn-home');
+            var btnFeed = document.getElementById('tab-btn-feed');
+            if (!abaHome || !abaFeed || !btnHome || !btnFeed) return;
+            if (tab === 'home') {
+                abaHome.style.display = '';
+                abaFeed.style.display = 'none';
+                btnHome.classList.add('home-tab-btn--active');
+                btnFeed.classList.remove('home-tab-btn--active');
+            } else {
+                abaHome.style.display = 'none';
+                abaFeed.style.display = '';
+                btnFeed.classList.add('home-tab-btn--active');
+                btnHome.classList.remove('home-tab-btn--active');
+            }
+        }
+
+        function homeFeedLike(btn) {
+            var svg = btn.querySelector('svg');
+            var count = btn.querySelector('.feed-like-count');
+            if (!svg || !count) return;
+            var liked = btn.getAttribute('data-liked') === '1';
+            if (liked) {
+                btn.setAttribute('data-liked', '0');
+                svg.setAttribute('fill', 'none');
+                svg.setAttribute('stroke', 'currentColor');
+                btn.style.color = '#6b7280';
+                count.textContent = parseInt(count.textContent) - 1;
+            } else {
+                btn.setAttribute('data-liked', '1');
+                svg.setAttribute('fill', '#ef4444');
+                svg.setAttribute('stroke', '#ef4444');
+                btn.style.color = '#ef4444';
+                count.textContent = parseInt(count.textContent) + 1;
+            }
+        }
+
+        // Delegação global — captura cliques nas abas e likes do feed
+        // independente de como o F7 injeta o HTML
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('#tab-btn-home');
+            if (btn) { homeSwitchTab('home'); return; }
+            btn = e.target.closest('#tab-btn-feed');
+            if (btn) { homeSwitchTab('feed'); return; }
+            btn = e.target.closest('.feed-post-action-btn[data-like]');
+            if (btn) { homeFeedLike(btn); return; }
+        });
+        // ===== FIM ABAS HOME =====
+
+        function abrirStory(idx) {
+            sessionStorage.setItem('storyIdx', idx);
+            if (window.app && app.views && app.views.main && app.views.main.router) {
+                app.views.main.router.navigate('/boletos/', { transition: 'f7-cover-v' });
+            } else {
+                window.location.href = 'boletos.html';
+            }
+        }
+
+        function abrirSeletorStory() {
+            function navegarParaSeletor() {
+                if (window.app && app.views && app.views.main && app.views.main.router) {
+                    app.views.main.router.navigate('/indicacao/', { transition: 'f7-cover-v' });
+                } else {
+                    window.location.href = 'indicacao.html';
+                }
+            }
+
+            // Ambiente Cordova — solicitar permissão de câmera antes de navegar
+            if (typeof cordova !== 'undefined' && cordova.platformId) {
+                if (cordova.plugins && cordova.plugins.permissions) {
+                    var perm = cordova.plugins.permissions.CAMERA;
+                    cordova.plugins.permissions.checkPermission(perm, function(status) {
+                        if (status.hasPermission) {
+                            navegarParaSeletor();
+                        } else {
+                            cordova.plugins.permissions.requestPermission(perm, function(result) {
+                                if (result.hasPermission) {
+                                    navegarParaSeletor();
+                                } else {
+                                    if (window.app && app.dialog) {
+                                        app.dialog.alert(
+                                            'Para compartilhar novidades é necessário permitir o acesso à câmera. Acesse Configurações > Aplicativos > Tasktime > Permissões para ativar.',
+                                            'Permissão necessária'
+                                        );
+                                    }
+                                }
+                            }, function() {
+                                // Erro ao solicitar — navega mesmo assim
+                                navegarParaSeletor();
+                            });
+                        }
+                    }, function() {
+                        // Erro ao verificar — navega mesmo assim
+                        navegarParaSeletor();
+                    });
+                } else {
+                    // Sem plugin de permissões — navega direto (SO vai pedir se necessário)
+                    navegarParaSeletor();
+                }
+            } else {
+                // Ambiente web — navega direto
+                navegarParaSeletor();
+            }
+        }
+    </script>
+
+    <!-- Função de inicialização da página index - deve ser carregada antes do routes.js -->
+    <script>
+    // Função para inicializar a página index
+    async function inicializarIndex() {
+      // Verificar se há telefone salvo e redirecionar para senha ou home
+      const telefoneUsuario = localStorage.getItem('telefone_usuario');
+      if (telefoneUsuario) {
+        const loginSemSenha = localStorage.getItem('login_sem_senha') === 'true';
+
+        // Verificar se telefone está validado
+        let telefoneValidado = true;
+        try {
+            const usuarioCache = localStorage.getItem('usuario_tasktime');
+            if (usuarioCache) {
+                const u = JSON.parse(usuarioCache);
+                telefoneValidado = u.telefone_validado === true;
+            }
+        } catch(e) {}
+
+        const destino = !telefoneValidado
+            ? '/metodos-verificacao/'
+            : (loginSemSenha ? '/home/' : '/senha/');
+
+        console.log('[INDEX] Telefone salvo detectado, redirecionando para', destino);
+        if (window.app && window.app.views && window.app.views.main) {
+            window.app.views.main.router.navigate(destino);
+        } else {
+            setTimeout(() => {
+                if (window.app && window.app.views && window.app.views.main) {
+                    window.app.views.main.router.navigate(destino);
+                }
+            }, 500);
+        }
+        return;
+      }
+      
+      // Verificar se há usuário logado e redirecionar para home
+      const cpfUsuario = localStorage.getItem('cpf_usuario');
+      if (cpfUsuario) {
+        console.log('[INDEX] Usuário logado detectado, redirecionando para home...');
+        // Aguardar Framework7 ficar pronto e redirecionar para home
+        if (window.app && window.app.views && window.app.views.main) {
+            window.app.views.main.router.navigate('/home/');
+        } else {
+            setTimeout(() => {
+                if (window.app && window.app.views && window.app.views.main) {
+                    window.app.views.main.router.navigate('/home/');
+                }
+            }, 500);
+        }
+        return;
+      }
+      
+      var btnEntrar = document.getElementById('btnEntrar');
+      
+      if (btnEntrar) {
+        // Remover evento anterior se existir
+        if (btnEntrar.clickHandler) {
+          btnEntrar.removeEventListener('click', btnEntrar.clickHandler);
+        }
+        
+        // Adicionar novo evento
+        btnEntrar.clickHandler = function(e) {
+            // Parar propagação do evento
+            e.stopPropagation();
+            // Solicitar permissões e depois navegar para login
+            solicitarPermissoes();
+        };
+        
+        btnEntrar.addEventListener('click', btnEntrar.clickHandler);
+      } else {
+        // Tentar novamente após um delay
+        setTimeout(function() {
+          inicializarIndex();
+        }, 100);
+      }
+    }
+
+    // Função para limpar eventos da página index
+    function limparEventosIndex() {
+      var btnEntrar = document.getElementById('btnEntrar');
+      if (btnEntrar && btnEntrar.clickHandler) {
+        btnEntrar.removeEventListener('click', btnEntrar.clickHandler);
+        btnEntrar.clickHandler = null;
+      }
+    }
+
+    // Função para solicitar permissões
+    function solicitarPermissoes() {
+        // Animar botão para círculo de carregamento
+        const btnEntrar = document.getElementById('btnEntrar');
+        if (btnEntrar) {
+            // Salvar estado original
+            btnEntrar.originalWidth = btnEntrar.style.width || '100%';
+            btnEntrar.originalContent = btnEntrar.innerHTML;
+            
+            // Animar para círculo
+            btnEntrar.style.transition = 'all 0.3s ease';
+            btnEntrar.style.width = '48px';
+            btnEntrar.style.height = '48px';
+            btnEntrar.style.borderRadius = '50%';
+            btnEntrar.style.padding = '0';
+            btnEntrar.style.justifyContent = 'center';
+            btnEntrar.style.alignItems = 'center';
+            
+            // Mostrar spinner de carregamento
+            btnEntrar.innerHTML = `
+                <div class="animate-spin rounded-full border-2 border-white border-t-transparent loading-spinner"></div>
+            `;
+            
+            // Desabilitar botão
+            btnEntrar.disabled = true;
+        }
+      // Verificar se estamos no app Cordova ou no navegador
+      if (typeof cordova !== 'undefined' && cordova.platformId) {
+        // Solicitar permissão de localização no Cordova
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              solicitarPermissaoNotificacoesCordova();
+            },
+            function(error) {
+              solicitarPermissaoNotificacoesCordova();
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 0
+            }
+          );
+        } else {
+          solicitarPermissaoNotificacoesCordova();
+        }
+      } else {
+        // Solicitar permissão de localização no navegador
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              solicitarPermissaoNotificacoesNavegador();
+            },
+            function(error) {
+              solicitarPermissaoNotificacoesNavegador();
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 0
+            }
+          );
+        } else {
+          solicitarPermissaoNotificacoesNavegador();
+        }
+      }
+    }
+
+    // Função para solicitar permissão de notificações no CORDOVA
+    function solicitarPermissaoNotificacoesCordova() {
+      // Se OneSignal já está disponível, solicitar permissão agora
+      if (window.plugins && window.plugins.OneSignal && window.plugins.OneSignal.Notifications) {
+        window.plugins.OneSignal.Notifications.requestPermission(true).then(function() {
+          redirecionarParaLogin();
+        }).catch(function() {
+          redirecionarParaLogin();
+        });
+        return;
+      }
+
+      // OneSignal ainda não carregou — aguardar até 8s antes de desistir
+      var tentativas = 0;
+      var maxTentativas = 16; // 16 x 500ms = 8s
+      var aguardar = setInterval(function() {
+        tentativas++;
+        if (window.plugins && window.plugins.OneSignal && window.plugins.OneSignal.Notifications) {
+          clearInterval(aguardar);
+          window.plugins.OneSignal.Notifications.requestPermission(true).then(function() {
+            redirecionarParaLogin();
+          }).catch(function() {
+            redirecionarParaLogin();
+          });
+        } else if (tentativas >= maxTentativas) {
+          clearInterval(aguardar);
+          // Fallback: tentar plugin local, senão redireciona
+          if (window.cordova && window.cordova.plugins && window.cordova.plugins.notification) {
+            window.cordova.plugins.notification.local.requestPermission(function() {
+              redirecionarParaLogin();
+            });
+          } else {
+            redirecionarParaLogin();
+          }
+        }
+      }, 500);
+    }
+
+    // Função para solicitar permissão de notificações no NAVEGADOR
+    function solicitarPermissaoNotificacoesNavegador() {
+      if ('Notification' in window) {
+        if (Notification.permission === 'default') {
+          Notification.requestPermission().then(function(permission) {
+            redirecionarParaLogin();
+          });
+        } else {
+          redirecionarParaLogin();
+        }
+      } else {
+        redirecionarParaLogin();
+      }
+    }
+
+    // Função para solicitar permissão da câmera
+    function solicitarPermissaoCamera(callback) {
+      // Verificar se estamos no app Cordova
+      if (typeof cordova !== 'undefined' && cordova.platformId) {
+        console.log('[INDEX] Solicitando permissão da câmera no Cordova...');
+
+        // No Cordova, verificar status da permissão primeiro
+        if (navigator.camera && cordova.plugins && cordova.plugins.permissions) {
+          cordova.plugins.permissions.checkPermission(
+            cordova.plugins.permissions.CAMERA,
+            function(status) {
+              if (status.hasPermission) {
+                console.log('[INDEX] Permissão da câmera já concedida (Cordova)');
+                if (callback) callback(true);
+              } else {
+                // Solicitar permissão explicitamente
+                cordova.plugins.permissions.requestPermission(
+                  cordova.plugins.permissions.CAMERA,
+                  function(status) {
+                    if (status.hasPermission) {
+                      console.log('[INDEX] Permissão da câmera concedida (Cordova)');
+                      if (callback) callback(true);
+                    } else {
+                      console.warn('[INDEX] Permissão da câmera negada (Cordova)');
+                      if (callback) callback(false);
+                    }
+                  },
+                  function(error) {
+                    console.error('[INDEX] Erro ao solicitar permissão (Cordova):', error);
+                    if (callback) callback(false);
+                  }
+                );
+              }
+            },
+            function(error) {
+              console.error('[INDEX] Erro ao verificar permissão (Cordova):', error);
+              // Fallback: tentar acessar câmera diretamente
+              if (navigator.camera) {
+                navigator.camera.getPicture(
+                  function success(imageData) {
+                    console.log('[INDEX] Permissão da câmera concedida (Cordova)');
+                    if (callback) callback(true);
+                  },
+                  function error(error) {
+                    console.error('[INDEX] Erro ao acessar câmera (Cordova):', error);
+                    if (callback) callback(false);
+                  },
+                  {
+                    quality: 10,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    allowEdit: false,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth: 100,
+                    targetHeight: 100,
+                    mediaType: Camera.MediaType.PICTURE,
+                    correctOrientation: true,
+                    saveToPhotoAlbum: false,
+                    cameraDirection: Camera.Direction.BACK
+                  }
+                );
+              } else {
+                console.log('[INDEX] Camera plugin não disponível');
+                if (callback) callback(false);
+              }
+            }
+          );
+        } else {
+          console.log('[INDEX] Plugins necessários não disponíveis');
+          if (callback) callback(false);
+        }
+      } else {
+        // No navegador, verificar status da permissão primeiro
+        console.log('[INDEX] Solicitando permissão da câmera no navegador...');
+
+        if (navigator.permissions && navigator.permissions.query) {
+          // Verificar status atual da permissão
+          navigator.permissions.query({ name: 'camera' })
+            .then(function(permissionStatus) {
+              console.log('[INDEX] Status atual da câmera:', permissionStatus.state);
+
+              if (permissionStatus.state === 'granted') {
+                console.log('[INDEX] Permissão da câmera já concedida (Navegador)');
+                if (callback) callback(true);
+              } else {
+                // Solicitar permissão diretamente (sempre mostra popup quando necessário)
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                  navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                      console.log('[INDEX] Permissão da câmera concedida (Navegador)');
+                      // Parar o stream imediatamente
+                      stream.getTracks().forEach(track => track.stop());
+                      if (callback) callback(true);
+                    })
+                    .catch(function(error) {
+                      console.error('[INDEX] Erro ao solicitar permissão da câmera (Navegador):', error);
+                      if (callback) callback(false);
+                    });
+                } else {
+                  console.log('[INDEX] API getUserMedia não suportada');
+                  if (callback) callback(false);
+                }
+              }
+            })
+            .catch(function(error) {
+              console.warn('[INDEX] Erro ao verificar status da câmera:', error);
+              // Fallback: solicitar diretamente
+              if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                  .then(function(stream) {
+                    console.log('[INDEX] Permissão da câmera concedida (Navegador)');
+                    stream.getTracks().forEach(track => track.stop());
+                    if (callback) callback(true);
+                  })
+                  .catch(function(error) {
+                    console.error('[INDEX] Erro ao solicitar permissão da câmera (Navegador):', error);
+                    if (callback) callback(false);
+                  });
+              } else {
+                console.log('[INDEX] API getUserMedia não suportada');
+                if (callback) callback(false);
+              }
+            });
+        } else {
+          // Fallback para navegadores sem Permission API
+          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+              .then(function(stream) {
+                console.log('[INDEX] Permissão da câmera concedida (Navegador)');
+                stream.getTracks().forEach(track => track.stop());
+                if (callback) callback(true);
+              })
+              .catch(function(error) {
+                console.error('[INDEX] Erro ao solicitar permissão da câmera (Navegador):', error);
+                if (callback) callback(false);
+              });
+          } else {
+            console.log('[INDEX] API getUserMedia não suportada');
+            if (callback) callback(false);
+          }
+        }
+      }
+    }
+
+    // Função para redirecionar para login
+    function redirecionarParaLogin() {
+      // Navegar para rota /login/ com transição push lateral
+      if (window.app && app.views && app.views.main && app.views.main.router) {
+        app.views.main.router.navigate('/login/');
+      } else if (window.app && app.router) {
+        app.router.navigate('/login/');
+      } else {
+        // Fallback - navegar para login
+        window.location.href = 'login.html';
+      }
+      
+      // Restaurar botão após um pequeno delay
+      setTimeout(() => {
+        const btnEntrar = document.getElementById('btnEntrar');
+        if (btnEntrar) {
+          // Limpar TODOS os estilos inline acumulados
+          btnEntrar.removeAttribute('style');
+          
+          // Restaurar estilos básicos
+          btnEntrar.style.width = '100%';
+          btnEntrar.style.background = 'transparent';
+          btnEntrar.style.color = 'white';
+          btnEntrar.style.fontWeight = '600';
+          btnEntrar.style.padding = '8px 4px 8px 16px';
+          btnEntrar.style.borderRadius = '9999px';
+          btnEntrar.style.display = 'flex';
+          btnEntrar.style.alignItems = 'center';
+          btnEntrar.style.justifyContent = 'space-between';
+          btnEntrar.style.border = '1px solid white';
+          btnEntrar.style.cursor = 'pointer';
+          btnEntrar.disabled = false;
+          
+          // Restaurar conteúdo original
+          btnEntrar.innerHTML = `
+              <span class="ml-4 btn-entrar-text">Entre ou cadastre-se</span>
+              <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14"/>
+                      <path d="m12 5 7 7-7 7"/>
+                  </svg>
+              </div>
+          `;
+          
+          // Remover foco e estados
+          btnEntrar.blur();
+          btnEntrar.classList.remove('active', 'ripple');
+        }
+      }, 300);
+    }
+
+
+    // Função para aguardar Framework7 estar pronto no Cordova
+    function aguardarFramework7ERedirecionar() {
+      let tentativas = 0;
+      const maxTentativas = 20; // 10 segundos máximo
+      
+      const verificarFramework7 = () => {
+        tentativas++;
+
+        if (window.app && app.views && app.views.main && app.views.main.router) {
+          redirecionarParaSenha();
+        } else if (tentativas < maxTentativas) {
+          setTimeout(verificarFramework7, 500);
+        } else {
+          console.warn('[INDEX] Framework7 não ficou disponível após aguardar; cancelando fallback por href.');
+        }
+      };
+      
+      verificarFramework7();
+    }
+    
+    // Função para redirecionar para senha
+    function redirecionarParaSenha() {
+      if (window.app && app.views && app.views.main && app.views.main.router) {
+        app.views.main.router.navigate('/senha/');
+      } else if (window.app && app.router) {
+        app.router.navigate('/senha/');
+      } else {
+        console.warn('[INDEX] Não foi possível redirecionar para /senha/ via router (Framework7 ausente).');
+      }
+    }
+
+    // Expor funções globalmente para o routes.js
+    window.inicializarIndex = inicializarIndex;
+    window.limparEventosIndex = limparEventosIndex;
+    window.solicitarPermissoes = solicitarPermissoes;
+    window.solicitarPermissaoNotificacoesCordova = solicitarPermissaoNotificacoesCordova;
+    window.solicitarPermissaoNotificacoesNavegador = solicitarPermissaoNotificacoesNavegador;
+    window.solicitarPermissaoCamera = solicitarPermissaoCamera;
+
+
+    // Inicializar PhotoLibrary após deviceready
+    document.addEventListener('deviceready', function() {
+        if (window.PhotoLibrary) {
+            console.log('[INDEX] PhotoLibrary disponível');
+            window._photoLibraryPronto = true;
+        }
+    }, false);
+    
+    // Variável para armazenar o callback de imagem
+    let callbackImagemComprovante = null;
+    
+    // Função global para abrir câmera ou galeria
+    window.abrirCameraOuGaleria = function(callback) {
+        callbackImagemComprovante = callback;
+
+        if (window.app && app.actions) {
+            app.actions.create({
+                buttons: [[
+                    {
+                        text: 'Selecionar da galeria',
+                        bold: true,
+                        onClick: function() {
+                            // Cordova: usar plugin de câmera com PHOTOLIBRARY
+                            if (typeof navigator !== 'undefined' && navigator.camera) {
+                                navigator.camera.getPicture(
+                                    function(base64String) {
+                                        // Remover prefixo data: se vier junto
+                                        var base64Clean = base64String;
+                                        if (base64String.indexOf('data:') === 0) {
+                                            base64Clean = base64String.split(',')[1];
+                                        }
+                                        var dataUrl = 'data:image/jpeg;base64,' + base64Clean;
+                                        if (callbackImagemComprovante) callbackImagemComprovante(dataUrl);
+                                    },
+                                    function(error) {
+                                        console.error('[GALERIA] Erro ao abrir galeria:', error);
+                                        if (window.app && app.toast) app.toast.create({ text: 'Erro ao abrir galeria. Tente novamente.', position: 'center', closeTimeout: 2500 }).open();
+                                    },
+                                    {
+                                        quality: 70,
+                                        destinationType: Camera.DestinationType.DATA_URL,
+                                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                                        allowEdit: false,
+                                        correctOrientation: true,
+                                        encodingType: Camera.EncodingType.JPEG
+                                    }
+                                );
+                                return;
+                            }
+                            // Navegador: input file com pequeno delay
+                            setTimeout(function() {
+                                document.getElementById('inputCameraGaleria').removeAttribute('capture');
+                                document.getElementById('inputCameraGaleria').click();
+                            }, 300);
+                        }
+                    },
+                    {
+                        text: 'Tirar foto',
+                        onClick: function() {
+                            // Navega para frente-documento com callback de retorno
+                            window._frenteDocumentoCallback = function(dataUrl) {
+                                if (callbackImagemComprovante) callbackImagemComprovante(dataUrl);
+                            };
+                            if (window.app && app.views && app.views.main && app.views.main.router) {
+                                app.views.main.router.navigate('/frente-documento/', { transition: 'f7-push' });
+                            }
+                        }
+                    },
+                    { text: 'Cancelar', color: 'red' }
+                ]]
+            }).open();
+        }
+    };
+    
+    // Input oculto para galeria
+    const inputCamera = document.createElement('input');
+    inputCamera.type = 'file';
+    inputCamera.id = 'inputCameraGaleria';
+    inputCamera.accept = 'image/*';
+    inputCamera.style.cssText = 'position:fixed;top:-100px;left:-100px;width:1px;height:1px;opacity:0;';
+    document.body.appendChild(inputCamera);
+    
+    inputCamera.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && callbackImagemComprovante) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                callbackImagemComprovante(event.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+        this.value = '';
+    });
+
+    // Modal de câmera usando getUserMedia (mesmo padrão do frente/verso-documento)
+    let cameraStream = null;
+
+    function abrirModalCamera() {
+        // Cria modal
+        const modal = document.createElement('div');
+        modal.id = 'modalCameraComprovante';
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
+        modal.innerHTML = `
+            <video id="videoCameraComprovante" autoplay playsinline style="width:100%;max-height:70vh;object-fit:cover;"></video>
+            <canvas id="canvasCameraComprovante" style="display:none;"></canvas>
+            <div style="display:flex;gap:24px;margin-top:24px;">
+                <button id="btnCapturarComprovante" style="width:64px;height:64px;border-radius:50%;background:white;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </button>
+                <button id="btnFecharCamera" style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const video = document.getElementById('videoCameraComprovante');
+        const canvas = document.getElementById('canvasCameraComprovante');
+
+        // Inicia stream
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+            .then(function(stream) {
+                cameraStream = stream;
+                video.srcObject = stream;
+            })
+            .catch(function(err) {
+                console.error('[CAMERA]', err);
+                fecharModalCamera();
+                if (window.app && app.toast) {
+                    app.toast.create({ text: 'Não foi possível acessar a câmera.', position: 'center', closeTimeout: 2500 }).open();
+                }
+            });
+
+        // Capturar foto
+        document.getElementById('btnCapturarComprovante').addEventListener('click', function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+            fecharModalCamera();
+            if (callbackImagemComprovante) callbackImagemComprovante(dataUrl);
+        });
+
+        // Fechar modal
+        document.getElementById('btnFecharCamera').addEventListener('click', fecharModalCamera);
+    }
+
+    function fecharModalCamera() {
+        if (cameraStream) {
+            cameraStream.getTracks().forEach(t => t.stop());
+            cameraStream = null;
+        }
+        const modal = document.getElementById('modalCameraComprovante');
+        if (modal) modal.remove();
+    }
+    // Função para restaurar botão em caso de erro
+    function restaurarBotaoEntrar() {
+        const btnEntrar = document.getElementById('btnEntrar');
+        if (btnEntrar) {
+            // Limpar TODOS os estilos inline acumulados
+            btnEntrar.removeAttribute('style');
+            
+            // Restaurar estilos básicos
+            btnEntrar.style.width = '100%';
+            btnEntrar.style.background = 'transparent';
+            btnEntrar.style.color = 'white';
+            btnEntrar.style.fontWeight = '600';
+            btnEntrar.style.padding = '8px 4px 8px 16px';
+            btnEntrar.style.borderRadius = '9999px';
+            btnEntrar.style.display = 'flex';
+            btnEntrar.style.alignItems = 'center';
+            btnEntrar.style.justifyContent = 'space-between';
+            btnEntrar.style.border = '1px solid white';
+            btnEntrar.style.cursor = 'pointer';
+            btnEntrar.disabled = false;
+            
+            // Restaurar conteúdo original
+            btnEntrar.innerHTML = `
+                <span class="ml-4 btn-entrar-text">Entre ou cadastre-se</span>
+                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </div>
+            `;
+            
+            // Remover foco e estados
+            btnEntrar.blur();
+            btnEntrar.classList.remove('active', 'ripple');
+        }
+    }
+
+    // Função para entrar na fila de espera
+    function entrarFilaEspera() {
+        // Redirecionar para abertura de conta
+        if (window.app && app.views && app.views.main && app.views.main.router) {
+            app.views.main.router.navigate('/abertura-conta/', { transition: 'f7-push' });
+        } else {
+            window.location.href = 'abertura-conta.html';
+        }
+        
+        // Navegar para a página de lista de espera
+        if (window.app && app.views && app.views.main && app.views.main.router) {
+            app.views.main.router.navigate('/lista-espera-cadastro/');
+        } else if (window.app && app.router) {
+            app.router.navigate('/lista-espera-cadastro/');
+        } else {
+            // Fallback - navegar para lista de espera
+            window.location.href = 'lista-espera-cadastro.html';
+        }
+    }
+
+    window.redirecionarParaLogin = redirecionarParaLogin;
+    window.aguardarFramework7ERedirecionar = aguardarFramework7ERedirecionar;
+    window.redirecionarParaSenha = redirecionarParaSenha;
+    window.restaurarBotaoEntrar = restaurarBotaoEntrar;
+    window.entrarFilaEspera = entrarFilaEspera;
+    </script>
+
+    <!-- Scripts de páginas - carregados via pageInit em routes.js -->
+    <!-- Script de biometria - carregado globalmente para estar disponível em todas as páginas -->
+    <script type="text/javascript" src="js/ativar-biometria.js"></script>
+
+    <!-- Chat e Conversas - carregados globalmente para estar sempre disponíveis -->
+    <script type="text/javascript" src="js/chat.js"></script>
+    <script type="text/javascript" src="js/conversas-usuarios.js"></script>
+    
+    <!-- Roteamento do app - carregado por último -->
+    <script type="text/javascript" src="js/routes.js"></script>
+
+    <!-- Funções RH globais: assinaturas via localStorage -->
+    <script>
+    function rhHoje() {
+        const d = new Date();
+        const ano = d.getFullYear();
+        const mes = String(d.getMonth() + 1).padStart(2, '0');
+        const dia = String(d.getDate()).padStart(2, '0');
+        return `${ano}-${mes}-${dia}`;
+    }
+    function rhCarregarAssinaturas() {
+        var hoje = rhHoje();
+        var dados = JSON.parse(localStorage.getItem('rh_assinaturas') || '{}');
+        if (dados.data !== hoje) {
+            dados = { data: hoje, prata: 0, ouro: 0, diamante: 0, selecao: 0, pix: 0, arredondar: 0 };
+            localStorage.setItem('rh_assinaturas', JSON.stringify(dados));
+        }
+        var elPrata    = document.getElementById('rhPrata');
+        var elOuro     = document.getElementById('rhOuro');
+        var elDiamante = document.getElementById('rhDiamante');
+        var elData     = document.getElementById('rhDataAssinaturas');
+        var elTotal    = document.getElementById('rhTotal');
+        if (elPrata)    elPrata.textContent    = dados.prata;
+        if (elOuro)     elOuro.textContent     = dados.ouro;
+        if (elDiamante) elDiamante.textContent = dados.diamante;
+        if (elData)     elData.textContent     = 'Hoje, ' + hoje.split('-').reverse().join('/');
+        if (elTotal)    elTotal.textContent    = (dados.prata || 0) + (dados.ouro || 0) + (dados.diamante || 0) + (dados.selecao || 0) + (dados.pix || 0) + (dados.arredondar || 0);
+        var elSelecao    = document.getElementById('rhSelecao');
+        var elPix        = document.getElementById('rhPix');
+        var elArredondar = document.getElementById('rhArredondar');
+        if (elSelecao)    elSelecao.textContent    = dados.selecao || 0;
+        if (elPix)        elPix.textContent        = dados.pix || 0;
+        if (elArredondar) elArredondar.textContent = dados.arredondar || 0;
+        // atualiza contadores na pag pix se existirem
+        pixAtualizarContadores();
+    }
+    function rhAlterarAssinatura(tipo, delta) {
+        var hoje = rhHoje();
+        var dados = JSON.parse(localStorage.getItem('rh_assinaturas') || '{}');
+        if (dados.data !== hoje) {
+            dados = { data: hoje, prata: 0, ouro: 0, diamante: 0, selecao: 0, pix: 0, arredondar: 0 };
+        }
+        dados[tipo] = Math.max(0, (dados[tipo] || 0) + delta);
+        localStorage.setItem('rh_assinaturas', JSON.stringify(dados));
+        rhCarregarAssinaturas();
+    }
+    function pixAtualizarContadores() {
+        var dados = JSON.parse(localStorage.getItem('rh_assinaturas') || '{}');
+        var map = {
+            pixPrata: dados.prata || 0,
+            pixOuro: dados.ouro || 0,
+            pixDiamante: dados.diamante || 0,
+            pixPix: dados.pix || 0,
+            pixArredondar: dados.arredondar || 0
+        };
+        Object.keys(map).forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = map[id];
+        });
+    }
+    // Expor globalmente para o routes.js e páginas dinâmicas
+    window.rhCarregarAssinaturas = rhCarregarAssinaturas;
+    window.rhAlterarAssinatura = rhAlterarAssinatura;
+    window.pixAtualizarContadores = pixAtualizarContadores;
+    </script>
+
+</body><script>
+document.addEventListener('click', function(e) {
+  var chatIcon = e.target.closest('a[href="/chat/"]');
+  if (chatIcon) {
+    e.preventDefault();
+    if (window.app && app.views && app.views.main && app.views.main.router) {
+      app.views.main.router.navigate('/chat/');
+    } else if (window.app && app.router) {
+      app.router.navigate('/chat/');
+    } else {
+      window.location.href = 'chat.html';
+    }
+  }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var inputPesquisa = document.getElementById('inputPesquisa');
+  var btnPesquisa = document.getElementById('btnPesquisaFake');
+  function irParaPesquisa() {
+    window.location.href = 'pesquisa.html';
+  }
+  if (inputPesquisa) {
+    inputPesquisa.addEventListener('focus', irParaPesquisa);
+    inputPesquisa.addEventListener('click', irParaPesquisa);
+  }
+  if (btnPesquisa) {
+    btnPesquisa.addEventListener('click', irParaPesquisa);
+  }
+});
+</script>
+    <script type="text/javascript">
+// Função para configurar status bar da página index
+function configurarStatusBarIndex() {
+  if (window.StatusBar) {
+    StatusBar.overlaysWebView(true);
+    StatusBar.backgroundColorByHexString('#00000000');
+    StatusBar.styleDefault(); // Ícones escuros
+  }
+}
+
+// Configurar quando a página index for carregada via roteamento
+document.addEventListener('DOMContentLoaded', function() {
+  // Verificar se estamos na página index
+  if (window.location.pathname === '/' || window.location.pathname === '/index/' || window.location.pathname.includes('index.html')) {
+    configurarStatusBarIndex();
+  }
+});
+
+// Configurar quando o dispositivo estiver pronto
+document.addEventListener('deviceready', function() {
+  // Verificar se estamos na página index
+  if (window.location.pathname === '/' || window.location.pathname === '/index/' || window.location.pathname.includes('index.html')) {
+    configurarStatusBarIndex();
+  }
+});
+
+// Expor função globalmente para ser chamada pelo sistema de rotas
+window.configurarStatusBarIndex = configurarStatusBarIndex;
+
+// Listener para atualizações em tempo real dos dados do usuário
+window.addEventListener('userDataUpdated', function(event) {
+    
+    // Atualizar badge do botão Limite se o status_limite mudou
+    const badgeLimite = document.getElementById('badgeLimite');
+    const btnLimite = document.getElementById('btnLimite');
+    
+    if (badgeLimite && btnLimite && event.detail.status_limite) {
+        const statusLimite = event.detail.status_limite;
+        badgeLimite.textContent = statusLimite.toUpperCase();
+        
+        // Definir cor e estado do botão baseado no status
+        if (statusLimite === 'ativo') {
+            badgeLimite.style.background = '#10b981'; // verde
+            // Habilitar botão quando ativo
+            btnLimite.disabled = false;
+            btnLimite.style.opacity = '1';
+            btnLimite.style.cursor = 'pointer';
+        } else if (statusLimite === 'pendente') {
+            badgeLimite.style.background = '#f59e0b'; // laranja
+            // Desabilitar botão quando pendente
+            btnLimite.disabled = true;
+            btnLimite.style.opacity = '0.6';
+            btnLimite.style.cursor = 'not-allowed';
+        } else if (statusLimite === 'bloqueado' || statusLimite === 'suspenso') {
+            badgeLimite.style.background = '#ef4444'; // vermelho
+            // Desabilitar botão quando bloqueado/suspenso
+            btnLimite.disabled = true;
+            btnLimite.style.opacity = '0.6';
+            btnLimite.style.cursor = 'not-allowed';
+        } else {
+            badgeLimite.style.background = '#f59e0b'; // laranja padrão
+            // Desabilitar botão por padrão
+            btnLimite.disabled = true;
+            btnLimite.style.opacity = '0.6';
+            btnLimite.style.cursor = 'not-allowed';
+        }
+        
+    } else {
+    }
+    
+    // Controlar badge e estado do botão Faturas - só mostrar quando status for pendente
+    const badgeFaturas = document.querySelector('button[onclick="navegarParaFaturas()"] span');
+    const btnFaturas = document.querySelector('button[onclick="navegarParaFaturas()"]');
+    if (badgeFaturas && btnFaturas && event.detail.status_limite) {
+        const statusLimite = event.detail.status_limite;
+        if (statusLimite === 'pendente') {
+            badgeFaturas.style.display = 'block';
+            badgeFaturas.textContent = 'EM BREVE';
+            badgeFaturas.style.background = '#f59e0b';
+            // Desabilitar botão quando pendente
+            btnFaturas.disabled = true;
+            btnFaturas.style.opacity = '0.6';
+            btnFaturas.style.cursor = 'not-allowed';
+        } else {
+            badgeFaturas.style.display = 'none';
+            // Habilitar botão quando não pendente
+            btnFaturas.disabled = false;
+            btnFaturas.style.opacity = '1';
+            btnFaturas.style.cursor = 'pointer';
+        }
+    }
+});
+
+// Função global para testar o badge do limite
+window.testarBadgeLimite = function(status) {
+    const badgeLimite = document.getElementById('badgeLimite');
+    
+    if (badgeLimite) {
+        badgeLimite.textContent = status.toUpperCase();
+        
+        // Definir cor baseada no status
+        if (status === 'ativo') {
+            badgeLimite.style.background = '#10b981'; // verde
+        } else if (status === 'pendente') {
+            badgeLimite.style.background = '#f59e0b'; // laranja
+        } else if (status === 'bloqueado' || status === 'suspenso') {
+            badgeLimite.style.background = '#ef4444'; // vermelho
+        } else {
+            badgeLimite.style.background = '#f59e0b'; // laranja padrão
+        }
+        
+    }
+};
+</script>
+<script>
+// Configurar evento quando DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+  inicializarIndex();
+});
+
+// Listener para Cordova no ambiente mobile
+document.addEventListener('deviceready', function() {
+  // Verificar novamente se precisa redirecionar após Cordova estar pronto
+  const cpfUsuario = localStorage.getItem('cpf_usuario');
+  if (cpfUsuario && typeof cordova !== 'undefined') {
+    // Aguardar um pouco mais para garantir que Framework7 esteja pronto
+    setTimeout(() => {
+      if (window.app && app.views && app.views.main && app.views.main.router) {
+        redirecionarParaSenha();
+      }
+    }, 1000);
+  }
+}, false);
+</script>
+<script>
+// Controle dos indicadores de slides
+document.addEventListener('DOMContentLoaded', function() {
+  const sliderContainer = document.querySelector('.overflow-x-auto');
+  const indexPage = document.getElementById('indexPage');
+  
+  // Array com as imagens de fundo para cada slide
+  const backgroundImages = [
+    'img/img1.inicio.png', // Slide 0
+    'img/img2.inicio.png', // Slide 1
+    'img/img3.inicio.png', // Slide 2
+    'img/img4.inicio.png'  // Slide 3
+  ];
+  
+  let currentBackgroundIndex = 0;
+  
+  // Função para mudar background
+  function changeBackground(index) {
+    if (index >= 0 && index < 4) {
+      currentBackgroundIndex = index;
+      
+      // Ocultar todos os backgrounds
+      for (let i = 0; i < 4; i++) {
+        const bgDiv = document.getElementById(`bg${i}`);
+        if (bgDiv) {
+          bgDiv.style.opacity = i === index ? '1' : '0';
+        }
+      }
+      
+      // Mostrar apenas o slide correspondente à imagem atual
+      for (let i = 0; i < 4; i++) {
+        const slide = document.getElementById(`slide${i}`);
+        if (slide) {
+          slide.style.display = i === index ? 'block' : 'none';
+        }
+      }
+      
+      // NÃO atualizar as barras indicadoras aqui - elas são controladas pela animação
+    }
+  }
+  
+
+  
+  // Inicializar apenas o background, sem preencher indicadores
+  // Ocultar todos os backgrounds
+  for (let i = 0; i < 4; i++) {
+    const bgDiv = document.getElementById(`bg${i}`);
+    if (bgDiv) {
+      bgDiv.style.opacity = i === 0 ? '1' : '0';
+    }
+  }
+  
+  // Mostrar apenas o primeiro slide
+  for (let i = 0; i < 4; i++) {
+    const slide = document.getElementById(`slide${i}`);
+    if (slide) {
+      slide.style.display = i === 0 ? 'block' : 'none';
+    }
+  }
+  
+  // Adicionar navegação bidirecional com clique nas laterais
+  document.addEventListener('click', function(e) {
+    // Evitar que clique no botão dispare mudança de imagem
+    if (e.target.closest('#btnEntrar')) {
+      return;
+    }
+    
+    const screenWidth = window.innerWidth;
+    const clickX = e.clientX;
+    
+    // Se o clique foi na lateral direita (últimos 100px da tela) - AVANÇAR
+    if (clickX > screenWidth - 100) {
+      e.preventDefault();
+      currentBackgroundIndex = (currentBackgroundIndex + 1) % backgroundImages.length;
+      changeBackground(currentBackgroundIndex);
+    }
+    
+    // Se o clique foi na lateral esquerda (primeiros 100px da tela) - VOLTAR
+    if (clickX < 100) {
+      e.preventDefault();
+      currentBackgroundIndex = (currentBackgroundIndex - 1 + backgroundImages.length) % backgroundImages.length;
+      changeBackground(currentBackgroundIndex);
+    }
+  });
+});
+</script>
+<script>
+// Funcionalidade do ícone de olhinho para mostrar/ocultar saldo - INDEX
+let saldoTimeout = null;
+
+// Função específica para o toggle do saldo
+function toggleSaldoVisibilidade() {
+  // Procurar elementos em toda a página
+  var saldoSpan = document.getElementById('saldoUsuario') || document.querySelector('[id*="saldo"]') || document.querySelector('[class*="saldo"]');
+  var iconSpan = document.getElementById('toggleSaldoIcon') || document.querySelector('[id*="toggle"]') || document.querySelector('[class*="toggle"]');
+  
+  // Elementos do limite
+  var limiteDisponivelElement = document.getElementById('limiteDisponivelCard');
+  var limiteTotalElement = document.getElementById('limiteTotalCard');
+  var limiteUtilizadoElement = document.getElementById('limiteUtilizadoCard');
+  var limiteExtraElement = document.getElementById('limiteExtraCardValor');
+  
+  if (!saldoSpan || !iconSpan) {
+    return;
+  }
+  
+  var mostrando = saldoSpan.getAttribute('data-mostrando') === 'true';
+  var saldoReal = saldoSpan.getAttribute('data-saldo-real');
+  
+  if (mostrando) {
+    saldoSpan.innerHTML = '<div class="skeleton-bg skeleton-saldo"></div>';
+    // Ocultar os centavos também
+    const centavosElement = document.getElementById('centavosUsuario');
+    if (centavosElement) {
+      centavosElement.style.display = 'none';
+    }
+    saldoSpan.setAttribute('data-mostrando', 'false');
+    
+    // Ocultar limite - USANDO A MESMA LÓGICA DO LIMITE UTILIZADO
+    if (limiteDisponivelElement) {
+      limiteDisponivelElement.setAttribute('data-valor-real', limiteDisponivelElement.textContent);
+      // Manter o "R$" fixo fora do elemento que é ocultado (como o limite utilizado)
+      limiteDisponivelElement.innerHTML = 'R$ <span class="skeleton-bg skeleton-limite"></span>';
+    }
+    if (limiteTotalElement) {
+      limiteTotalElement.setAttribute('data-valor-real', limiteTotalElement.textContent);
+      limiteTotalElement.innerHTML = '<span class="skeleton-bg skeleton-limite-small"></span>';
+    }
+    if (limiteUtilizadoElement) {
+      limiteUtilizadoElement.setAttribute('data-valor-real', limiteUtilizadoElement.textContent);
+      limiteUtilizadoElement.innerHTML = '<span class="skeleton-bg skeleton-limite-small"></span>';
+    }
+    if (limiteExtraElement) {
+      limiteExtraElement.setAttribute('data-valor-real', limiteExtraElement.textContent);
+      limiteExtraElement.innerHTML = '<span class="skeleton-bg skeleton-limite-small"></span>';
+    }
+    
+    if (iconSpan.innerHTML) {
+      iconSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye-closed"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 9c-2.4 2.667 -5.4 4 -9 4c-3.6 0 -6.6 -1.333 -9 -4" /><path d="M3 15l2.5 -3.8" /><path d="M21 14.976l-2.492 -3.776" /><path d="M9 17l.5 -4" /><path d="M15 17l-.5 -4" /></svg>`;
+    }
+    if (saldoTimeout) {
+      clearTimeout(saldoTimeout);
+      saldoTimeout = null;
+    }
+  } else {
+    if (saldoReal && saldoReal !== '' && saldoReal !== '•••') {
+      // Remover efeito de blur
+      saldoSpan.style.filter = 'none';
+      // O saldoReal já está formatado, então vamos usar diretamente
+      // Separar valor principal e centavos
+      const partes = saldoReal.split(',');
+      const valorPrincipal = partes[0];
+      const centavos = partes[1] || '00';
+      
+      // Atualizar apenas o valor principal (não usar innerHTML para não interferir com a estrutura)
+      saldoSpan.textContent = valorPrincipal;
+      
+      // Atualizar os centavos no elemento separado
+      const centavosElement = document.getElementById('centavosUsuario');
+      if (centavosElement) {
+        centavosElement.textContent = `,${centavos}`;
+        centavosElement.style.display = 'inline';
+      }
+      saldoSpan.setAttribute('data-mostrando', 'true');
+      
+      // Mostrar limite - RESTAURANDO OS VALORES REAIS
+      if (limiteDisponivelElement) {
+        const valorReal = limiteDisponivelElement.getAttribute('data-valor-real');
+        if (valorReal) limiteDisponivelElement.textContent = valorReal;
+      }
+      if (limiteTotalElement) {
+        const valorReal = limiteTotalElement.getAttribute('data-valor-real');
+        if (valorReal) limiteTotalElement.textContent = valorReal;
+      }
+      if (limiteUtilizadoElement) {
+        const valorReal = limiteUtilizadoElement.getAttribute('data-valor-real');
+        if (valorReal) limiteUtilizadoElement.textContent = valorReal;
+      }
+      if (limiteExtraElement) {
+        const valorReal = limiteExtraElement.getAttribute('data-valor-real');
+        if (valorReal) limiteExtraElement.textContent = valorReal;
+      }
+      
+      if (iconSpan.innerHTML) {
+        iconSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M11.102 17.957c-3.204 -.307 -5.904 -2.294 -8.102 -5.957c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6a19.5 19.5 0 0 1 -.663 1.032" /><path d="M15 19l2 2l4 -4" /></svg>`;
+      }
+    }
+  }
+}
+
+// Event listener específico apenas para o ícone do olho
+document.addEventListener('click', function(e) {
+  // Verificar se o clique foi especificamente no botão toggleSaldo ou elementos relacionados
+  if (e.target.id === 'toggleSaldo' || 
+      e.target.closest('#toggleSaldo') || 
+      e.target.id === 'toggleSaldoIcon' ||
+      e.target.closest('#toggleSaldoIcon')) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleSaldoVisibilidade();
+    return;
+  }
+});
+
+// Configurar o evento diretamente no botão quando ele estiver disponível
+function configurarEventoToggleIndex() {
+  const toggleBtn = document.getElementById('toggleSaldo');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleSaldoVisibilidade();
+    });
+  } else {
+    // Tentar novamente após um tempo
+    setTimeout(configurarEventoToggleIndex, 1000);
+  }
+}
+
+// Executar quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+  configurarEventoToggleIndex();
+  
+  // Também tentar após um delay
+  setTimeout(function() {
+    configurarEventoToggleIndex();
+  }, 2000);
+});
+
+// Tentar também quando a página estiver completamente carregada
+window.addEventListener('load', function() {
+  configurarEventoToggleIndex();
+});
+
+
+// ===== FUNÇÕES GLOBAIS PARA CARREGAR DADOS DO USUÁRIO =====
+// Função para definir iniciais do usuário (global)
+window.definirIniciais = function(nomeCompleto, fotoPerfil) {
+    if (!nomeCompleto || typeof nomeCompleto !== 'string') {
+        return;
+    }
+    
+    // Extrair iniciais (primeira letra de cada palavra, máximo 2)
+    const palavras = nomeCompleto.trim().split(' ').filter(palavra => palavra.length > 0);
+    let iniciais = '';
+    
+    if (palavras.length >= 2) {
+        iniciais = palavras[0].charAt(0) + palavras[1].charAt(0);
+    } else if (palavras.length === 1) {
+        iniciais = palavras[0].charAt(0);
+    }
+    
+    iniciais = iniciais.toUpperCase();
+    
+    // Atualizar todos os elementos de iniciais na página
+    const elementosIniciais = document.querySelectorAll('#iniciaisUsuario, #iniciaisUsuarioPanel, #tabbarUserInitials');
+    elementosIniciais.forEach(elemento => {
+        if (fotoPerfil && fotoPerfil.trim() !== '') {
+            // Tem foto — exibir imagem
+            elemento.innerHTML = '<img src="' + fotoPerfil + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.parentNode.innerHTML=\'<span class=\\\'text-white font-bold text-lg\\\'>' + iniciais + '</span>\';this.parentNode.style.color=\'white\';">';
+        } else {
+            // Sem foto — iniciais
+            const span = elemento.querySelector('span');
+            if (span) {
+                span.textContent = iniciais;
+            } else {
+                const tamanhoTexto = elemento.id === 'iniciaisUsuarioPanel' ? 'text-xl' : 'text-lg';
+                elemento.innerHTML = '<span class="text-white font-bold ' + tamanhoTexto + '">' + iniciais + '</span>';
+            }
+            elemento.style.color = 'white';
+            elemento.classList.remove('text-gray-600');
+            elemento.classList.add('text-white');
+        }
+    });
+    
+    return iniciais;
+};
+
+// Função para carregar dados do usuário (global)
+window.carregarDadosUsuario = async function() {
+    // Aplicar skeleton durante carregamento inicial
+    const saldoElement = document.getElementById('saldoUsuario');
+    if (saldoElement) {
+        saldoElement.setAttribute('data-mostrando', 'true');
+        // Chamar a função do olhinho para aplicar skeleton
+        toggleSaldoVisibilidade();
+    }
+    
+    try {
+        // Obter CPF do localStorage
+        const cpfUsuario = localStorage.getItem('cpf_usuario');
+        if (!cpfUsuario) {
+          // Limpar nome do painel se não logado
+          const nomePanel = document.getElementById('nomeUsuarioPanel');
+          if (nomePanel) nomePanel.textContent = '';
+          return;
+        }
+        
+        // Verificar se há dados do usuário logado no localStorage
+        const usuarioLogado = localStorage.getItem('usuarioLogado');
+        if (usuarioLogado) {
+          const dadosUsuario = JSON.parse(usuarioLogado);
+          // Atualizar nome completo no painel
+          if (dadosUsuario && dadosUsuario.nome) {
+            const nomePanel = document.getElementById('nomeUsuarioPanel');
+            if (nomePanel) {
+              // Exibir apenas o primeiro nome
+              const primeiroNome = dadosUsuario.nome.split(' ')[0];
+              nomePanel.textContent = primeiroNome;
+            }
+          }
+          // Exibir agência e conta separadamente
+          const agenciaPanel = document.getElementById('agenciaPanel');
+          const contaPanel = document.getElementById('contaPanel');
+          if (agenciaPanel && contaPanel) {
+            let agencia = dadosUsuario.agencia || '';
+            let conta = dadosUsuario.numero_conta || '';
+            let digito = dadosUsuario.digito_verificador || '';
+            if (agencia) {
+              agenciaPanel.textContent = `Agência ${agencia}`;
+            } else {
+              agenciaPanel.textContent = '';
+            }
+            if (conta && digito) {
+              contaPanel.textContent = `Conta ${conta}-${digito}`;
+            } else {
+              contaPanel.textContent = '';
+            }
+          }
+          const usernamePanel = document.getElementById('usernamePanel');
+          if (usernamePanel) {
+            usernamePanel.textContent = dadosUsuario.username ? dadosUsuario.username : '';
+          }
+          // Verificar se o CPF é diferente (usuário diferente logado)
+          if (dadosUsuario.cpf && dadosUsuario.cpf !== cpfUsuario) {
+            // Buscar dados do usuário correto
+            const { data: usuario, error } = await window.supabaseClient
+              .from('usuarios')
+              .select('*')
+              .eq('cpf', cpfUsuario)
+              .single();
+            if (error) {
+              return;
+            }
+            if (usuario) {
+              // Atualizar localStorage com dados corretos
+              localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+              // Atualizar nome completo no painel
+              const nomePanel = document.getElementById('nomeUsuarioPanel');
+              if (nomePanel && usuario.nome) {
+                // Exibir apenas o primeiro nome
+                const primeiroNome = usuario.nome.split(' ')[0];
+                nomePanel.textContent = primeiroNome;
+              }
+              // Exibir agência e conta separadamente após atualização
+              const agenciaPanel = document.getElementById('agenciaPanel');
+              const contaPanel = document.getElementById('contaPanel');
+              if (agenciaPanel && contaPanel) {
+                let agencia = usuario.agencia || '';
+                let conta = usuario.numero_conta || '';
+                let digito = usuario.digito_verificador || '';
+                if (agencia) {
+                  agenciaPanel.textContent = `Agência ${agencia}`;
+                } else {
+                  agenciaPanel.textContent = '';
+                }
+                if (conta && digito) {
+                  contaPanel.textContent = `Conta ${conta}-${digito}`;
+                } else {
+                  contaPanel.textContent = '';
+                }
+              }
+              const usernamePanel = document.getElementById('usernamePanel');
+              if (usernamePanel) {
+                usernamePanel.textContent = usuario.username ? usuario.username : '';
+              }
+            }
+          }
+        }
+        
+        // Buscar dados do usuário usando userService (inclui limite)
+        let usuario = null;
+        if (window.userService) {
+            usuario = await window.userService.getUserDataFromDB(cpfUsuario);
+        } else {
+            // Fallback: buscar apenas da tabela usuarios
+            const { data: usuarioData, error } = await window.supabaseClient
+                .from('usuarios')
+                .select('*')
+                .eq('cpf', cpfUsuario)
+                .single();
+                
+            if (error) {
+                return;
+            }
+            
+            if (!usuarioData) {
+                return;
+            }
+            
+            usuario = usuarioData;
+        }
+        
+        if (!usuario) {
+            return;
+        }
+        
+        // Salvar no localStorage
+        localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+        
+        // Atualizar nome do usuário
+        const nomeUsuario = document.getElementById('nomeUsuario');
+        if (nomeUsuario && usuario.nome) {
+            nomeUsuario.textContent = usuario.nome;
+        }
+        
+        // Atualizar nome do usuário no navbar (ao lado do círculo de perfil)
+        const nomeUsuarioNavbar = document.getElementById('nomeUsuarioNavbar');
+        if (nomeUsuarioNavbar && usuario.nome) {
+            const nomes = usuario.nome.split(' ');
+            const primeiroNome = nomes[0];
+            nomeUsuarioNavbar.textContent = primeiroNome;
+        }
+        
+        // Definir iniciais
+        if (usuario.nome) {
+            window.definirIniciais(usuario.nome, usuario.foto_perfil || '');
+        }
+        
+        // Controlar visibilidade do card de verificação de conta
+        const cardVerificacaoConta = document.getElementById('cardVerificacaoConta');
+        if (cardVerificacaoConta) {
+            const contaValidada = usuario.conta_validada || 'pendente';
+            const cardVerificacaoTexto = document.getElementById('cardVerificacaoTexto');
+            const cardVerificacaoIcone = document.getElementById('cardVerificacaoIcone');
+            
+            if (contaValidada === 'nao') {
+                cardVerificacaoConta.style.display = 'block';
+                // Mostrar botão "Verificar" e esconder ícone de relógio
+                const cardVerificacaoBotao = document.getElementById('cardVerificacaoBotao');
+                if (cardVerificacaoBotao) cardVerificacaoBotao.style.display = 'block';
+                if (cardVerificacaoIcone) cardVerificacaoIcone.style.display = 'none';
+                const cardVerificacaoDescricao = document.getElementById('cardVerificacaoDescricao');
+                if (cardVerificacaoDescricao) cardVerificacaoDescricao.textContent = 'Complete sua verificação para acessar todas as funcionalidades';
+                // Habilitar clique
+                cardVerificacaoConta.style.pointerEvents = 'auto';
+                cardVerificacaoConta.style.cursor = 'pointer';
+            } else if (contaValidada === 'pendente') {
+                cardVerificacaoConta.style.display = 'block';
+                // Ocultar botão azul e mostrar ícone de informação laranja na borda do ícone user-scan
+                const cardVerificacaoBotao = document.getElementById('cardVerificacaoBotao');
+                if (cardVerificacaoBotao) cardVerificacaoBotao.style.display = 'none';
+                if (cardVerificacaoIcone) {
+                    cardVerificacaoIcone.className = 'mdi mdi-information';
+                    cardVerificacaoIcone.style.color = '#f59e0b';
+                    cardVerificacaoIcone.style.display = 'flex';
+                }
+                const cardVerificacaoDescricao = document.getElementById('cardVerificacaoDescricao');
+                if (cardVerificacaoDescricao) cardVerificacaoDescricao.textContent = 'Estamos analisando sua verificação. Em breve você terá acesso a todas as funcionalidades';
+                // Desabilitar clique quando pendente
+                cardVerificacaoConta.style.pointerEvents = 'none';
+                cardVerificacaoConta.style.cursor = 'default';
+            } else if (contaValidada === 'falha') {
+                cardVerificacaoConta.style.display = 'block';
+                // Mostrar botão "Verificar" e mostrar ícone de informação vermelho na borda do SVG
+                const cardVerificacaoBotao = document.getElementById('cardVerificacaoBotao');
+                if (cardVerificacaoBotao) cardVerificacaoBotao.style.display = 'block';
+                if (cardVerificacaoIcone) {
+                    cardVerificacaoIcone.className = 'mdi mdi-information';
+                    cardVerificacaoIcone.style.color = '#dc2626';
+                    cardVerificacaoIcone.style.display = 'flex';
+                }
+                const cardVerificacaoDescricao = document.getElementById('cardVerificacaoDescricao');
+                if (cardVerificacaoDescricao) cardVerificacaoDescricao.textContent = 'Sua validação não foi aprovada. Tente novamente para acessar todas as funcionalidades';
+                // Habilitar clique para tentar novamente
+                cardVerificacaoConta.style.pointerEvents = 'auto';
+                cardVerificacaoConta.style.cursor = 'pointer';
+            } else {
+                cardVerificacaoConta.style.display = 'none';
+            }
+        }
+        
+        // Controlar overlay dos botões do swiper
+        const contaValidada = usuario.conta_validada || 'pendente';
+        const mostrarOverlay = contaValidada === 'pendente' || contaValidada === 'nao' || contaValidada === 'falha';
+        
+        const botoesOverlay = [
+            { overlay: 'pixButtonOverlay', btn: 'btnPix' },
+            { overlay: 'boletosButtonOverlay', btn: 'btnBoletos' },
+            { overlay: 'recargaButtonOverlay', btn: 'btnRecarga' },
+            { overlay: 'cashbacksButtonOverlay', btn: 'btnCashbacks' },
+            { overlay: 'transferirButtonOverlay', btn: 'btnTransferir' }
+        ];
+        
+        botoesOverlay.forEach(({ overlay, btn }) => {
+            const overlayEl = document.getElementById(overlay);
+            const btnEl = document.getElementById(btn);
+            if (overlayEl && btnEl) {
+                if (mostrarOverlay) {
+                    overlayEl.style.display = 'flex';
+                    btnEl.style.pointerEvents = 'none';
+                    btnEl.style.opacity = '0.6';
+                } else {
+                    overlayEl.style.display = 'none';
+                    btnEl.style.pointerEvents = 'auto';
+                    btnEl.style.opacity = '1';
+                }
+            }
+        });
+        
+        // Atualizar saldo
+        const saldoElement = document.getElementById('saldoUsuario');
+        if (saldoElement && usuario.saldo !== undefined) {
+            const saldo = usuario.saldo || 0;
+            const saldoFormatado = saldo.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            
+            // Separar valor principal e centavos
+            const partes = saldoFormatado.split(',');
+            const valorPrincipal = partes[0];
+            const centavos = partes[1] || '00';
+            
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                // Atualizar apenas o valor principal
+                saldoElement.textContent = valorPrincipal;
+                
+                // Atualizar os centavos
+                const centavosElement = document.getElementById('centavosUsuario');
+                if (centavosElement) {
+                    centavosElement.textContent = `,${centavos}`;
+                    centavosElement.style.display = 'inline';
+                }
+                saldoElement.setAttribute('data-saldo-real', saldoFormatado);
+                saldoElement.setAttribute('data-saldo-texto', saldoFormatado);
+                saldoElement.setAttribute('data-mostrando', 'true');
+                
+                // Garantir que o ícone do olhinho fique no estado correto (aberto)
+                const iconSpan = document.getElementById('toggleSaldoIcon');
+                if (iconSpan) {
+                    iconSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M11.102 17.957c-3.204 -.307 -5.904 -2.294 -8.102 -5.957c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6a19.5 19.5 0 0 1 -.663 1.032" /><path d="M15 19l2 2l4 -4" /></svg>`;
+                }
+            }, 2000);
+        }
+        
+        // Atualizar limite disponível no card (se existir)
+        const limiteDisponivelCardElem = document.getElementById('limiteDisponivelCard');
+        if (limiteDisponivelCardElem && usuario.limite_disponivel !== undefined) {
+            const limite = usuario.limite_disponivel || 0;
+            const limiteFormatado = limite.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                limiteDisponivelCardElem.textContent = 'R$ ' + limiteFormatado;
+            }, 2000);
+        }
+        
+        // Atualizar limite total no card (se existir)
+        const limiteTotalCardElem = document.getElementById('limiteTotalCard');
+        if (limiteTotalCardElem && usuario.limite_total !== undefined) {
+            const limiteTotal = usuario.limite_total || 0;
+            const limiteTotalFormatado = limiteTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                limiteTotalCardElem.textContent = limiteTotalFormatado;
+            }, 2000);
+        }
+        
+        // Atualizar limite utilizado no card (se existir)
+        const limiteUtilizadoCardElem = document.getElementById('limiteUtilizadoCard');
+        if (limiteUtilizadoCardElem && usuario.limite_usado !== undefined) {
+            const limiteUsado = usuario.limite_usado || 0;
+            const limiteUsadoFormatado = limiteUsado.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                limiteUtilizadoCardElem.textContent = limiteUsadoFormatado;
+            }, 2000);
+        }
+        
+        // Atualizar limite disponível na parte inferior (se existir)
+        const limiteDisponivelCardValorElem = document.getElementById('limiteDisponivelCardValor');
+        if (limiteDisponivelCardValorElem && usuario.limite_disponivel !== undefined) {
+            const limite = usuario.limite_disponivel || 0;
+            const limiteFormatado = limite.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                limiteDisponivelCardValorElem.textContent = limiteFormatado;
+            }, 2000);
+        }
+        
+        // Atualizar barra de progresso do limite (se existir)
+        const barraProgressoCard = document.getElementById('barraProgressoCard');
+        if (barraProgressoCard && usuario.limite_total > 0) {
+            const utilizado = usuario.limite_usado || 0;
+            const total = usuario.limite_total || 0;
+            const percentual = (utilizado / total) * 100;
+            
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                barraProgressoCard.style.width = `${percentual}%`;
+                barraProgressoCard.classList.remove('bg-white', 'bg-yellow-500', 'bg-red-500', 'bg-bank-blue');
+                
+                if (percentual <= 70) {
+                    barraProgressoCard.classList.add('bg-bank-blue');
+                } else if (percentual <= 90) {
+                    barraProgressoCard.classList.add('bg-yellow-500');
+                } else {
+                    barraProgressoCard.classList.add('bg-red-500');
+                }
+            }, 2000);
+        }
+        
+        // Atualizar limite extra disponível
+        const limiteExtraCardValorElem = document.getElementById('limiteExtraCardValor');
+        const limiteExtraContainerElem = document.getElementById('limiteExtraContainer');
+        
+        if (limiteExtraCardValorElem && usuario.limite_extra_disponivel !== undefined) {
+            const limiteExtraDisponivel = usuario.limite_extra_disponivel || 0;
+            const limiteExtraFormatado = limiteExtraDisponivel.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            
+            // Verificar se deve mostrar o campo Extra baseado no status
+            const statusLimiteExtra = usuario.status_limite_extra;
+            const deveMostrarExtra = statusLimiteExtra === 'ativo';
+            
+            
+            // Controlar visibilidade do campo Extra IMEDIATAMENTE
+            if (limiteExtraContainerElem) {
+                if (deveMostrarExtra) {
+                    limiteExtraContainerElem.style.display = 'inline';
+                } else {
+                    limiteExtraContainerElem.style.display = 'none';
+                }
+            } else {
+            }
+            
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                limiteExtraCardValorElem.textContent = limiteExtraFormatado;
+            }, 2000);
+        }
+
+        // Controlar visibilidade dos cards com prioridade: verificação > reprovado > limite normal
+        const limiteCardContainer = document.getElementById('limiteCardContainer');
+        const cardLimiteReprovado = document.getElementById('cardLimiteReprovado');
+        
+        // Primeiro ocultar todos os cards de limite
+        if (limiteCardContainer) {
+                limiteCardContainer.style.display = 'none';
+        }
+        if (cardLimiteReprovado) {
+            cardLimiteReprovado.style.display = 'none';
+        }
+        
+        // Verificar se conta está validada
+        if (usuario.conta_validada === 'sim') {
+            // Conta validada - verificar status do limite
+            const statusLimite = usuario.status_limite || '';
+            const isReprovado = statusLimite.toLowerCase().includes('reprovado');
+            
+            if (isReprovado) {
+                // Status reprovado - mostrar card de reprovado
+                if (cardLimiteReprovado) {
+                    cardLimiteReprovado.style.display = 'block';
+                    }
+                } else {
+                // Status não reprovado - mostrar card de limite normal
+                if (limiteCardContainer) {
+                limiteCardContainer.style.display = 'block';
+                
+                // Controlar overlay de bloqueado
+                const limiteCardOverlay = document.getElementById('limiteCardOverlay');
+                if (limiteCardOverlay) {
+                        const isBloqueado = statusLimite === 'bloqueado' 
+                            || statusLimite === 'suspenso'
+                            || statusLimite === 'bloqueado_sistema'
+                            || statusLimite === 'bloqueado_central'
+                            || statusLimite === 'bloqueado_fatura';
+                    if (isBloqueado) {
+                        limiteCardOverlay.style.display = 'flex';
+                    } else {
+                        limiteCardOverlay.style.display = 'none';
+                    }
+                }
+                
+                // Atualizar título e ícone baseado no status
+                const limiteCardTituloElem = document.getElementById('limiteCardTitulo');
+                const limiteCardIconElem = document.getElementById('limiteCardIcon');
+                
+                if (limiteCardTituloElem && limiteCardIconElem) {
+                        const isBloqueado = statusLimite === 'bloqueado' 
+                            || statusLimite === 'suspenso'
+                            || statusLimite === 'bloqueado_sistema'
+                            || statusLimite === 'bloqueado_central'
+                            || statusLimite === 'bloqueado_fatura';
+                    
+                    if (isBloqueado) {
+                        // Título e ícone para limite bloqueado/suspenso
+                        limiteCardTituloElem.textContent = 'Limite bloqueado';
+                        limiteCardIconElem.innerHTML = `
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z"/>
+                            <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"/>
+                            <path d="M8 11v-4a4 4 0 1 1 8 0v4"/>
+                        `;
+                        limiteCardIconElem.className.baseVal = 'icon icon-tabler icons-tabler-outline icon-tabler-lock';
+                        
+                    } else {
+                        // Título e ícone padrão para limite ativo
+                        limiteCardTituloElem.textContent = 'Limite disponível';
+                        limiteCardIconElem.innerHTML = `
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5" />
+                            <path d="M10 12l-2 -2.2l.6 -1" />
+                        `;
+                        limiteCardIconElem.className.baseVal = 'icon icon-tabler icons-tabler-outline icon-tabler-diamond';
+                        
+                    }
+                }
+                
+                    // Aplicar transição suave no card de limite
+                const cardLimite = document.querySelector('#limiteCardContainer .card');
+                if (cardLimite) {
+                    setTimeout(() => {
+                        cardLimite.style.opacity = '1';
+                    }, 50);
+                }
+            }
+        }
+        }
+        // Se conta não validada, o card de verificação já é controlado em outra parte do código
+
+        // Controlar visibilidade do seletor de crédito baseado no status do limite
+        const statusLimite = usuario.status_limite || 'pendente';
+        // Mostrar APENAS se status for 'ativo' ou 'bloqueado'
+        const deveMostrarSeletorCredito = statusLimite === 'ativo' || statusLimite === 'bloqueado';
+
+        console.log('[INDEX.HTML] Controlando visibilidade da aba crédito - statusLimite:', statusLimite, 'deve mostrar:', deveMostrarSeletorCredito);
+
+        // Controlar visibilidade da aba crédito
+        const seletorCredito = document.querySelector('a[href="#tab-credito"]');
+        if (seletorCredito) {
+            seletorCredito.style.display = deveMostrarSeletorCredito ? 'block' : 'none';
+            console.log('[INDEX.HTML] ✅ Aba crédito → ' + (deveMostrarSeletorCredito ? 'VISÍVEL' : 'OCULTA'));
+        }
+        
+        // Também controlar o conteúdo da aba
+        const abaCreditoContent = document.getElementById('tab-credito');
+        if (abaCreditoContent) {
+            abaCreditoContent.style.display = deveMostrarSeletorCredito ? 'block' : 'none';
+        }
+
+        // Atualizar badge do botão Limite baseado no status
+        const badgeLimite = document.getElementById('badgeLimite');
+        const btnLimite = document.getElementById('btnLimite');
+        if (badgeLimite && btnLimite) {
+            const statusLimite = usuario.status_limite || 'pendente';
+            badgeLimite.textContent = statusLimite.toUpperCase();
+            
+            // Definir cor baseada no status
+            if (statusLimite === 'ativo') {
+                badgeLimite.style.background = '#10b981'; // verde
+                // Habilitar botão quando ativo
+                btnLimite.disabled = false;
+                btnLimite.style.opacity = '1';
+                btnLimite.style.cursor = 'pointer';
+            } else if (statusLimite === 'pendente') {
+                badgeLimite.style.background = '#f59e0b'; // laranja
+                // Desabilitar botão quando pendente
+                btnLimite.disabled = true;
+                btnLimite.style.opacity = '0.6';
+                btnLimite.style.cursor = 'not-allowed';
+            } else if (statusLimite === 'bloqueado' || statusLimite === 'suspenso') {
+                badgeLimite.style.background = '#ef4444'; // vermelho
+                // Desabilitar botão quando bloqueado/suspenso
+                btnLimite.disabled = true;
+                btnLimite.style.opacity = '0.6';
+                btnLimite.style.cursor = 'not-allowed';
+            } else {
+                badgeLimite.style.background = '#f59e0b'; // laranja padrão
+                // Desabilitar botão por padrão
+                btnLimite.disabled = true;
+                btnLimite.style.opacity = '0.6';
+                btnLimite.style.cursor = 'not-allowed';
+            }
+        }
+        
+        // Controlar badge e estado do botão Faturas - só mostrar quando status for pendente
+        const badgeFaturas = document.querySelector('button[onclick="navegarParaFaturas()"] span');
+        const btnFaturas = document.querySelector('button[onclick="navegarParaFaturas()"]');
+        if (badgeFaturas && btnFaturas) {
+            const statusLimite = usuario.status_limite || 'pendente';
+            if (statusLimite === 'pendente') {
+                badgeFaturas.style.display = 'block';
+                badgeFaturas.textContent = 'EM BREVE';
+                badgeFaturas.style.background = '#f59e0b';
+                // Desabilitar botão quando pendente
+                btnFaturas.disabled = true;
+                btnFaturas.style.opacity = '0.6';
+                btnFaturas.style.cursor = 'not-allowed';
+            } else {
+                badgeFaturas.style.display = 'none';
+                // Habilitar botão quando não pendente
+                btnFaturas.disabled = false;
+                btnFaturas.style.opacity = '1';
+                btnFaturas.style.cursor = 'pointer';
+            }
+        }
+        
+        // Atualizar círculo de progresso do score no card do swiper (apenas na página home)
+        const currentPage = window.app?.views?.main?.router?.currentRoute?.path;
+        if (currentPage === '/home/' || window.location.pathname.includes('home.html')) {
+            console.log('[INDEX.HTML] Chamando atualizarScoreCardCredito...');
+            if (typeof window.atualizarScoreCardCredito === 'function') {
+                await window.atualizarScoreCardCredito(usuario);
+            } else {
+                console.log('[INDEX.HTML] atualizarScoreCardCredito não está disponível ainda, tentando novamente...');
+                setTimeout(async () => {
+                    if (typeof window.atualizarScoreCardCredito === 'function') {
+                        await window.atualizarScoreCardCredito(usuario);
+                    }
+                }, 1000);
+            }
+
+        }
+        
+    } catch (error) {
+    }
+};
+
+// Função para verificar dados do usuário (global)
+window.verificarDadosUsuario = async function() {
+    try {
+        // Obter CPF do localStorage
+        const cpfUsuario = localStorage.getItem('cpf_usuario');
+        if (!cpfUsuario) {
+            return;
+        }
+        
+        // Buscar dados do usuário
+        const { data: usuario, error } = await window.supabaseClient
+            .from('usuarios')
+            .select('*')
+            .eq('cpf', cpfUsuario)
+            .single();
+            
+        if (error) {
+            return;
+        }
+        
+        if (!usuario) {
+            return;
+        }
+        
+        // Salvar no localStorage
+        localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+        
+        // Definir iniciais
+        if (usuario.nome) {
+            window.definirIniciais(usuario.nome, usuario.foto_perfil || '');
+        }
+        
+        // Atualizar saldo
+        const saldoElement = document.getElementById('saldoUsuario');
+        if (saldoElement && usuario.saldo !== undefined) {
+            const saldo = usuario.saldo || 0;
+            const saldoFormatado = saldo.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+            
+            // Separar valor principal e centavos
+            const partes = saldoFormatado.split(',');
+            const valorPrincipal = partes[0];
+            const centavos = partes[1] || '00';
+            
+            // Ocultar skeleton após 4 segundos e mostrar dados reais
+            setTimeout(() => {
+                // Atualizar apenas o valor principal
+                saldoElement.textContent = valorPrincipal;
+                
+                // Atualizar os centavos
+                const centavosElement = document.getElementById('centavosUsuario');
+                if (centavosElement) {
+                    centavosElement.textContent = `,${centavos}`;
+                    centavosElement.style.display = 'inline';
+                }
+                saldoElement.setAttribute('data-saldo-real', saldoFormatado);
+                saldoElement.setAttribute('data-saldo-texto', saldoFormatado);
+                saldoElement.setAttribute('data-mostrando', 'true');
+                
+                // Garantir que o ícone do olhinho fique no estado correto (aberto)
+                const iconSpan = document.getElementById('toggleSaldoIcon');
+                if (iconSpan) {
+                    iconSpan.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M11.102 17.957c-3.204 -.307 -5.904 -2.294 -8.102 -5.957c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6a19.5 19.5 0 0 1 -.663 1.032" /><path d="M15 19l2 2l4 -4" /></svg>`;
+                }
+            }, 2000);
+        }
+        
+    } catch (error) {
+    }
+};
+
+// Sheet de Senha para Cartões
+const sheetHTML = `
+    <div class="sheet-modal my-sheet-senha-cartoes">
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div class="left"></div>
+                <div class="right">
+                    <a href="#" class="link sheet-close">Fechar</a>
+                </div>
+            </div>
+        </div>
+        <div class="sheet-modal-inner">
+            <div class="block">
+                <!-- Título -->
+                <div class="text-center mb-8">
+                    <h1 class="text-xl font-bold text-gray-800 mb-2">Digite sua senha</h1>
+                    <p class="text-gray-600">Para acessar o cartão virtual</p>
+                </div>
+                
+                <!-- Pontinhos circulos -->
+                <div class="flex justify-center items-center space-x-4 mb-6 relative cursor-pointer" onclick="focarInputSenhaCartoes()">
+                    <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot-cartoes" data-index="0"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot-cartoes" data-index="1"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot-cartoes" data-index="2"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot-cartoes" data-index="3"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot-cartoes" data-index="4"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot-cartoes" data-index="5"></div>
+                </div>
+                
+                <!-- Espaço fixo para mensagem de erro -->
+                <div class="h-6 flex items-center justify-center">
+                    <div id="senhaErrorCartoes" class="text-red-500 text-sm hidden text-center">Senha incorreta</div>
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+
+// Adicionar o sheet ao DOM
+document.body.insertAdjacentHTML('beforeend', sheetHTML);
+
+// O sheet será inicializado pelo arquivo sheet-senha-admin.js
+
+</script>
+
+<!-- Sheet Home Transferência -->
+<div class="sheet-modal sheet-home-transferencia">
+    <div class="toolbar">
+        <div class="toolbar-inner">
+            <div class="left"></div>
+            <div class="right">
+                <a href="#" class="link sheet-close">Fechar</a>
+            </div>
+        </div>
+    </div>
+    <div class="sheet-modal-inner">
+        <div class="block">
+            <!-- Título -->
+            <div class="text-center mb-8">
+                <h1 class="text-xl font-bold text-gray-800 mb-2">Sheet Home</h1>
+                <p class="text-gray-600">Texto do sheet home</p>
+            </div>
+</div>
+
+<!-- Sheet Seletor de Gênero -->
+<div class="sheet-modal sheet-genero-lista-espera" style="height: 50vh;">
+    <div class="toolbar" style="background-color: #f3f4f6;">
+        <div style="width: 36px; height: 5px; background: #999; border-radius: 3px; margin: 8px auto;"></div>
+        <div class="toolbar-inner">
+            <div class="left" style="padding-left: 0;">
+                <h2 class="text-lg font-bold text-gray-800" style="margin: 0; padding: 0 15px;">Selecione seu gênero</h2>
+            </div>
+            <div class="right"></div>
+        </div>
+    </div>
+    <div class="sheet-modal-inner" style="background-color: #f3f4f6;">
+        <div class="block" style="padding-bottom: 80px;">
+            <!-- Opções de gênero -->
+            <div class="list">
+                <ul>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="genero-sheet" value="masculino">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Masculino</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="genero-sheet" value="feminino">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Feminino</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="genero-sheet" value="outro">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Outro</div>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Botão Selecionar -->
+            <div style="padding: 16px;">
+                <button onclick="confirmarSelecaoGenero()" type="button" class="button button-fill button-large color-blue" style="flex: 1; border-radius: 50px;">
+                    Selecionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sheet Seletor de Indicação -->
+<div class="sheet-modal sheet-indicacao-lista-espera" style="height: 50vh;">
+    <div class="toolbar" style="">
+        <div style="width: 36px; height: 5px; background: #999; border-radius: 3px; margin: 8px auto;"></div>
+        <div class="toolbar-inner">
+            <div class="left" style="padding-left: 0;">
+                <h2 class="text-lg font-bold text-gray-800" style="margin: 0; padding: 0 15px;">Foi indicado por alguém?</h2>
+            </div>
+            <div class="right"></div>
+        </div>
+    </div>
+    <div class="sheet-modal-inner" style="">
+        <div class="block" style="padding-bottom: 80px;">
+            <!-- Opções de indicação -->
+            <div class="list">
+                <ul>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="indicacao-sheet" value="nao">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Não, encontrei sozinho</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="indicacao-sheet" value="sim">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Sim, fui indicado</div>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Botão Selecionar -->
+            <div style="padding: 16px;">
+                <button onclick="confirmarSelecaoIndicacao()" type="button" class="button button-fill button-large color-blue" style="flex: 1; border-radius: 50px;">
+                    Selecionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sheet Seletor de Profissão -->
+<div class="sheet-modal sheet-profissao-lista-espera" style="height: 70vh;">
+    <div class="toolbar" style="">
+        <div style="width: 36px; height: 5px; background: #999; border-radius: 3px; margin: 8px auto;"></div>
+        <div class="toolbar-inner">
+            <div class="left" style="padding-left: 0;">
+                <h2 class="text-lg font-bold text-gray-800" style="margin: 0; padding: 0 15px;">Selecione sua profissão</h2>
+            </div>
+            <div class="right"></div>
+        </div>
+    </div>
+    <div class="sheet-modal-inner" style="">
+        <div class="block" style="padding-bottom: 80px;">
+            <!-- Opções de profissão -->
+            <div class="list">
+                <ul>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="profissao-sheet" value="aposentado">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Aposentado</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="profissao-sheet" value="autonomo">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Autônomo</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="profissao-sheet" value="empregado">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Empregado</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="profissao-sheet" value="profissional_liberal">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Profissional Liberal</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="item-content item-radio">
+                            <input type="radio" name="profissao-sheet" value="empresario">
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                                <div class="item-title">Empresário</div>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Botão Selecionar -->
+            <div style="padding: 16px;">
+                <button onclick="confirmarSelecaoProfissao()" type="button" class="button button-fill button-large color-blue" style="flex: 1; border-radius: 50px;">
+                    Selecionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Painel Lateral de Validação de Indicação -->
+
+
+    <script>
+        // Função genérica de navegação
+        function navegarPara(rota) {
+            if (window.app && app.views && app.views.main && app.views.main.router) {
+                app.views.main.router.navigate(rota, { transition: 'f7-push' });
+            } else {
+                window.location.href = rota.replace(/\//g, '') + '.html';
+            }
+        }
+
+        // Função para navegar para página de libere limite informações
+        function navegarParaLibereLimite() {
+            navegarPara('/libere-limite-informacoes/');
+        }
+
+        // NOTE: navegação deve ser feita via `navegarPara(rota)` e rotas em `routes.js`.
+
+        // Função para navegar para dados pessoais
+        function navegarParaDadosPessoais() {
+            // Fechar o painel antes de navegar
+            if (window.app && app.panel) {
+                app.panel.close('#painelSimples');
+            }
+            navegarPara('/dados-pessoais/');
+        }
+
+        // Função para navegar para alterar senha
+        function navegarParaAlterarSenha() {
+            // Fechar o painel antes de navegar
+            if (window.app && app.panel) {
+                app.panel.close('#painelSimples');
+            }
+            navegarPara('/metodos-verificacao/');
+        }
+
+        // Função para navegar para convidar amigos
+        function navegarParaConvidarAmigos() {
+            // Fechar o painel antes de navegar
+            if (window.app && app.panel) {
+                app.panel.close('#painelSimples');
+            }
+            navegarPara('/indicacao/');
+        }
+
+        // Função para navegar para cupons
+        function navegarParaCupons() {
+            if (window.app && app.panel) {
+                app.panel.close('#painelSimples');
+            }
+            navegarPara('/cupons-desconto/');
+        }
+
+        // Função para navegar para configurações do usuário
+        function navegarParaConfiguracoes() {
+            // Fechar o painel antes de navegar
+            if (window.app && app.panel) {
+                app.panel.close('#painelSimples');
+            }
+            navegarPara('/configuracoes-usuario/');
+        }
+
+        // Função para fazer logout
+        function fazerLogout() {
+            // Fechar o painel
+            if (window.app && app.panel) {
+                app.panel.close('#painelSimples');
+            }
+
+            // Limpar dados do usuário
+            localStorage.removeItem('cpf_usuario');
+            localStorage.removeItem('usuarioLogado');
+            localStorage.removeItem('sessaoAtual');
+            localStorage.removeItem('tempoSessao');
+            
+            // Limpar flag de biometria para que seja solicitada novamente no próximo login
+            sessionStorage.removeItem('biometria_solicitada_nesta_sessao');
+
+            // Redirecionar para login
+            setTimeout(() => {
+                if (window.app && app.views && app.views.main && app.views.main.router) {
+                    app.views.main.router.navigate('/login/', { transition: 'f7-fade' });
+                } else {
+                    window.location.href = 'login.html';
+                }
+            }, 300);
+        }
+
+        // Funções globais para controle do panel de perfil
+        // Função global para abrir painel simples
+        document.addEventListener('DOMContentLoaded', function() {
+          // Carregar tema salvo do localStorage
+          const temaSalvo = localStorage.getItem('app-tema') || 'blue';
+          if (temaSalvo && typeof TEMAS_CORES !== 'undefined' && TEMAS_CORES[temaSalvo]) {
+            const cores = TEMAS_CORES[temaSalvo];
+            document.documentElement.style.setProperty('--app-primary-color', cores.primary);
+            console.log('[TEMA] Tema carregado ao iniciar app:', temaSalvo, cores.primary);
+          }
+
+          // Carregar modo noturno salvo do localStorage
+          if (localStorage.getItem('app-dark-mode') === 'true') {
+            document.body.classList.add('dark-mode');
+            // Aplicar estilo dark salvo (slate ou black)
+            const darkStyle = localStorage.getItem('app-dark-style') || 'black';
+            const vars = darkStyle === 'black'
+                ? { bg: '#000000', bgSec: '#111111', bgCard: '#111111', border: '#222222', input: '#111111' }
+                : { bg: '#0f172a', bgSec: '#1e293b', bgCard: '#1e293b', border: '#334155', input: '#1e293b' };
+            document.body.style.setProperty('--app-bg',           vars.bg);
+            document.body.style.setProperty('--app-bg-secondary', vars.bgSec);
+            document.body.style.setProperty('--app-bg-card',      vars.bgCard);
+            document.body.style.setProperty('--app-border',       vars.border);
+            document.body.style.setProperty('--app-input-bg',     vars.input);
+            console.log('[DARK MODE] Modo noturno aplicado ao iniciar app, estilo:', darkStyle);
+          }
+
+          });
+
+   // Função global para mostrar dialog de bloqueio
+   window.mostrarDialogBloqueio = function(mensagem) {
+     console.log('[DIALOG] Função chamada com mensagem:', mensagem);
+     const dialog = document.getElementById('dialogBloqueio');
+     const msgEl = document.getElementById('dialogBloqueioMensagem');
+     const btnFechar = document.getElementById('dialogBloqueioFechar');
+     console.log('[DIALOG] dialog:', dialog, 'msgEl:', msgEl, 'btnFechar:', btnFechar);
+     if (dialog && msgEl) {
+       msgEl.textContent = mensagem;
+       dialog.style.display = 'flex';
+       console.log('[DIALOG] Dialog exibido');
+       btnFechar.onclick = () => {
+         dialog.style.display = 'none';
+         console.log('[DIALOG] Dialog fechado');
+       };
+       dialog.onclick = (e) => {
+         if (e.target === dialog) {
+           dialog.style.display = 'none';
+           console.log('[DIALOG] Dialog fechado (overlay)');
+         }
+       };
+     } else {
+       console.error('[DIALOG] ERRO: Elementos do dialog não encontrados!');
+     }
+   };
+
+   // Fechar dialog com tecla ESC
+   document.addEventListener('keydown', function(e) {
+     if (e.key === 'Escape') {
+       const dialog = document.getElementById('dialogBloqueio');
+       if (dialog && dialog.style.display === 'flex') {
+         dialog.style.display = 'none';
+       }
+     }
+   });
+ </script>
+
+ <!-- Sheet: Registrar Ponto Retroativo (usado na página histórico de ponto) -->
+<div class="sheet-modal sheet-modal-bottom sheet-registro-retroativo" data-swipe-to-close="false" style="height:auto;max-height:90vh;z-index:12500;border-radius:20px 20px 0 0;">
+    <div style="display:flex;justify-content:center;padding-top:10px;padding-bottom:4px;">
+        <div style="width:40px;height:4px;border-radius:2px;background:#CBD5E1;"></div>
+    </div>
+    <div style="padding:8px 20px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f3f4f6;">
+        <span style="font-weight:700;font-size:17px;color:#111827;">Registrar ponto</span>
+        <a class="link sheet-close" style="color:#9ca3af;display:flex;align-items:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </a>
+    </div>
+    <div class="sheet-modal-inner" style="overflow-y:auto;-webkit-overflow-scrolling:touch;">
+        <div style="padding:16px 20px 32px;">
+
+            <!-- Tipo de registro -->
+            <div style="font-size:12px;color:#6b7280;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;">Tipo</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
+                <button onclick="selecionarTipoRetro('entrada',this)" class="retro-tipo-btn" style="padding:11px 6px;border-radius:10px;border:2px solid #e5e7eb;background:#f9fafb;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;">Entrada</button>
+                <button onclick="selecionarTipoRetro('saida_intervalo',this)" class="retro-tipo-btn" style="padding:11px 6px;border-radius:10px;border:2px solid #e5e7eb;background:#f9fafb;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;">Saída intervalo</button>
+                <button onclick="selecionarTipoRetro('retorno_intervalo',this)" class="retro-tipo-btn" style="padding:11px 6px;border-radius:10px;border:2px solid #e5e7eb;background:#f9fafb;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;">Retorno</button>
+                <button onclick="selecionarTipoRetro('saida_final',this)" class="retro-tipo-btn" style="padding:11px 6px;border-radius:10px;border:2px solid #e5e7eb;background:#f9fafb;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;">Saída final</button>
+            </div>
+            <select id="modalRetroCampo" style="display:none;"><option value="entrada">Entrada</option><option value="saida_intervalo">Saída intervalo</option><option value="retorno_intervalo">Retorno intervalo</option><option value="saida_final">Saída final</option></select>
+
+            <!-- Picker de Data + Hora estilo iOS -->
+            <div style="font-size:12px;color:#6b7280;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;">Data e Hora</div>
+            <div style="position:relative;background:#f9fafb;border-radius:14px;overflow:hidden;border:1.5px solid #e5e7eb;">
+                <!-- linha de seleção central -->
+                <div style="position:absolute;top:50%;left:0;right:0;height:44px;transform:translateY(-50%);background:rgba(30,64,175,0.07);border-top:1.5px solid #1e40af22;border-bottom:1.5px solid #1e40af22;pointer-events:none;z-index:2;"></div>
+                <!-- fade top -->
+                <div style="position:absolute;top:0;left:0;right:0;height:60px;background:linear-gradient(to bottom,#f9fafb,transparent);pointer-events:none;z-index:3;"></div>
+                <!-- fade bottom -->
+                <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,#f9fafb,transparent);pointer-events:none;z-index:3;"></div>
+
+                <div style="display:flex;height:176px;">
+                    <!-- Dia -->
+                    <div id="retroColDia" style="flex:1.2;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;" class="retro-col"></div>
+                    <!-- Mês -->
+                    <div id="retroColMes" style="flex:1.5;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;" class="retro-col"></div>
+                    <!-- Ano -->
+                    <div id="retroColAno" style="flex:1.2;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;" class="retro-col"></div>
+                    <!-- sep -->
+                    <div style="width:1px;background:#e5e7eb;flex-shrink:0;"></div>
+                    <!-- Hora -->
+                    <div id="retroColHora" style="flex:1;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;" class="retro-col"></div>
+                    <!-- sep -->
+                    <div style="width:1px;background:#e5e7eb;flex-shrink:0;margin:0 2px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#374151;">:</div>
+                    <!-- Min -->
+                    <div id="retroColMin" style="flex:1;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;" class="retro-col"></div>
+                </div>
+            </div>
+
+            <input type="hidden" id="modalRetroData">
+            <input type="hidden" id="modalRetroHora">
+
+            <div style="display:flex;gap:10px;margin-top:20px;">
+                <button class="button button-outline sheet-close" style="flex:1;border-radius:9999px;height:48px;color:#6b7280;border-color:#e5e7eb;font-weight:500;">Cancelar</button>
+                <button class="button button-fill" onclick="confirmarRegistroRetroativo()" style="flex:1;border-radius:9999px;height:48px;background:#1e40af;color:white;font-weight:600;">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.retro-col::-webkit-scrollbar { display:none; }
+.retro-col-item {
+    scroll-snap-align: center;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #9ca3af;
+    font-weight: 400;
+    transition: color .1s, font-weight .1s;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+</style>
+
+<script>
+(function() {
+    var meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+    function preencherCol(el, items, valorAtual) {
+        // padding top/bottom para centralizar primeiro/último
+        el.innerHTML = '<div style="height:66px;flex-shrink:0;"></div>';
+        items.forEach(function(v) {
+            var d = document.createElement('div');
+            d.className = 'retro-col-item';
+            d.textContent = v.label !== undefined ? v.label : v;
+            d.dataset.val = v.val !== undefined ? v.val : v;
+            el.appendChild(d);
+        });
+        el.innerHTML += '<div style="height:66px;flex-shrink:0;"></div>';
+
+        // scroll para valor atual
+        setTimeout(function() {
+            var items2 = el.querySelectorAll('.retro-col-item');
+            items2.forEach(function(item) {
+                if (item.dataset.val == String(valorAtual)) {
+                    el.scrollTop = item.offsetTop - el.offsetHeight/2 + item.offsetHeight/2;
+                }
+            });
+        }, 50);
+
+        // highlight ao scroll
+        el.addEventListener('scroll', function() { destacarCentro(el); }, { passive: true });
+    }
+
+    function destacarCentro(col) {
+        var centro = col.scrollTop + col.offsetHeight / 2;
+        col.querySelectorAll('.retro-col-item').forEach(function(item) {
+            var itemCentro = item.offsetTop + item.offsetHeight / 2;
+            var dist = Math.abs(centro - itemCentro);
+            if (dist < 22) {
+                item.style.color = '#1e40af';
+                item.style.fontWeight = '700';
+                item.style.fontSize = '17px';
+            } else if (dist < 44) {
+                item.style.color = '#374151';
+                item.style.fontWeight = '500';
+                item.style.fontSize = '15px';
+            } else {
+                item.style.color = '#d1d5db';
+                item.style.fontWeight = '400';
+                item.style.fontSize = '14px';
+            }
+        });
+    }
+
+    function getValorCentro(col) {
+        var centro = col.scrollTop + col.offsetHeight / 2;
+        var melhor = null, menorDist = 9999;
+        col.querySelectorAll('.retro-col-item').forEach(function(item) {
+            var dist = Math.abs((item.offsetTop + item.offsetHeight/2) - centro);
+            if (dist < menorDist) { menorDist = dist; melhor = item.dataset.val; }
+        });
+        return melhor;
+    }
+
+    window._initRetroPicker = function() {
+        var agora = new Date();
+        var dia = agora.getDate(), mes = agora.getMonth(), ano = agora.getFullYear();
+        var hora = agora.getHours(), min = agora.getMinutes();
+
+        // Dias 1-31
+        var dias = [];
+        for (var d = 1; d <= 31; d++) dias.push({ val: String(d).padStart(2,'0'), label: String(d).padStart(2,'0') });
+        preencherCol(document.getElementById('retroColDia'), dias, String(dia).padStart(2,'0'));
+
+        // Meses
+        var mesItems = meses.map(function(m,i){ return { val: String(i+1).padStart(2,'0'), label: m }; });
+        preencherCol(document.getElementById('retroColMes'), mesItems, String(mes+1).padStart(2,'0'));
+
+        // Anos (últimos 3 anos até hoje)
+        var anos = [];
+        for (var y = ano; y >= ano-2; y--) anos.push({ val: String(y), label: String(y) });
+        preencherCol(document.getElementById('retroColAno'), anos, String(ano));
+
+        // Horas
+        var horas = [];
+        for (var h = 0; h < 24; h++) horas.push({ val: String(h).padStart(2,'0'), label: String(h).padStart(2,'0') });
+        preencherCol(document.getElementById('retroColHora'), horas, String(hora).padStart(2,'0'));
+
+        // Minutos
+        var mins = [];
+        for (var m2 = 0; m2 < 60; m2++) mins.push({ val: String(m2).padStart(2,'0'), label: String(m2).padStart(2,'0') });
+        preencherCol(document.getElementById('retroColMin'), mins, String(min).padStart(2,'0'));
+
+        // highlight inicial
+        setTimeout(function() {
+            ['retroColDia','retroColMes','retroColAno','retroColHora','retroColMin'].forEach(function(id) {
+                destacarCentro(document.getElementById(id));
+            });
+        }, 100);
+    };
+
+    window._getRetroValores = function() {
+        var d = getValorCentro(document.getElementById('retroColDia'));
+        var m = getValorCentro(document.getElementById('retroColMes'));
+        var y = getValorCentro(document.getElementById('retroColAno'));
+        var h = getValorCentro(document.getElementById('retroColHora'));
+        var mi = getValorCentro(document.getElementById('retroColMin'));
+        return { data: y+'-'+m+'-'+d, hora: h+':'+mi };
+    };
+})();
+
+function selecionarTipoRetro(valor, btn) {
+    document.querySelectorAll('.retro-tipo-btn').forEach(function(b) {
+        b.style.border = '2px solid #e5e7eb';
+        b.style.background = '#f9fafb';
+        b.style.color = '#6b7280';
+    });
+    btn.style.border = '2px solid #1e40af';
+    btn.style.background = '#eff6ff';
+    btn.style.color = '#1e40af';
+    document.getElementById('modalRetroCampo').value = valor;
+}
+</script>
+
+ <!-- Dialog de Bloqueio Global (usado em todas as páginas) -->
+ <div id="dialogBloqueio" class="dialog-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:10000;align-items:center;justify-content:center;">
+   <div class="dialog-content" style="background:#fff;border-radius:16px;padding:24px 20px;max-width:320px;width:90%;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.2);">
+     <div style="width:56px;height:56px;border-radius:50%;background:#fee2e2;display:flex;align-items:center;justify-content:center;margin:0 auto 16px auto;">
+       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+         <circle cx="12" cy="12" r="10"></circle>
+         <line x1="12" y1="8" x2="12" y2="12"></line>
+         <line x1="12" y1="16" x2="12.01" y2="16"></line>
+       </svg>
+     </div>
+     <h3 style="font-size:18px;font-weight:600;margin-bottom:8px;color:#111827;font-family:'Proxima Nova',sans-serif;">Funcionalidade bloqueada</h3>
+     <p id="dialogBloqueioMensagem" style="font-size:14px;color:#6b7280;line-height:1.5;margin-bottom:20px;font-family:'Proxima Nova',sans-serif;">Esta funcionalidade está temporariamente indisponível.</p>
+     <button id="dialogBloqueioFechar" style="background:#1e40af;color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:500;width:100%;cursor:pointer;font-family:'Proxima Nova',sans-serif;">Entendi</button>
+   </div>
+ </div>
+
+ <!-- Scripts (já incluem home/index.js) -->
+   <script>
+       // Funções para a seção Últimas Movimentações
+       let modoAdicao = false;
+       let contadoresOriginais = [0, 0, 0, 0, 0]; // Será preenchido pelo banco
+
+       // Mapa de índice do slide para campo da tabela
+       const camposPorSlide = ['prata', 'ouro', 'diamante', 'selection', 'pix'];
+
+       // Carregar contadores do banco (tabela assinaturas_tasktime) - soma do dia
+       async function carregarContadores() {
+           // Pegar apenas os badges dentro do swiper de registro do dia
+           const swiperRegistro = document.getElementById('slide-adicionar')?.closest('.swiper-wrapper');
+           if (!swiperRegistro) return;
+           const badges = swiperRegistro.querySelectorAll('.badge-contador');
+           
+           try {
+               const usuarioTasktime = localStorage.getItem('usuario_tasktime');
+               if (!usuarioTasktime || !window.supabaseClient) throw new Error('sem dados');
+               
+               const usuario = JSON.parse(usuarioTasktime);
+               const _d1 = new Date();
+               const hoje = `${_d1.getFullYear()}-${String(_d1.getMonth()+1).padStart(2,'0')}-${String(_d1.getDate()).padStart(2,'0')}`;
+               const idUsuario = usuario.id_usuario;
+               
+               // Buscar TODOS os registros do dia de TODOS os usuários e somar por coluna
+               const { data, error } = await window.supabaseClient
+                   .from('assinaturas_tasktime')
+                   .select('prata, ouro, diamante, selection, pix')
+                   .eq('data', hoje);
+               
+               if (!error && data && data.length > 0) {
+                   const totais = data.reduce((acc, row) => ({
+                       prata:     acc.prata     + (parseInt(row.prata)     || 0),
+                       ouro:      acc.ouro      + (parseInt(row.ouro)      || 0),
+                       diamante:  acc.diamante  + (parseInt(row.diamante)  || 0),
+                       selection: acc.selection + (parseInt(row.selection) || 0),
+                       pix:       acc.pix       + (parseInt(row.pix)       || 0),
+                   }), { prata: 0, ouro: 0, diamante: 0, selection: 0, pix: 0 });
+                   
+                   const valores = [totais.prata, totais.ouro, totais.diamante, totais.selection, totais.pix];
+                   contadoresOriginais = [...valores];
+                   badges.forEach((badge, index) => {
+                       if (index < valores.length) badge.textContent = valores[index];
+                   });
+               } else {
+                   contadoresOriginais = [0, 0, 0, 0, 0];
+                   badges.forEach(badge => badge.textContent = 0);
+               }
+           } catch (e) {
+               const contadores = localStorage.getItem('movimentacoesContadores');
+               if (contadores) {
+                   const valores = JSON.parse(contadores);
+                   badges.forEach((badge, index) => {
+                       if (index < valores.length) badge.textContent = valores[index];
+                   });
+               } else {
+                   badges.forEach((badge, index) => badge.textContent = contadoresOriginais[index] || 0);
+               }
+           }
+       }
+
+       // Salvar contadores no localStorage como fallback simples
+       function salvarContadores() {
+           const swiperRegistro = document.getElementById('slide-adicionar')?.closest('.swiper-wrapper');
+           if (!swiperRegistro) return;
+           const badges = swiperRegistro.querySelectorAll('.badge-contador');
+           const valores = Array.from(badges).map(b => b.textContent);
+           localStorage.setItem('movimentacoesContadores', JSON.stringify(valores));
+       }
+
+       function adicionarMovimentacao() {
+           const slideAdicionar = document.getElementById('slide-adicionar');
+           const container = slideAdicionar.querySelector('.flex.flex-col');
+           
+           if (!modoAdicao) {
+               // Ativar modo de adição e mudar para ícone de sections
+               modoAdicao = true;
+               
+               container.innerHTML = `
+                   <div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary" style="border: 2px solid rgba(255, 255, 255, 0.3);">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                           <path d="M3.5 5.5l1.5 1.5l2.5 -2.5" />
+                           <path d="M3.5 11.5l1.5 1.5l2.5 -2.5" />
+                           <path d="M3.5 17.5l1.5 1.5l2.5 -2.5" />
+                           <path d="M11 6l9 0" />
+                           <path d="M11 12l9 0" />
+                           <path d="M11 18l9 0" />
+                       </svg>
+                   </div>
+                   <span class="text-xs text-gray-700 text-center font-medium mt-2">Adicionar</span>
+               `;
+               
+               // Mudar todos os badges para +
+               const badges = document.querySelectorAll('.badge-contador');
+               badges.forEach(badge => {
+                   badge.textContent = '+';
+               });
+           } else {
+               // Desativar modo de adição e voltar ao ícone de +
+               modoAdicao = false;
+               
+               container.innerHTML = `
+                   <div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary" style="border: 2px dashed rgba(255, 255, 255, 0.5);">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                           <line x1="12" y1="5" x2="12" y2="19"></line>
+                           <line x1="5" y1="12" x2="19" y2="12"></line>
+                       </svg>
+                   </div>
+                   <span class="text-xs text-gray-700 text-center font-medium mt-2">Adicionar</span>
+               `;
+               
+               // Restaurar badges aos números originais
+               carregarContadores();
+           }
+       }
+
+       async function incrementarBadge(element) {
+           // Só incrementa se estiver em modo de adição
+           if (!modoAdicao) return;
+           
+           // Vibrar ao clicar
+           if (navigator.vibrate) {
+               navigator.vibrate(50);
+           }
+           
+           // Procurar o badge no elemento pai (swiper-slide)
+           const slide = element.closest('.swiper-slide');
+           const badge = slide.querySelector('.badge-contador');
+           
+           // Restringir ao swiper de registro do dia
+           const swiperRegistro = document.getElementById('slide-adicionar')?.closest('.swiper-wrapper');
+           if (!swiperRegistro) return;
+           const allSlides = Array.from(swiperRegistro.querySelectorAll('.swiper-slide')).filter(s => s.id !== 'slide-adicionar');
+           const slideIndex = allSlides.indexOf(slide);
+           const campos = ['prata', 'ouro', 'diamante', 'selection', 'pix'];
+           const campo = campos[slideIndex];
+           
+           if (badge) {
+               // Não atualizar aqui — será atualizado com o total real após o insert no banco
+           }
+           
+           // Voltar todos os OUTROS badges aos números originais
+           allSlides.forEach((s, index) => {
+               const slideBadge = s.querySelector('.badge-contador');
+               if (slideBadge && s !== slide) {
+                   slideBadge.textContent = contadoresOriginais[index] || 0;
+               }
+           });
+           
+           // Feedback visual no slide clicado: bg-primary + check
+           const imgOuDiv = slide.querySelector('img, .w-16');
+           if (imgOuDiv) {
+               const parent = imgOuDiv.parentElement;
+               const originalHTML = parent.innerHTML;
+               
+               // Substituir conteúdo pelo check
+               parent.innerHTML = `
+                   <div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary" style="border: 2px dashed rgba(255, 255, 255, 0.5);">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                           <polyline points="20 6 9 17 4 12"></polyline>
+                       </svg>
+                   </div>
+               `;
+               
+               // Após 1 segundo, voltar ao original
+               setTimeout(() => {
+                   parent.innerHTML = originalHTML;
+               }, 1000);
+           }
+           
+           // Chamar Edge Function para processar venda
+           if (campo && window.supabaseClient) {
+               try {
+                   const usuarioTasktime = localStorage.getItem('usuario_tasktime');
+                   if (usuarioTasktime) {
+                       const usuario = JSON.parse(usuarioTasktime);
+                       const _d2 = new Date();
+                       const hoje = `${_d2.getFullYear()}-${String(_d2.getMonth()+1).padStart(2,'0')}-${String(_d2.getDate()).padStart(2,'0')}`;
+                       const idUsuario = usuario.id_usuario;
+                       
+                       // Preparar payload para Edge Function
+                       const payload = {
+                           id_usuario: idUsuario,
+                           data: hoje,
+                           prata: campo === 'prata' ? 1 : 0,
+                           ouro: campo === 'ouro' ? 1 : 0,
+                           diamante: campo === 'diamante' ? 1 : 0,
+                           selection: campo === 'selection' ? 1 : 0,
+                           pix: campo === 'pix' ? 1 : 0
+                       };
+                       
+                       console.log('[CONTADORES] 📤 Chamando Edge Function para processar venda:', campo);
+                       console.log('[CONTADORES] Payload:', payload);
+                       
+                       // Chamar Edge Function - ela faz TUDO:
+                       // - Salva/atualiza na tabela assinaturas_tasktime
+                       // - Cria notificações para usuário e colegas
+                       // - Calcula e adiciona bônus na carteira
+                       // - Salva histórico da carteira
+                       const { data: result, error: edgeError } = await window.supabaseClient.functions.invoke(
+                           'tasktime-processar-registro-venda',
+                           { body: payload }
+                       );
+                       
+                       if (edgeError) {
+                           console.error('[CONTADORES] ❌ Erro na Edge Function:', edgeError);
+                           throw edgeError;
+                       }
+                       
+                       console.log('[CONTADORES] ✅ Edge Function executada com sucesso!');
+                       console.log('[CONTADORES] Resultado:', result);
+                       
+                       // Mostrar bônus recebido
+                       if (result && result.bonus) {
+                           console.log(`[CONTADORES] 💰 Bônus recebido: R$ ${result.bonus.toFixed(2)}`);
+                           console.log(`[CONTADORES] 💵 Novo saldo: R$ ${result.saldo_novo.toFixed(2)}`);
+                       }
+                       
+                       // Buscar total real do banco — soma de TODOS os usuários do dia
+                       const { data: registros } = await window.supabaseClient
+                           .from('assinaturas_tasktime')
+                           .select(campo)
+                           .eq('data', hoje);
+                       
+                       const totalReal = registros
+                           ? registros.reduce((acc, r) => acc + (parseInt(r[campo]) || 0), 0)
+                           : 1;
+                       
+                       if (badge) {
+                           badge.textContent = totalReal;
+                           if (slideIndex >= 0) contadoresOriginais[slideIndex] = totalReal;
+                       }
+                       
+                       // Atualizar saldo da carteira
+                       setTimeout(() => {
+                           if (typeof atualizarBadgeSaldoCarteira === 'function') {
+                               atualizarBadgeSaldoCarteira();
+                           }
+                       }, 1000);
+                   }
+
+               } catch (e) {
+                   console.error('[CONTADORES] ❌ Erro ao processar venda:', e);
+               }
+           }
+           
+           // Salvar no localStorage como fallback
+           salvarContadores();
+           
+           // Desativar modo de adição após incrementar
+           modoAdicao = false;
+           
+           // Voltar o círculo de adicionar ao normal COM ÍCONE DE CHECK
+           const slideAdicionar = document.getElementById('slide-adicionar');
+           const container = slideAdicionar.querySelector('.flex.flex-col');
+           container.innerHTML = `
+               <div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary" style="border: 2px dashed rgba(255, 255, 255, 0.5);">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                       <polyline points="20 6 9 17 4 12"></polyline>
+                   </svg>
+               </div>
+               <span class="text-xs text-gray-700 text-center font-medium mt-2">Adicionar</span>
+           `;
+           
+           // Após 1 segundo, voltar para o ícone de +
+           setTimeout(() => {
+               container.innerHTML = `
+                   <div class="w-16 h-16 rounded-full flex items-center justify-center bg-primary" style="border: 2px dashed rgba(255, 255, 255, 0.5);">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                           <line x1="12" y1="5" x2="12" y2="19"></line>
+                           <line x1="5" y1="12" x2="19" y2="12"></line>
+                       </svg>
+                   </div>
+                   <span class="text-xs text-gray-700 text-center font-medium mt-2">Adicionar</span>
+               `;
+           }, 1000);
+       }
+
+       // Carregar contadores quando a página carregar
+       document.addEventListener('DOMContentLoaded', () => {
+           carregarContadores();
+           atualizarBadgeChecklistUsers();
+       });
+       
+       // Atualizar badge do checklist_users
+       function atualizarBadgeChecklistUsers() {
+           const badge = document.getElementById('badgeChecklistPendentes');
+           if (badge && window.getChecklistUsersPendingCount) {
+               const pending = window.getChecklistUsersPendingCount();
+               if (pending > 0) {
+                   badge.textContent = pending;
+                   badge.style.display = 'flex';
+               } else {
+                   badge.style.display = 'none';
+               }
+           }
+       }
+       
+       // Expor função globalmente
+       window.atualizarBadgeChecklistUsers = atualizarBadgeChecklistUsers;
+   </script>
+   </html>

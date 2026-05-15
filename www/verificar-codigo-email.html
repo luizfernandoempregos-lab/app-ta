@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#1e40af">
+    <!-- Your app title -->
+    <title>Verificar Código Email - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/personalizado.css">
+</head>
+<body>
+    <!-- Framework7 App -->
+    <div id="app">
+        <!-- Framework7 Views -->
+        <div class="view view-main view-init" data-url="/">
+            <!-- Framework7 Pages -->
+            <div class="page" data-name="verificar-codigo-email">
+                <!-- Header -->
+                <div class="flex items-center justify-between px-4 pb-2" style="padding-top: 40px;">
+                    <div class="flex items-center">
+                        <a href="/metodos-verificacao/" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 6l-6 6l6 6" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Page content -->
+                <div class="page-content">
+                    <div class="px-6 py-8">
+                        <!-- Logo/Title -->
+                        <div class="text-center mb-8">
+                            <h1 class="text-2xl font-bold text-gray-800 mb-2">Código enviado!</h1>
+                            <p class="text-gray-600">Enviamos um código de 5 dígitos para seu email</p>
+                        </div>
+
+                        <!-- Email Info -->
+                        <div class="text-center mb-8">
+                            <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+                                <p class="text-sm text-gray-600 mb-2">Código enviado para:</p>
+                                <div id="emailDestino" class="text-gray-800 font-semibold">carregando...</div>
+                            </div>
+                        </div>
+
+                        <!-- Código Fields -->
+                        <div class="mb-8">
+                            <!-- Campos de entrada -->
+                            <div id="camposContainer" class="flex justify-center space-x-3">
+                                <input type="text" id="emailCodigo1" maxlength="1" style="width: 48px; height: 48px; padding: 8px; border: 1px solid #e5e7eb; border-radius: 16px; background-color: #f9fafb; font-size: 20px; font-weight: bold; text-align: center; box-sizing: border-box;" inputmode="numeric">
+                                <input type="text" id="emailCodigo2" maxlength="1" style="width: 48px; height: 48px; padding: 8px; border: 1px solid #e5e7eb; border-radius: 16px; background-color: #f9fafb; font-size: 20px; font-weight: bold; text-align: center; box-sizing: border-box;" inputmode="numeric">
+                                <input type="text" id="emailCodigo3" maxlength="1" style="width: 48px; height: 48px; padding: 8px; border: 1px solid #e5e7eb; border-radius: 16px; background-color: #f9fafb; font-size: 20px; font-weight: bold; text-align: center; box-sizing: border-box;" inputmode="numeric">
+                                <input type="text" id="emailCodigo4" maxlength="1" style="width: 48px; height: 48px; padding: 8px; border: 1px solid #e5e7eb; border-radius: 16px; background-color: #f9fafb; font-size: 20px; font-weight: bold; text-align: center; box-sizing: border-box;" inputmode="numeric">
+                                <input type="text" id="emailCodigo5" maxlength="1" style="width: 48px; height: 48px; padding: 8px; border: 1px solid #e5e7eb; border-radius: 16px; background-color: #f9fafb; font-size: 20px; font-weight: bold; text-align: center; box-sizing: border-box;" inputmode="numeric">
+                            </div>
+                            
+                            <!-- Loading -->
+                            <div id="loadingContainerEmail" class="flex justify-center items-center mb-4 hidden">
+                                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                            </div>
+                            
+                            <div id="emailMensagemErro" class="text-red-500 text-sm mt-2 text-center hidden"></div>
+                            <div id="emailMensagemSucesso" class="text-green-500 text-sm mt-2 text-center hidden"></div>
+                        </div>
+
+                        <!-- Timer -->
+                        <div class="text-center mb-8">
+                            <div id="timer" class="text-lg font-bold text-blue-600">00:30</div>
+                            <p id="reenviarText" class="text-sm text-gray-500 mt-2 hidden">Não recebeu o código? <button id="btnReenviar" class="text-blue-600 font-semibold">Reenviar</button></p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/verificar-codigo-email.js"></script>
+
+    <style>
+        body {
+        }
+        
+        /* Garantir que a página não tenha rolagem */
+        .page {
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .page-content {
+            height: calc(100vh - 60px); /* Subtrair altura do header */
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-bottom: 100px; /* Espaço para o botão fixo */
+        }
+        
+        /* Animação para o botão disabled */
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Garantir que o botão funcione corretamente */
+        #btnVerificar {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        #btnVerificar:not(:disabled) {
+            cursor: pointer;
+        }
+        
+        /* Estilo para inputs de código */
+        input[type="text"]::-webkit-outer-spin-button,
+        input[type="text"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Animação para campos preenchidos */
+        .codigo-preenchido {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+        }
+    </style>
+</body>
+</html>

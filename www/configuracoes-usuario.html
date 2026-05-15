@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Configurações - Banco Digital</title>
+    <link rel="stylesheet" href="css/configuracoes-usuario.css">
+
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <div class="page min-h-screen flex flex-col overflow-hidden" data-name="configuracoes-usuario">
+                
+                <!-- Header -->
+                <div class="flex items-center justify-between px-4 pb-2" style="padding-top: 40px; flex-shrink: 0;">
+                    <div class="flex items-center">
+                        <button onclick="app.views.main.router.back(); return false;" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 6l-6 6l6 6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Avatar e Nome -->
+                <div class="flex items-center gap-4 px-4 py-4" style="flex-shrink: 0;">
+                    <div class="relative" style="flex-shrink: 0;">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-content-center flex-shrink-0 bg-primary overflow-hidden" id="avatarUsuarioConfig" style="border: 2px solid rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">
+                            <span class="text-white font-bold text-2xl">?</span>
+                        </div>
+                        <!-- Botão lápis para editar foto -->
+                        <div id="btnEditarFotoConfig" onclick="abrirSeletorFotoConfig()" style="position: absolute; bottom: -2px; right: -2px; width: 24px; height: 24px; border-radius: 50%; background: var(--app-primary-color); border: 2px solid white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 3;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none;">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                        </div>
+                        <!-- Input file oculto — usado apenas no navegador (fallback) -->
+                        <input type="file" id="inputFotoConfig" accept="image/*" onchange="processarFotoConfig(event)" style="display:none;">
+                    </div>
+                    <div>
+                        <div class="text-lg font-bold text-gray-900" id="nomeUsuarioConfig">João Dias</div>
+                        <div class="text-sm text-gray-400" id="cargoUsuarioConfig">Vendedor</div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo principal com scroll -->
+                <div class="flex-1 px-4 py-6 overflow-y-auto">
+
+                    <!-- SEÇÃO: TEMA E APARÊNCIA -->
+                    <div class="configuracoes-section">
+                        <div class="configuracoes-section-title">Tema e Aparência</div>
+
+                        <!-- Cor do Tema (accordion customizado) -->
+                        <div class="cfg-card" id="accordion-tema">
+                            <div class="cfg-card-row cfg-card-clickable" onclick="toggleTemaAccordion()">
+                                <div>
+                                    <div class="configuracoes-item-theme-title">Cor do Tema</div>
+                                    <div class="configuracoes-item-theme-description cfg-no-margin">Escolha a cor principal do app</div>
+                                </div>
+                                <div class="cfg-chevron" id="tema-chevron">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="cfg-accordion-content" id="tema-content">
+                                <div class="theme-color-selector">
+                                    <div class="theme-color-option" onclick="mudarTema('blue')" id="tema-blue">
+                                        <div class="theme-color-circle" style="background-color: #1e40af; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Azul</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('green')" id="tema-green">
+                                        <div class="theme-color-circle" style="background-color: #059669; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Verde</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('pink')" id="tema-pink">
+                                        <div class="theme-color-circle" style="background-color: #db2777; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Rosa</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('black')" id="tema-black">
+                                        <div class="theme-color-circle" style="background-color: #1f2937; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Preto</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('purple')" id="tema-purple">
+                                        <div class="theme-color-circle" style="background-color: #7c3aed; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Roxo</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('orange')" id="tema-orange">
+                                        <div class="theme-color-circle" style="background-color: #ea580c; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Laranja</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('red')" id="tema-red">
+                                        <div class="theme-color-circle" style="background-color: #dc2626; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Vermelho</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('yellow')" id="tema-yellow">
+                                        <div class="theme-color-circle" style="background-color: #d97706; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Âmbar</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('cyan')" id="tema-cyan">
+                                        <div class="theme-color-circle" style="background-color: #0891b2; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Ciano</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('teal')" id="tema-teal">
+                                        <div class="theme-color-circle" style="background-color: #14b8a6; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Turquesa</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('indigo')" id="tema-indigo">
+                                        <div class="theme-color-circle" style="background-color: #4f46e5; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Indigo</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('fuchsia')" id="tema-fuchsia">
+                                        <div class="theme-color-circle" style="background-color: #d946ef; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Fúcsia</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('lime')" id="tema-lime">
+                                        <div class="theme-color-circle" style="background-color: #84cc16; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Limão</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('sky')" id="tema-sky">
+                                        <div class="theme-color-circle" style="background-color: #0ea5e9; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Céu</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('rose')" id="tema-rose">
+                                        <div class="theme-color-circle" style="background-color: #f43f5e; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Rosado</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('emerald')" id="tema-emerald">
+                                        <div class="theme-color-circle" style="background-color: #10b981; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Esmeralda</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('violet')" id="tema-violet">
+                                        <div class="theme-color-circle" style="background-color: #a855f7; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Violeta</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('navy')" id="tema-navy">
+                                        <div class="theme-color-circle" style="background-color: #001f3f; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Marinho</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('forest')" id="tema-forest">
+                                        <div class="theme-color-circle" style="background-color: #0d3d1e; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Floresta</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('grape')" id="tema-grape">
+                                        <div class="theme-color-circle" style="background-color: #4a0e4e; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Amora</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('wine')" id="tema-wine">
+                                        <div class="theme-color-circle" style="background-color: #722f37; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Vinho</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('terracota')" id="tema-terracota">
+                                        <div class="theme-color-circle" style="background-color: #8b4513; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Terracota</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('magenta')" id="tema-magenta">
+                                        <div class="theme-color-circle" style="background-color: #9b2667; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Magenta</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('darkTeal')" id="tema-darkTeal">
+                                        <div class="theme-color-circle" style="background-color: #0b6662; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Teal Esc.</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('darkIndigo')" id="tema-darkIndigo">
+                                        <div class="theme-color-circle" style="background-color: #1e1b4b; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Índigo Esc.</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('coral')" id="tema-coral">
+                                        <div class="theme-color-circle" style="background-color: #ff6b6b; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Coral</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('mint')" id="tema-mint">
+                                        <div class="theme-color-circle" style="background-color: #00b894; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Menta</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('gold')" id="tema-gold">
+                                        <div class="theme-color-circle" style="background-color: #f59e0b; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Dourado</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('brown')" id="tema-brown">
+                                        <div class="theme-color-circle" style="background-color: #92400e; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Marrom</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('slate')" id="tema-slate">
+                                        <div class="theme-color-circle" style="background-color: #475569; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Ardósia</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('cobalt')" id="tema-cobalt">
+                                        <div class="theme-color-circle" style="background-color: #1746a2; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Cobalto</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('salmon')" id="tema-salmon">
+                                        <div class="theme-color-circle" style="background-color: #fa8072; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Salmão</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('olive')" id="tema-olive">
+                                        <div class="theme-color-circle" style="background-color: #4d7c0f; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Oliva</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('plum')" id="tema-plum">
+                                        <div class="theme-color-circle" style="background-color: #6b21a8; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Ameixa</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('steel')" id="tema-steel">
+                                        <div class="theme-color-circle" style="background-color: #334155; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Aço</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('azure')" id="tema-azure">
+                                        <div class="theme-color-circle" style="background-color: #0078d4; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Azure</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('crimson')" id="tema-crimson">
+                                        <div class="theme-color-circle" style="background-color: #be123c; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Carmesim</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('jade')" id="tema-jade">
+                                        <div class="theme-color-circle" style="background-color: #16a34a; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Jade</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('denim')" id="tema-denim">
+                                        <div class="theme-color-circle" style="background-color: #1d4ed8; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Jeans</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('midnight')" id="tema-midnight">
+                                        <div class="theme-color-circle" style="background-color: #0f172a; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Meia-noite</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('blush')" id="tema-blush">
+                                        <div class="theme-color-circle" style="background-color: #F9B4C0; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Blush</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('pine')" id="tema-pine">
+                                        <div class="theme-color-circle" style="background-color: #166534; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Pinheiro</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('brick')" id="tema-brick">
+                                        <div class="theme-color-circle" style="background-color: #9f1239; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Tijolo</div>
+                                    </div>
+                                    <div class="theme-color-option" onclick="mudarTema('ocean')" id="tema-ocean">
+                                        <div class="theme-color-circle" style="background-color: #0369a1; width: 35px; height: 35px;"></div>
+                                        <div class="theme-color-name">Oceano</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modo Noturno -->
+                        <div class="cfg-card cfg-card-row" id="dark-mode-row" style="margin-top: 12px;">
+                            <div class="flex items-center gap-3">
+                                <div class="cfg-icon-bg" id="dark-mode-icon-bg">
+                                    <svg id="dark-mode-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="configuracoes-item-theme-title cfg-no-margin">Modo Noturno</div>
+                                    <div class="configuracoes-item-theme-description cfg-no-margin" id="dark-mode-desc">Fundo claro ativado</div>
+                                </div>
+                            </div>
+                            <label class="dark-mode-toggle-label" onclick="toggleModoNoturno()">
+                                <div class="dark-mode-toggle-track" id="dark-mode-track">
+                                    <div class="dark-mode-toggle-thumb" id="dark-mode-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Estilo do Dark Mode (só aparece quando dark mode está ativo) -->
+                        <div class="cfg-card" id="dark-style-row" style="margin-top:8px;display:none;">
+                            <div class="cfg-card-row cfg-card-clickable" onclick="toggleDarkStyleAccordion()">
+                                <div>
+                                    <div class="configuracoes-item-theme-title cfg-no-margin">Estilo do Modo Noturno</div>
+                                    <div class="configuracoes-item-theme-description cfg-no-margin" id="dark-style-desc">Preto</div>
+                                </div>
+                                <div class="cfg-chevron" id="dark-style-chevron">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="cfg-accordion-content" id="dark-style-content">
+                                <div style="display:flex;gap:12px;padding:8px 16px 14px;">
+                                    <div id="dark-style-slate" onclick="mudarEstiloDark('slate')"
+                                        style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:10px 6px;border-radius:12px;border:2px solid #e5e7eb;transition:all 0.2s;">
+                                        <div style="width:36px;height:36px;border-radius:50%;background:#0f172a;border:2px solid #334155;"></div>
+                                        <span style="font-size:12px;font-weight:500;color:#6b7280;">Ardósia</span>
+                                    </div>
+                                    <div id="dark-style-black" onclick="mudarEstiloDark('black')"
+                                        style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:10px 6px;border-radius:12px;border:2px solid #e5e7eb;transition:all 0.2s;">
+                                        <div style="width:36px;height:36px;border-radius:50%;background:#000000;border:2px solid #222222;"></div>
+                                        <span style="font-size:12px;font-weight:500;color:#6b7280;">Preto</span>
+                                    </div>
+                                    <div id="dark-style-blush" onclick="mudarEstiloDark('blush')"
+                                        style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:10px 6px;border-radius:12px;border:2px solid #e5e7eb;transition:all 0.2s;">
+                                        <div style="width:36px;height:36px;border-radius:50%;background:#fdf2f5;border:2px solid #f8bbd0;"></div>
+                                        <span style="font-size:12px;font-weight:500;color:#6b7280;">Blush</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO: DISPOSITIVOS E SEGURANÇA -->
+                    <div class="configuracoes-section">
+                        <div class="configuracoes-section-title">Dispositivos e Segurança</div>
+
+                        <!-- Biometria -->
+                        <div class="cfg-card cfg-card-row" id="biometria-row">
+                            <div class="flex items-center">
+                                <div class="cfg-icon-bg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18.9 7a8 8 0 0 1 1.1 5v1a6 6 0 0 0 .8 3" /><path d="M8 11a4 4 0 0 1 8 0v1a10 10 0 0 0 2 6" /><path d="M12 11v2a14 14 0 0 0 2.5 8" /><path d="M8 15a18 18 0 0 0 1.8 6" /><path d="M4.9 19a22 22 0 0 1 -.9 -7v-1a8 8 0 0 1 12 -6.95" /></svg>
+                                </div>
+                                <div style="margin-left:12px">
+                                    <div class="configuracoes-item-title">Biometria</div>
+                                    <div class="configuracoes-item-description">Use a biometria do dispositivo para autenticar</div>
+                                </div>
+                            </div>
+                            <label class="dark-mode-toggle-label" onclick="toggleBiometria()">
+                                <div class="dark-mode-toggle-track" id="biometria-track">
+                                    <div class="dark-mode-toggle-thumb" id="biometria-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Login sem senha -->
+                        <div class="cfg-card cfg-card-row" id="login-sem-senha-row" style="margin-top:8px;">
+                            <div class="flex items-center">
+                                <div class="cfg-icon-bg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z"/><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"/><path d="M8 11v-4a4 4 0 1 1 8 0v4"/></svg>
+                                </div>
+                                <div style="margin-left:12px">
+                                    <div class="configuracoes-item-title">Login sem senha</div>
+                                    <div class="configuracoes-item-description">Entrar direto na home sem digitar senha</div>
+                                </div>
+                            </div>
+                            <label class="dark-mode-toggle-label" onclick="toggleLoginSemSenha()">
+                                <div class="dark-mode-toggle-track" id="login-sem-senha-track">
+                                    <div class="dark-mode-toggle-thumb" id="login-sem-senha-thumb"></div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO: CONTA -->
+                    <div class="configuracoes-section" style="margin-top: 8px;">
+                        <div class="configuracoes-section-title">Conta</div>
+
+                        <!-- Sair da conta -->
+                        <div class="cfg-card cfg-card-row cfg-card-clickable" onclick="fazerLogout()">
+                            <div class="flex items-center">
+                                <div class="cfg-icon-bg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+                                </div>
+                                <div style="margin-left:12px">
+                                    <div class="configuracoes-item-title cfg-text-danger">Sair da conta</div>
+                                    <div class="configuracoes-item-description">Encerrar sessão no dispositivo</div>
+                                </div>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Espaço para navigation bar do dispositivo -->
+                    <div style="height: calc(env(safe-area-inset-bottom, 0px) + 24px);"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cordova.js"></script>
+    <script src="js/configuracoes-usuario.js"></script>
+</body>
+</html>

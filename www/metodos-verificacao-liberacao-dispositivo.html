@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#1e40af">
+    <!-- Your app title -->
+    <title>Métodos de Liberação do Dispositivo - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/personalizado.css">
+    <!-- CSS para página de métodos de verificação de liberação do dispositivo -->
+    <link rel="stylesheet" href="css/metodos-verificacao-liberacao-dispositivo.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="metodos-verificacao-liberacao-dispositivo" class="page" style="border-radius: 16px 16px 0 0; overflow: hidden;">
+                <!-- Header -->
+                <div class="px-4 pb-2" style="padding-top: 40px;">
+                    <div class="flex items-center mb-4">
+                        <a href="/senha/" class="back w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+                        </a>
+                    </div>
+                    <h1 id="tituloMetodos" class="text-2xl font-bold text-gray-800">Escolha um método</h1>
+                    <p id="subtituloMetodos" class="text-gray-600">de liberação do dispositivo</p>
+                </div>
+
+                <!-- Page content -->
+                <div class="page-content bg-white">
+                    <!-- Métodos Form -->
+                    <div class="px-6 py-20">
+
+                        <!-- Opções de Liberação -->
+                        <div class="space-y-4 mb-8 mt-32">
+                            <!-- Biometria Facial -->
+                            <div class="card card-strong color-blue rounded-2xl" data-metodo="biometria-facial" style="margin: 0 0 16px 0; padding: 20px 16px 20px 16px;">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="font-semibold text-gray-800 mb-1">Biometria Facial</h3>
+                                            <span class="px-2 py-1 text-xs font-bold text-white rounded-full" style="background: #6b7280;">Em breve</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Use reconhecimento facial</p>
+                                    </div>
+                                    <div class="ml-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                            <path d="M9 18l6-6-6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Código via Email -->
+                            <div class="card card-strong color-blue rounded-2xl" data-metodo="codigo-email" style="margin: 0 0 16px 0; padding: 20px 16px 20px 16px;">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="font-semibold text-gray-800 mb-1">Código via Email</h3>
+                                            <span class="px-2 py-1 text-xs font-bold text-white rounded-full" style="background: #6b7280;">Em breve</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Receba um código de 6 dígitos por email</p>
+                                    </div>
+                                    <div class="ml-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                            <path d="M9 18l6-6-6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Código iToken -->
+                            <div class="card card-strong color-blue rounded-2xl cursor-pointer" id="cardCodigoIToken" data-metodo="codigo-itoken" onclick="liberacao_selecionarMetodo('codigo-itoken')" style="margin: 0 0 16px 0; padding: 20px 16px 20px 16px;">
+                                <div class="flex items-center">
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-gray-800 mb-1">Código iToken</h3>
+                                        <p class="text-sm text-gray-600">Libere seu novo dispositivo pelo seu antigo com o código</p>
+                                    </div>
+                                    <div class="ml-3" id="iconCodigoIToken">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                            <path d="M9 18l6-6-6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Roteamento do app-->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <!-- Script dos Métodos -->
+    <script type="text/javascript" src="js/metodos-verificacao-liberacao-dispositivo.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <title>Mensagens - Banco Digital</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="css/conversas-usuarios.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+</head>
+<body>
+<div id="app">
+<div class="view view-main">
+<div data-name="conversas-usuarios" class="page page-bg">
+
+    <!-- Header normal -->
+    <div class="conv-header" id="convHeaderNormal">
+        <div class="conv-header-inner">
+            <a class="conv-back-btn" onclick="if(window.app&&app.views&&app.views.main){app.views.main.router.back();}else{history.back();}" style="outline:none;cursor:pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6l6 6"/></svg>
+            </a>
+            <span class="conv-title">Mensagens</span>
+            <div class="conv-header-actions">
+            </div>
+        </div>
+    </div>
+
+    <!-- Header de seleção -->
+    <div class="conv-header-selecao" id="convHeaderSelecao">
+        <div class="conv-header-selecao-inner">
+            <button class="conv-sel-cancelar" onclick="cancelarSelecao()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6l6 6"/></svg>
+            </button>
+            <span class="conv-sel-count" id="convSelCount">0 selecionado</span>
+            <div class="conv-sel-acoes">
+                <!-- Fixar -->
+                <button class="conv-sel-btn" onclick="fixarSelecionadas()" title="Fixar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1v3.76z"/></svg>
+                </button>
+                <!-- Marcar como lida -->
+                <button class="conv-sel-btn" onclick="marcarLidaSelecionadas()" title="Marcar como lida">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                </button>
+                <!-- Excluir -->
+                <button class="conv-sel-btn" onclick="excluirSelecionadas()" title="Excluir">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo -->
+    <div class="conv-content">
+
+        <!-- Busca -->
+        <div class="conv-search-wrap">
+            <form class="searchbar searchbar-init" id="convSearchbar">
+                <div class="searchbar-inner">
+                    <div class="searchbar-input-wrap">
+                        <input type="search" id="convSearchInput" placeholder="Pesquisar..." oninput="filtrarConversas(this.value)">
+                        <i class="searchbar-icon"></i>
+                        <span class="input-clear-button"></span>
+                    </div>
+                    <span class="searchbar-disable-button">Cancelar</span>
+                </div>
+            </form>
+            <div class="searchbar-backdrop"></div>
+        </div>
+
+        <!-- Lista de conversas -->
+        <div id="convLista">
+            <!-- Skeletons de loading -->
+            <div id="convLoading">
+                <!-- Conversa 1 skeleton -->
+                <div class="flex items-center justify-between py-3 px-4 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                        <div class="flex-1">
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 140px; border-radius: 7px; margin-bottom: 6px;"></div>
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 180px; border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 12px; width: 40px; border-radius: 6px;"></div>
+                    </div>
+                </div>
+                
+                <!-- Conversa 2 skeleton -->
+                <div class="flex items-center justify-between py-3 px-4 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                        <div class="flex-1">
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 120px; border-radius: 7px; margin-bottom: 6px;"></div>
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 160px; border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 12px; width: 35px; border-radius: 6px;"></div>
+                    </div>
+                </div>
+                
+                <!-- Conversa 3 skeleton -->
+                <div class="flex items-center justify-between py-3 px-4 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                        <div class="flex-1">
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 160px; border-radius: 7px; margin-bottom: 6px;"></div>
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 140px; border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 12px; width: 45px; border-radius: 6px;"></div>
+                    </div>
+                </div>
+                
+                <!-- Conversa 4 skeleton -->
+                <div class="flex items-center justify-between py-3 px-4 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                        <div class="flex-1">
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 130px; border-radius: 7px; margin-bottom: 6px;"></div>
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 170px; border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 12px; width: 38px; border-radius: 6px;"></div>
+                    </div>
+                </div>
+                
+                <!-- Conversa 5 skeleton -->
+                <div class="flex items-center justify-between py-3 px-4 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite;"></div>
+                        <div class="flex-1">
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 15px; width: 150px; border-radius: 7px; margin-bottom: 6px;"></div>
+                            <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 13px; width: 190px; border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div style="background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; height: 12px; width: 42px; border-radius: 6px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estado vazio -->
+        <div id="convVazio" style="display:none;">
+            <div class="conv-empty">
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"/><path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"/></svg>
+                <h3>Nenhuma mensagem</h3>
+                <p>Inicie uma conversa com um colega</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+</div>
+
+<script src="lib/framework7-bundle.min.js"></script>
+<script src="lib/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="js/conversas-usuarios.js"></script>
+<script type="text/javascript" src="js/routes.js"></script>
+</body>
+</html>

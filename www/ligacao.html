@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Ligação</title>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/ligacao.css">
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="ligacao" class="page ligacao-page">
+
+                <!-- Fundo gradiente animado -->
+                <div class="ligacao-bg"></div>
+
+                <!-- Topo: nome e status -->
+                <div class="ligacao-topo">
+                    <p class="ligacao-status" id="ligacaoStatus">Ligando...</p>
+                    <h1 class="ligacao-nome" id="ligacaoNome"></h1>
+                    <p class="ligacao-tempo" id="ligacaoTempo">00:00</p>
+                </div>
+
+                <!-- Avatar central -->
+                <div class="ligacao-avatar-wrap">
+                    <div class="ligacao-avatar" id="ligacaoAvatar"></div>
+                    <div class="ligacao-avatar-ring"></div>
+                </div>
+
+                <!-- Botões de controle -->
+                <div class="ligacao-controles">
+                    <div class="ligacao-btn-wrap">
+                        <button class="ligacao-btn" id="btnMudo" onclick="toggleMudo()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                        </button>
+                        <span class="ligacao-btn-label">sem som</span>
+                    </div>
+                    <div class="ligacao-btn-wrap">
+                        <button class="ligacao-btn" onclick="abrirTeclado()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h.01M12 8h.01M16 8h.01M8 12h.01M12 12h.01M16 12h.01M8 16h4"/></svg>
+                        </button>
+                        <span class="ligacao-btn-label">teclado</span>
+                    </div>
+                    <div class="ligacao-btn-wrap">
+                        <button class="ligacao-btn" id="btnAltoFalante" onclick="toggleAltoFalante()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                        </button>
+                        <span class="ligacao-btn-label">áudio</span>
+                    </div>
+                </div>
+
+                <!-- Botão encerrar -->
+                <div class="ligacao-encerrar-wrap">
+                    <button class="ligacao-encerrar" onclick="encerrarLigacao()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.42 19.42 0 0 1 4.26 8.6 19.79 19.79 0 0 1 1.19 0a2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.18 5.73"/><line x1="23" y1="1" x2="1" y2="23"/></svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/framework7-bundle.min.js"></script>
+    <script type="text/javascript" src="js/routes.js"></script>
+    <script type="text/javascript" src="js/ligacao.js"></script>
+</body>
+</html>

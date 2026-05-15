@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisando Cadastro - NandoPay</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/analisando-cadastro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <div data-name="analisando-cadastro" class="page">
+                <!-- Navbar -->
+                <div class="navbar">
+                    <div class="navbar-bg"></div>
+                    <div class="navbar-inner">
+                        <div class="left"></div>
+                        <div class="title"></div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+
+                <!-- Page content -->
+                <div class="page-content">
+                    <!-- Conteúdo de análise -->
+                    <div class="content-wrapper" id="conteudoAnalise" style="padding-top: 30px;">
+                        <div class="progress-circle-container">
+                            <div class="preloader-custom" id="progressCircle"></div>
+                        </div>
+
+                        <!-- Barras de progresso -->
+                        <div class="progress-bars-container" id="progressBarsContainer">
+                            <div class="progress-bar">
+                                <div class="progress-segment" id="segment1"></div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-segment" id="segment2"></div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-segment" id="segment3"></div>
+                            </div>
+                        </div>
+
+                        <!-- Texto Entendi (visível apenas quando reprovado) -->
+                        <div class="entendi-container" id="entendiContainer" style="display: none;">
+                            <span class="entendi-text" onclick="redirecionarParaIndex()">Entendi</span>
+                        </div>
+
+                        <h1 class="main-title">Analisando seu Cadastro</h1>
+                        <p class="subtitle-text">Estamos verificando seus dados. Isso pode levar alguns instantes.</p>
+                    </div>
+
+                    <!-- Conteúdo de sucesso -->
+                    <div class="conteudo-sucesso" id="conteudoSucesso">
+                        <h1 class="titulo-sucesso">Oba! Conta criada</h1>
+                        <p class="nome-usuario-sucesso" id="nomeUsuarioSucesso"></p>
+                        
+                        <!-- Dados simples -->
+                        <div class="dados-conta-sucesso">
+                            <div class="dado-sucesso">
+                                <p class="label-dado">Agência</p>
+                                <p class="agencia-usuario" id="agenciaUsuario">-</p>
+                            </div>
+                            <div class="dado-sucesso">
+                                <p class="label-dado">Conta</p>
+                                <p class="conta-usuario" id="contaUsuario">-</p>
+                            </div>
+                            <div class="dado-sucesso">
+                                <p class="label-dado">Username</p>
+                                <p class="username-usuario" id="usernameUsuario">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rodapé com botão Finalizar cadastro -->
+                <div class="rodape-botoes" id="rodapeFinalizarCadastro">
+                    <button class="btn-finalizar-cadastro" onclick="redirecionarParaCadastroVencimento()">
+                        Finalizar cadastro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/framework7.bundle.min.js"></script>
+    <script src="js/analisando-cadastro.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<div class="page min-h-screen flex flex-col" data-name="senha">
+                
+                <!-- Navbar com Menu -->
+                <div class="flex items-center justify-between px-4 pb-2" style="padding-top: 40px;">
+                    <div></div>
+                    <button class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full hover:bg-gray-100" style="border:none;outline:none;cursor:pointer;padding:0;" onclick="abrirMenuSenha()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Conteúdo -->
+                <section class="px-4 pt-6 text-black w-full flex-1">
+                    <!-- Senha Form -->
+                    <div class="px-6 py-8">
+                        <!-- Logo/Title -->
+                        <div class="text-left mb-8">
+                            <!-- Círculos de usuário e logo -->
+                            <div class="flex items-center justify-start gap-4 mb-4">
+                                <!-- Círculo do usuário -->
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background-color: var(--app-primary-color);">
+                                    <span id="iniciaisSenha" class="text-white font-bold text-xl"></span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-2">Olá, <span id="nomeUsuario" class="font-semibold" style="color: var(--app-primary-color);"></span>!</p>
+                            <h1 class="text-lg font-bold text-gray-800 mb-2">Digite sua senha</h1>
+                        </div>
+
+                        <!-- Senha Field -->
+                        <div class="mb-6">
+                            
+                            <!-- Pontinhos circulos -->
+                            <div class="flex justify-start items-center space-x-4 mb-4 relative" onclick="focarInputSenha()" style="cursor: pointer;">
+                                <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot" data-index="0"></div>
+                                <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot" data-index="1"></div>
+                                <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot" data-index="2"></div>
+                                <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot" data-index="3"></div>
+                                <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot" data-index="4"></div>
+                                <div class="w-4 h-4 rounded-full bg-gray-100 senha-dot" data-index="5"></div>
+                                
+                                <!-- Ícone de loading -->
+                                <div id="senha-loading" class="hidden items-center justify-center">
+                                    <div class="animate-spin rounded-full h-6 w-6" style="border-bottom: 2px solid var(--app-primary-color);"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Espaço fixo para mensagem de erro -->
+                            <div class="h-6 flex items-center justify-start">
+                                <div id="senhaError" class="text-red-500 text-sm hidden text-left">Senha incorreta</div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Forgot Password Link -->
+                        <div class="text-left mb-6">
+                            <a href="/metodos-verificacao/" class="font-medium hover:underline" style="color: var(--app-primary-color);">
+                                Esqueceu sua senha?
+                            </a>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Rodapé -->
+                <footer class="px-4 py-6 flex items-end justify-end" style="position: fixed; bottom: 0; right: 0; width: 100%;">
+                </footer>
+                <div class="popup popup-bottom" id="popupConfirmarDispositivo">
+                    <div class="view">
+                        <div class="page">
+                            <div class="page-content" style="display:flex; flex-direction:column; padding-bottom: 20px; min-height:auto; padding-top: 40px;">
+                                <div class="block" style="flex: none;">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-2" style="text-align:left;">Novo Dispositivo</h3>
+                                    <p class="text-sm text-gray-600 mb-4" style="text-align:left;">Você está liberando um novo dispositivo?</p>
+                                    
+                                    <!-- Informações do dispositivo solicitante -->
+                                    <div style="border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+                                        <p style="margin: 0 0 8px 0; font-weight: 600; color: #1f2937; font-size: 14px;">
+                                            <span id="deviceNameExibicao">Carregando...</span>
+                                        </p>
+                                        <div style="font-size: 12px; color: #6b7280; line-height: 1.6;">
+                                            <div>
+                                                <strong>Modelo:</strong> <span id="modeloExibicao">-</span>
+                                            </div>
+                                            <div>
+                                                <strong>Sistema:</strong> <span id="sistemaExibicao">-</span>
+                                            </div>
+                                            <div>
+                                                <strong>Fabricante:</strong> <span id="fabricanteExibicao">-</span>
+                                            </div>
+                                            <hr style="margin: 8px 0; border: none; border-top: 1px solid #d1d5db;">
+                                            <div>
+                                                <strong>Localização:</strong> <span id="localizacaoExibicao">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top:auto; padding-top:8px; padding-bottom:60px; padding-left:16px; padding-right:16px;">
+                                    <div class="preview-controls" style="display:flex; gap:12px; width:100%;">
+                                        <button id="btnNaoFuiEu" onclick="rejeitarDispositivo()" class="preview-btn retry" style="flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #000; border-radius: 9999px; background-color: #ffffff; height: 50px; color: #333; font-weight: 500; position: relative; z-index: 99999;">Não fui eu</button>
+                                        <button id="btnFuiEu" onclick="aprovarDispositivo()" class="preview-btn confirm" style="flex: 1; display: flex; align-items: center; justify-content: center; border: none; border-radius: 9999px; background-color: #1e40af; height: 50px; color: #ffffff; font-weight: 500; position: relative; z-index: 99999;">Fui eu</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popup com código iToken -->
+                <div class="popup popup-bottom" id="popupCodigoIToken">
+                    <div class="view">
+                        <div class="page">
+                            <div class="page-content" style="padding-bottom: 20px;">
+                                <div class="block">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4" style="text-align: center;">Código iToken Gerado</h3>
+                                    <p style="margin: 0 0 20px 0; color: #6b7280; font-size: 14px; text-align: center;">Digite este código no novo dispositivo</p>
+                                    <div id="codigoExibicao" style="font-size: 48px; font-weight: 700; letter-spacing: 8px; color: var(--app-primary-color); margin: 20px 0; text-align: center; user-select: all;">------</div>
+                                    <p style="margin: 20px 0 0 0; color: #6b7280; font-size: 12px; text-align: center;">Código expira em alguns minutos</p>
+                                </div>
+
+                                <div style="margin-top: 20px; padding-bottom: 60px; padding-left: 16px; padding-right: 16px;">
+                                    <button id="btnFecharCodigoIToken" onclick="fecharPopupCodigoIToken()" class="preview-btn confirm" style="width: 100%; display: flex; align-items: center; justify-content: center; border: none; border-radius: 9999px; background-color: #1e40af; height: 50px; color: #ffffff; font-weight: 500; position: relative; z-index: 99999;">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popup de sucesso -->
+                <div class="popup popup-bottom" id="popupSucessoDispositivo">
+                    <div class="view">
+                        <div class="page">
+                            <div class="page-content" style="padding: 30px 20px;">
+                                <div class="block">
+                                    <div style="text-align: center;">
+                                        <div style="margin-bottom: 20px;">
+                                            <svg class="w-16 h-16" style="margin: 0 auto; width: 64px; height: 64px; color: #3b82f6;" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <div style="font-size: 18px; font-weight: 600; color: #1e40af; margin-bottom: 10px;">Dispositivo Liberado!</div>
+                                        <div style="font-size: 12px; color: #6b7280;">Novo dispositivo foi validado com sucesso</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+</div> 
+
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="white">
+    <!-- Your app title -->
+    <title>Ativar Biometria - Banco Digital</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/personalizado.css">
+    <!--Ícones Material Design-->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bank-blue': '#1e40af',
+                        'bank-light': '#3b82f6',
+                        'bank-dark': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <!-- App root element -->
+    <div id="app">
+        <div class="view view-main">
+            <div class="page min-h-screen flex flex-col" data-name="ativar-biometria">
+                
+                <!-- Conteúdo -->
+                <section class="px-4 pt-6 text-black w-full flex-1">
+                    <!-- Ativar Biometria Form -->
+                    <div class="px-6 py-8">
+                        <!-- Logo/Title -->
+                        <div class="text-center mb-8 mt-20">
+                            <div class="flex items-center justify-center mx-auto mb-6">
+                                <img src="img/cadastro-impressao.png" alt="Impressão Digital" class="w-44 h-44">
+                            </div>
+                            <h1 class="text-2xl font-bold text-gray-800 mb-3">Ativar Biometria</h1>
+                            <p class="text-gray-600 text-base leading-relaxed">
+                                Use sua biometria para fazer login nos próximos acessos. É mais rápido e seguro!
+                            </p>
+                        </div>
+
+
+                    </div>
+                </section>
+                
+                <!-- Rodapé com Botões -->
+                <footer class="px-6 pb-10">
+                    <div class="flex gap-4 justify-center">
+                        <button id="btnAtivarBiometria" class="flex-1 flex items-center justify-center" style="border: 1px solid #1e40af; border-radius: 9999px; background-color: #1e40af; height: 50px; color: #ffffff; font-weight: 500; position: relative; z-index: 1;">
+                            Ativar
+                        </button>
+                        
+                        <button id="btnPularAgora" class="flex-1 flex items-center justify-center" style="border: 1px solid #bbb; border-radius: 9999px; background-color: #ffffff; height: 50px; color: #333; font-weight: 500; position: relative; z-index: 2;">
+                            Agora não
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Framework7 Library -->
+    <script src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Routes -->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <!-- Ativar Biometria Script -->
+    <script type="text/javascript" src="js/ativar-biometria.js"></script>
+
+</body>
+
+</html>

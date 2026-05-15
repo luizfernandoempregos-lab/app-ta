@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Empréstimo - NandoPay</title>
+    
+    <!-- Framework7 CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/detalhes-emprestimos-contratados.css">
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <!-- Página Detalhes Empréstimo -->
+            <div data-name="detalhes-emprestimos-contratados" class="page bg-white" style="min-height: 100vh;">
+
+                
+                <!-- Header fixo (sem sombras) -->
+                <div class="sticky top-0 z-30 bg-white" style="box-shadow: none;">
+                    <div class="flex items-center justify-between px-4 py-3 bg-white" style="padding-top: 40px; box-shadow: none;">
+                        <div class="flex items-center">
+                            <a href="#" onclick="if (window.app && window.app.views && window.app.views.main && window.app.views.main.router) { window.app.views.main.router.back(); } else { window.history.back(); }" class="w-12 h-12 flex items-center justify-center text-gray-600 rounded-full bg-gray-50" style="border:none;outline:none;cursor:pointer;padding:0;box-shadow: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 6l-6 6 6 6" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo -->
+                <div class="page-content bg-white" style="padding-bottom: 120px;">
+                    <div class="px-4 py-2">
+                        <h1 class="text-xl font-bold mb-4">Detalhes do Empréstimo</h1>
+
+                        <!-- Loading -->
+                        <div id="loadingDetalhesEmprestimo" class="flex justify-center items-center py-12">
+                            <div class="spinner"></div>
+                        </div>
+
+                        <!-- Container de Detalhes -->
+                        <div id="detalhesEmprestimoContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/detalhes-emprestimos-contratados.js"></script>
+</body>
+</html>
