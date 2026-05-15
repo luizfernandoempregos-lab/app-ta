@@ -15,6 +15,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- CSS PERSONALIZADO PARA MENU-->
     <link rel="stylesheet" href="css/personalizado.css">
+    <!-- Melhorias visuais -->
+    <link rel="stylesheet" href="css/melhorias-visuais.css">
 
     <script>
         console.log('[LOGIN.HTML] Página login.html carregada');
@@ -55,15 +57,16 @@
 
                 <!-- Page content -->
                 <div class="page-content">
-                  <div class="block block-strong inset">
-                    <p>Acesse sua conta ou crie uma nova</p>
+                  <div class="block block-strong inset mv-animate-fade-in">
+                    <h2 class="mv-title mv-title-lg" style="margin-bottom: 6px;">Entrar</h2>
+                    <p class="mv-subtitle">Acesse sua conta ou crie uma nova</p>
                   </div>
                   
                   <div class="list">
                     <ul style="display: flex; gap: 8px; padding: 0 16px;">
 
                       <!-- Campo País (fixo: Brasil) -->
-                      <li class="item-content item-input item-input-outline" style="flex: 0 0 auto; width: 90px; list-style: none; margin: 0;">
+                      <li class="item-content item-input item-input-outline mv-animate-fade-in-up mv-stagger-1" style="flex: 0 0 auto; width: 90px; list-style: none; margin: 0;">
                         <div class="item-inner" style="padding: 0 10px;">
                           <div class="item-input-wrap" style="display: flex; align-items: center; gap: 6px; pointer-events: none;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="15" viewBox="0 0 24 17" style="border-radius: 2px; flex-shrink:0;">
@@ -78,7 +81,7 @@
                       </li>
 
                       <!-- Campo Telefone -->
-                      <li class="item-content item-input item-input-outline" style="flex: 1; list-style: none; margin: 0;">
+                      <li class="item-content item-input item-input-outline mv-animate-fade-in-up mv-stagger-2" style="flex: 1; list-style: none; margin: 0;">
                         <div class="item-inner">
                           <div class="item-title item-floating-label">Telefone</div>
                           <div class="item-input-wrap">
@@ -93,10 +96,10 @@
 
 
                   <!-- Cadastro -->
-                  <div class="block inset text-center mt-6">
-                    <p class="text-gray-600 text-sm">
-                      Ainda não está cadastrado? 
-                      <a href="/beneficios/" class="text-bank-blue font-semibold">Cadastre-se</a>
+                  <div class="block inset text-center mt-6 mv-animate-fade-in-up mv-stagger-3">
+                    <p class="text-gray-600 text-sm" style="line-height: 1.6;">
+                      Ainda nao esta cadastrado? 
+                      <a href="/beneficios/" class="font-semibold" style="color: var(--mv-primary, #1e40af);">Cadastre-se</a>
                     </p>
                   </div>
                 </div>
