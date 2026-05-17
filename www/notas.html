@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <title>Notas - Banco Digital</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/notas.css">
+    <script>
+        (function() {
+            var temas = {
+                blue:'#1e40af',green:'#059669',pink:'#db2777',black:'#1f2937',purple:'#7c3aed',
+                orange:'#ea580c',red:'#dc2626',yellow:'#d97706',cyan:'#0891b2',teal:'#14b8a6',
+                indigo:'#4f46e5',fuchsia:'#d946ef',lime:'#84cc16',sky:'#0ea5e9',rose:'#f43f5e',
+                emerald:'#10b981',violet:'#a855f7',navy:'#001f3f',forest:'#0d3d1e',grape:'#4a0e4e',
+                wine:'#722f37',terracota:'#8b4513',magenta:'#9b2667',darkTeal:'#0b6662',
+                darkIndigo:'#1e1b4b',coral:'#ff6b6b',mint:'#00b894',gold:'#f59e0b',brown:'#92400e',
+                slate:'#475569',cobalt:'#1746a2',salmon:'#fa8072',olive:'#4d7c0f',plum:'#6b21a8',
+                steel:'#334155',azure:'#0078d4',crimson:'#be123c',jade:'#16a34a',denim:'#1d4ed8',
+                midnight:'#0f172a',pine:'#166534',brick:'#9f1239',ocean:'#0369a1'
+            };
+            var tema = localStorage.getItem('app-tema') || 'blue';
+            var cor = localStorage.getItem('app-tema-color') || temas[tema] || '#1e40af';
+            document.documentElement.style.setProperty('--app-primary-color', cor);
+        })();
+    </script>
+</head>
+<body>
+    <div class="page" data-name="notas">
+ 
+        <!-- Header -->
+        <div class="notas-header">
+            <div class="notas-topbar">
+                <button onclick="app.views.main.router.back(); return false;" class="notas-back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 6l-6 6l6 6" />
+                    </svg>
+                </button>
+                <!-- Barra de busca no navbar -->
+                <form class="searchbar searchbar-init" id="searchbarNotas" style="flex: 1; margin: 0 12px;">
+                    <div class="searchbar-inner">
+                        <div class="searchbar-input-wrap">
+                            <input type="search" id="notasSearchInput" placeholder="Buscar notas..." />
+                            <i class="searchbar-icon"></i>
+                            <span class="input-clear-button"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+ 
+        <!-- Content -->
+        <div class="page-content">
+            <!-- Filtros -->
+            <div class="notas-filtros">
+                <button class="notas-filtro-btn active" data-filtro="todas" onclick="notasFiltrar('todas')">Todas</button>
+                <button class="notas-filtro-btn" data-filtro="fixadas" onclick="notasFiltrar('fixadas')">Fixadas</button>
+                <button class="notas-filtro-btn" data-filtro="lembretes" onclick="notasFiltrar('lembretes')">Lembretes</button>
+            </div>
+ 
+            <!-- Lista de notas -->
+            <div id="notasLista"></div>
+ 
+            <!-- Estado vazio -->
+            <div id="notasVazio" class="notas-vazio notas-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+                    <path d="M9 7l6 0" />
+                    <path d="M9 11l6 0" />
+                    <path d="M9 15l4 0" />
+                </svg>
+                <p class="notas-vazio-texto">Nenhuma nota ainda</p>
+                <p class="notas-vazio-sub">Toque no + para criar sua primeira nota</p>
+            </div>
+ 
+            <!-- Espaçamento final -->
+            <div class="notas-spacer"></div>
+        </div>
+ 
+        <!-- FAB - Botão flutuante -->
+        <div class="notas-fab" onclick="notasAbrirModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </div>
+ 
+        <!-- Modal criar/editar nota -->
+        <div id="notasModal" class="notas-modal notas-hidden">
+            <div class="notas-modal-overlay" onclick="notasFecharModal()"></div>
+            <div class="notas-modal-content">
+                <div class="notas-modal-header">
+                    <span class="notas-modal-titulo" id="notasModalTitulo">Nova Nota</span>
+                    <button class="notas-modal-fechar" onclick="notasFecharModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="notas-modal-body">
+                    <input type="hidden" id="notaEditId" value="">
+                    <div class="notas-form-group">
+                        <label class="notas-label">Título</label>
+                        <input type="text" id="notaTitulo" class="notas-input" placeholder="Título da nota...">
+                    </div>
+                    <div class="notas-form-group">
+                        <label class="notas-label">Conteúdo</label>
+                        <textarea id="notaConteudo" class="notas-textarea" placeholder="Escreva sua nota ou lembrete aqui..." rows="6"></textarea>
+                    </div>
+                    <div class="notas-form-group">
+                        <label class="notas-label">Cor</label>
+                        <div class="notas-cores">
+                            <button class="notas-cor-btn notas-cor-branco active" data-cor="#ffffff" onclick="notasSelecionarCor(this)"></button>
+                            <button class="notas-cor-btn notas-cor-amarelo" data-cor="#fef3c7" onclick="notasSelecionarCor(this)"></button>
+                            <button class="notas-cor-btn notas-cor-verde" data-cor="#dcfce7" onclick="notasSelecionarCor(this)"></button>
+                            <button class="notas-cor-btn notas-cor-azul" data-cor="#dbeafe" onclick="notasSelecionarCor(this)"></button>
+                            <button class="notas-cor-btn notas-cor-rosa" data-cor="#fce7f3" onclick="notasSelecionarCor(this)"></button>
+                            <button class="notas-cor-btn notas-cor-roxo" data-cor="#f3e8ff" onclick="notasSelecionarCor(this)"></button>
+                        </div>
+                    </div>
+                    <div class="notas-form-row">
+                        <label class="notas-toggle-label">
+                            <span>Fixar nota</span>
+                            <label class="notas-switch">
+                                <input type="checkbox" id="notaFixada">
+                                <span class="notas-slider"></span>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="notas-form-row">
+                        <label class="notas-toggle-label">
+                            <span>Lembrete</span>
+                            <label class="notas-switch">
+                                <input type="checkbox" id="notaLembrete" onchange="notasToggleLembrete()">
+                                <span class="notas-slider"></span>
+                            </label>
+                        </label>
+                    </div>
+                    <div id="notaLembreteDataWrapper" class="notas-form-group notas-hidden">
+                        <label class="notas-label">Data e hora do lembrete</label>
+                        <input type="datetime-local" id="notaLembreteData" class="notas-input">
+                    </div>
+                </div>
+                <div class="notas-modal-footer">
+                    <button class="notas-btn-salvar" onclick="notasSalvar()">Salvar</button>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+    
+    <script src="js/notas.js"></script>
+</body>
+</html>
