@@ -67,7 +67,16 @@ function verNotaCarregar() {
         conteudoEl.value = (nota.conteudo || '').replace(/<br>/g, '\n');
         verNotaAutoResize(conteudoEl);
     }
-    if (headerTitulo) headerTitulo.value = nota.titulo || 'Nota';
+    if (headerTitulo) {
+        headerTitulo.value = nota.titulo || 'Nota';
+        if (nota.obrigatoria) headerTitulo.setAttribute('readonly', true);
+    }
+
+    // Esconder botao editar se nota obrigatoria
+    var editBtn = document.getElementById('verNotaEditBtn');
+    if (editBtn) {
+        editBtn.style.display = nota.obrigatoria ? 'none' : 'flex';
+    }
 
     // Info
     if (infoEl) {
@@ -110,8 +119,11 @@ function verNotaAutoResize(el) {
 
 // Toggle modo edicao
 function verNotaToggleEdicao() {
+    // Bloquear edicao de nota obrigatoria
+    var nota = verNotaObterPorId(_verNotaId);
+    if (nota && nota.obrigatoria) return;
+
     if (_verNotaEditando) {
-        // Estava editando -> salvar e sair do modo edicao
         verNotaSalvar();
         return;
     }
