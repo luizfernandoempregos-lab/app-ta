@@ -101,18 +101,6 @@
     position: relative;
 }
 
-/* Margem vermelha lateral */
-.ver-nota-margem {
-    position: fixed;
-    top: 0;
-    left: 42px;
-    bottom: 0;
-    width: 2px;
-    background: #e8938a;
-    z-index: 2;
-    pointer-events: none;
-}
-
 /* ===== CONTEUDO ===== */
 .ver-nota-conteudo {
     width: 100%;
@@ -123,7 +111,7 @@
     border: none;
     outline: none;
     resize: none;
-    padding: 0 20px 20px 52px;
+    padding: 0 20px 20px 20px;
     padding-top: 7px;
     line-height: 32px;
     font-family: 'Georgia', 'Times New Roman', serif;
@@ -206,10 +194,6 @@ body.dark-mode .ver-nota-lined-bg {
             #3a3730 31px,
             #3a3730 32px
         );
-}
-
-body.dark-mode .ver-nota-margem {
-    background: #8b4a44;
 }
 
 body.dark-mode .ver-nota-conteudo {
