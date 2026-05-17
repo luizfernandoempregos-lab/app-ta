@@ -1843,8 +1843,22 @@ var app = new Framework7({
             console.error('[ROUTES.JS] Erro ao carregar script de notas:', err);
           });
         },
+        pageAfterIn: function (event, page) {
+          // Re-inicializar apos animacao para garantir DOM pronto
+          if (window.inicializarNotas) {
+            window.inicializarNotas();
+          }
+        },
         pageInit: function (event, page) {
-          // Página já foi inicializada no pageBeforeIn
+          if (window.inicializarNotas) {
+            window.inicializarNotas();
+          } else {
+            setTimeout(function() {
+              if (window.inicializarNotas) {
+                window.inicializarNotas();
+              }
+            }, 500);
+          }
         }
       }
     },
@@ -1864,8 +1878,21 @@ var app = new Framework7({
             console.error('[ROUTES.JS] Erro ao carregar script de ver-nota:', err);
           });
         },
+        pageAfterIn: function (event, page) {
+          if (window.inicializarVerNota) {
+            window.inicializarVerNota();
+          }
+        },
         pageInit: function (event, page) {
-          // Página já foi inicializada no pageBeforeIn
+          if (window.inicializarVerNota) {
+            window.inicializarVerNota();
+          } else {
+            setTimeout(function() {
+              if (window.inicializarVerNota) {
+                window.inicializarVerNota();
+              }
+            }, 500);
+          }
         }
       }
     },
