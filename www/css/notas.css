@@ -1,0 +1,581 @@
+.notas-header {
+    background: white;
+    padding: 16px;
+    padding-top: calc(env(safe-area-inset-top) + 16px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.notas-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.notas-back-btn {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 50%;
+    background: #f9fafb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.notas-back-btn svg {
+    stroke: #4b5563;
+}
+
+.notas-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+    flex: 1;
+    text-align: center;
+}
+
+.notas-topbar-spacer {
+    width: 36px;
+}
+
+/* Page Content */
+[data-name="notas"] .page-content {
+    padding: 16px;
+    padding-top: calc(env(safe-area-inset-top) + 100px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+}
+
+/* Filtros */
+.notas-filtros {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.notas-filtro-btn {
+    flex-shrink: 0;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1.5px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    cursor: pointer;
+    white-space: nowrap;
+    height: 32px;
+    display: inline-flex !important;
+    align-items: center;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    width: auto !important;
+    outline: none;
+}
+
+.notas-filtro-btn.active {
+    background: var(--app-primary-color, #1e40af);
+    border-color: var(--app-primary-color, #1e40af);
+    color: white;
+}
+
+/* Lista de notas */
+#notasLista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Card de nota */
+.nota-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    border-left: 4px solid var(--app-primary-color, #1e40af);
+    position: relative;
+    transition: transform 0.15s;
+}
+
+.nota-card:active {
+    transform: scale(0.98);
+}
+
+.nota-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.nota-card-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    flex: 1;
+    margin-right: 8px;
+    word-break: break-word;
+}
+
+.nota-card-acoes {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.nota-card-acao {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.nota-card-acao:hover {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.nota-card-acao.deletar:hover {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.nota-card-conteudo {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.nota-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nota-card-data {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.nota-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nota-badge-fixada {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.nota-badge-lembrete {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* Estado vazio */
+.notas-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.notas-vazio-texto {
+    font-size: 18px;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-top: 16px;
+}
+
+.notas-vazio-sub {
+    font-size: 14px;
+    color: #d1d5db;
+    margin-top: 6px;
+}
+
+.notas-hidden {
+    display: none !important;
+}
+
+/* Espaçamento final */
+.notas-spacer {
+    height: 80px;
+}
+
+/* FAB */
+.notas-fab {
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--app-primary-color, #1e40af);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.15s;
+}
+
+.notas-fab:active {
+    transform: scale(0.9);
+}
+
+/* Modal */
+.notas-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.notas-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.notas-modal-content {
+    position: relative;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    animation: notasSlideUp 0.3s ease-out;
+}
+
+@keyframes notasSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.notas-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 12px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.notas-modal-titulo {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.notas-modal-fechar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f3f4f6;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.notas-modal-body {
+    padding: 20px;
+}
+
+.notas-modal-footer {
+    padding: 0 20px 8px;
+}
+
+/* Form */
+.notas-form-group {
+    margin-bottom: 16px;
+}
+
+.notas-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.notas-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #1f2937;
+    background: #f9fafb;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.notas-input:focus {
+    border-color: var(--app-primary-color, #1e40af);
+    background: white;
+}
+
+.notas-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #1f2937;
+    background: #f9fafb;
+    outline: none;
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.notas-textarea:focus {
+    border-color: var(--app-primary-color, #1e40af);
+    background: white;
+}
+
+/* Cores */
+.notas-cores {
+    display: flex;
+    gap: 10px;
+}
+
+.notas-cor-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #e5e7eb;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+/* Cores dos botões de cor */
+.notas-cor-branco {
+    background: #ffffff;
+}
+
+.notas-cor-amarelo {
+    background: #fef3c7;
+}
+
+.notas-cor-verde {
+    background: #dcfce7;
+}
+
+.notas-cor-azul {
+    background: #dbeafe;
+}
+
+.notas-cor-rosa {
+    background: #fce7f3;
+}
+
+.notas-cor-roxo {
+    background: #f3e8ff;
+}
+
+.notas-cor-btn.active {
+    border-color: var(--app-primary-color, #1e40af);
+    transform: scale(1.15);
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--app-primary-color, #1e40af);
+}
+
+/* Toggle */
+.notas-form-row {
+    margin-bottom: 12px;
+}
+
+.notas-toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #374151;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.notas-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.notas-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.notas-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d1d5db;
+    border-radius: 24px;
+    transition: 0.3s;
+}
+
+.notas-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.notas-switch input:checked + .notas-slider {
+    background-color: var(--app-primary-color, #1e40af);
+}
+
+.notas-switch input:checked + .notas-slider:before {
+    transform: translateX(20px);
+}
+
+/* Botão salvar */
+.notas-btn-salvar {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--app-primary-color, #1e40af);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.notas-btn-salvar:active {
+    opacity: 0.85;
+}
+
+/* Dark mode overrides */
+body.dark-mode .notas-header {
+    background: var(--app-bg, #000000);
+}
+
+body.dark-mode .notas-back-btn {
+    background: var(--app-bg-secondary, #111111);
+}
+
+body.dark-mode .notas-back-btn svg {
+    stroke: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .nota-card {
+    background: var(--app-bg-card, #111111);
+}
+
+body.dark-mode .nota-card-titulo {
+    color: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .nota-card-conteudo {
+    color: var(--app-text-secondary, #94a3b8);
+}
+
+body.dark-mode .notas-modal-content {
+    background: var(--app-bg-card, #111111);
+}
+
+body.dark-mode .notas-modal-titulo {
+    color: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .notas-modal-header {
+    border-bottom-color: var(--app-border, #222222);
+}
+
+body.dark-mode .notas-modal-fechar {
+    background: var(--app-bg-secondary, #111111);
+    color: var(--app-text-secondary, #94a3b8);
+}
+
+body.dark-mode .notas-label {
+    color: var(--app-text-secondary, #94a3b8);
+}
+
+body.dark-mode .notas-input,
+body.dark-mode .notas-textarea {
+    background: var(--app-input-bg, #111111);
+    color: var(--app-text-primary, #f1f5f9);
+    border-color: var(--app-border, #222222);
+}
+
+body.dark-mode .notas-toggle-label {
+    color: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .notas-vazio-texto {
+    color: var(--app-text-muted, #64748b);
+}
+
+body.dark-mode .notas-vazio-sub {
+    color: var(--app-text-muted, #64748b);
+}
+
+body.dark-mode .nota-card-acao:hover {
+    background: var(--app-bg-secondary, #111111);
+    color: var(--app-text-primary, #f1f5f9);
+}
+
+/* Made with Bob */

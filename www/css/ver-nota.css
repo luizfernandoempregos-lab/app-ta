@@ -1,0 +1,225 @@
+/* ===== HEADER ===== */
+.ver-nota-header {
+    background: white;
+    padding: 16px;
+    padding-top: calc(env(safe-area-inset-top) + 16px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ver-nota-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ver-nota-back-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f9fafb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.ver-nota-back-btn svg {
+    stroke: #4b5563;
+}
+
+.ver-nota-header-titulo {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+    flex: 1;
+    text-align: center;
+    margin: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 6px 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+.ver-nota-header-titulo::placeholder {
+    color: #9ca3af;
+}
+
+.ver-nota-edit-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f9fafb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    color: #6b7280;
+    transition: all 0.2s;
+}
+
+.ver-nota-edit-btn.ativo {
+    background: var(--app-primary-color, #1e40af);
+    color: white;
+}
+
+/* ===== INFO ABAIXO DO NAVBAR ===== */
+.ver-nota-info {
+    padding: 8px 16px;
+    padding-top: calc(env(safe-area-inset-top) + 72px);
+    font-size: 12px;
+    color: #9ca3af;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    background: #fffef5;
+    position: relative;
+    z-index: 50;
+}
+
+/* ===== PAGE CONTENT COM LINHAS ===== */
+.ver-nota-lined-bg {
+    padding: 0;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+    background-color: #fffef5;
+    background-image:
+        repeating-linear-gradient(
+            transparent,
+            transparent 31px,
+            #d6cebf 31px,
+            #d6cebf 32px
+        );
+    background-size: 100% 32px;
+    background-attachment: local;
+    position: relative;
+}
+
+/* ===== CONTEUDO ===== */
+.ver-nota-conteudo {
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    font-size: 15px;
+    color: #374151;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 0 20px 20px 20px;
+    padding-top: 7px;
+    line-height: 32px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.ver-nota-conteudo::placeholder {
+    color: #c4b9a8;
+}
+
+/* Modo edicao */
+.ver-nota-conteudo.editando,
+.ver-nota-titulo-input.editando {
+    color: #111827;
+}
+
+/* ===== BADGES ===== */
+.ver-nota-info-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ver-nota-badge-fixada {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.ver-nota-badge-lembrete {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+
+/* ===== DARK MODE ===== */
+body.dark-mode .ver-nota-header {
+    background: var(--app-bg, #000000);
+    border-bottom-color: var(--app-border, #222222);
+}
+
+body.dark-mode .ver-nota-header-titulo {
+    color: var(--app-text-primary, #f1f5f9);
+    background: var(--app-bg-secondary, #111111);
+    border-color: var(--app-border, #222222);
+}
+
+body.dark-mode .ver-nota-header-titulo::placeholder {
+    color: #555;
+}
+
+body.dark-mode .ver-nota-back-btn {
+    background: var(--app-bg-secondary, #111111);
+}
+
+body.dark-mode .ver-nota-back-btn svg {
+    stroke: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .ver-nota-edit-btn {
+    background: var(--app-bg-secondary, #111111);
+    color: var(--app-text-secondary, #94a3b8);
+}
+
+body.dark-mode .ver-nota-edit-btn.ativo {
+    background: var(--app-primary-color, #1e40af);
+    color: white;
+}
+
+body.dark-mode .ver-nota-info {
+    background: #1a1a14;
+    color: var(--app-text-muted, #64748b);
+}
+
+body.dark-mode .ver-nota-lined-bg {
+    background-color: #1a1a14;
+    background-image:
+        repeating-linear-gradient(
+            transparent,
+            transparent 31px,
+            #3a3730 31px,
+            #3a3730 32px
+        );
+}
+
+body.dark-mode .ver-nota-conteudo {
+    color: var(--app-text-secondary, #94a3b8);
+}
+
+body.dark-mode .ver-nota-conteudo::placeholder {
+    color: #555;
+}
+
+body.dark-mode .ver-nota-conteudo.editando {
+    color: var(--app-text-primary, #f1f5f9);
+}
