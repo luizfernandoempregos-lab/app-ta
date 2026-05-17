@@ -69,19 +69,27 @@
     color: white;
 }
 
-/* ===== PAGE CONTENT ===== */
-[data-name="ver-nota"] .page-content {
-    padding: 0;
-    padding-top: calc(env(safe-area-inset-top) + 80px);
-    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+/* ===== INFO ABAIXO DO NAVBAR ===== */
+.ver-nota-info {
+    padding: 8px 16px;
+    padding-top: calc(env(safe-area-inset-top) + 72px);
+    font-size: 12px;
+    color: #9ca3af;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
     background: #fffef5;
+    position: relative;
+    z-index: 50;
 }
 
-/* ===== FOLHA COM LINHAS ===== */
-.ver-nota-folha {
-    position: relative;
-    min-height: calc(100vh - 160px);
-    padding: 20px 20px 20px 52px;
+/* ===== PAGE CONTENT COM LINHAS ===== */
+.ver-nota-lined-bg {
+    padding: 0;
+    padding-top: calc(env(safe-area-inset-top) + 110px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+    background-color: #fffef5;
     background-image:
         repeating-linear-gradient(
             transparent,
@@ -90,67 +98,37 @@
             #d6cebf 32px
         );
     background-size: 100% 32px;
-    background-position: 0 0;
+    position: relative;
 }
 
 /* Margem vermelha lateral */
 .ver-nota-margem {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 42px;
     bottom: 0;
     width: 2px;
     background: #e8938a;
-    z-index: 1;
-}
-
-/* ===== TITULO ===== */
-.ver-nota-titulo-wrap {
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.ver-nota-titulo-input {
-    width: 100%;
-    font-size: 20px;
-    font-weight: 700;
-    color: #1f2937;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 4px 0;
-    line-height: 32px;
-    font-family: 'Georgia', 'Times New Roman', serif;
-}
-
-.ver-nota-titulo-input::placeholder {
-    color: #c4b9a8;
-}
-
-/* ===== SEPARADOR ===== */
-.ver-nota-separador {
-    height: 0;
-    margin-bottom: 0;
+    z-index: 2;
+    pointer-events: none;
 }
 
 /* ===== CONTEUDO ===== */
-.ver-nota-conteudo-wrap {
-    position: relative;
-}
-
 .ver-nota-conteudo {
     width: 100%;
-    min-height: 400px;
+    min-height: calc(100vh - 200px);
     font-size: 15px;
     color: #374151;
     background: transparent;
     border: none;
     outline: none;
     resize: none;
-    padding: 0;
+    padding: 8px 20px 20px 52px;
     line-height: 32px;
     font-family: 'Georgia', 'Times New Roman', serif;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
 .ver-nota-conteudo::placeholder {
@@ -163,18 +141,7 @@
     color: #111827;
 }
 
-/* ===== INFO DA NOTA ===== */
-.ver-nota-info {
-    margin-top: 24px;
-    padding: 12px 0;
-    font-size: 11px;
-    color: #9ca3af;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-}
-
+/* ===== BADGES ===== */
 .ver-nota-info-badge {
     font-size: 10px;
     font-weight: 600;
@@ -258,11 +225,13 @@ body.dark-mode .ver-nota-edit-btn.ativo {
     color: white;
 }
 
-body.dark-mode [data-name="ver-nota"] .page-content {
+body.dark-mode .ver-nota-info {
     background: #1a1a14;
+    color: var(--app-text-muted, #64748b);
 }
 
-body.dark-mode .ver-nota-folha {
+body.dark-mode .ver-nota-lined-bg {
+    background-color: #1a1a14;
     background-image:
         repeating-linear-gradient(
             transparent,
@@ -276,14 +245,6 @@ body.dark-mode .ver-nota-margem {
     background: #8b4a44;
 }
 
-body.dark-mode .ver-nota-titulo-input {
-    color: var(--app-text-primary, #f1f5f9);
-}
-
-body.dark-mode .ver-nota-titulo-input::placeholder {
-    color: #555;
-}
-
 body.dark-mode .ver-nota-conteudo {
     color: var(--app-text-secondary, #94a3b8);
 }
@@ -292,13 +253,8 @@ body.dark-mode .ver-nota-conteudo::placeholder {
     color: #555;
 }
 
-body.dark-mode .ver-nota-conteudo.editando,
-body.dark-mode .ver-nota-titulo-input.editando {
+body.dark-mode .ver-nota-conteudo.editando {
     color: var(--app-text-primary, #f1f5f9);
-}
-
-body.dark-mode .ver-nota-info {
-    color: var(--app-text-muted, #64748b);
 }
 
 body.dark-mode .ver-nota-salvar-wrap {

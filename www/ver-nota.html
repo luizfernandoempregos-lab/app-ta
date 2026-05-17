@@ -50,28 +50,16 @@
             </div>
         </div>
 
-        <!-- Content -->
-        <div class="page-content">
-            <div class="ver-nota-folha">
-                <!-- Margem vermelha lateral -->
-                <div class="ver-nota-margem"></div>
+        <!-- Info organizada abaixo do navbar -->
+        <div class="ver-nota-info" id="verNotaInfo"></div>
 
-                <!-- Titulo da nota -->
-                <div class="ver-nota-titulo-wrap">
-                    <input type="text" id="verNotaTitulo" class="ver-nota-titulo-input" readonly placeholder="Titulo da nota...">
-                </div>
+        <!-- Content: linhas diretamente na pagina, sem card -->
+        <div class="page-content ver-nota-lined-bg">
+            <!-- Margem vermelha lateral -->
+            <div class="ver-nota-margem"></div>
 
-                <!-- Separador -->
-                <div class="ver-nota-separador"></div>
-
-                <!-- Area de conteudo com linhas -->
-                <div class="ver-nota-conteudo-wrap">
-                    <textarea id="verNotaConteudo" class="ver-nota-conteudo" readonly placeholder="Conteudo da nota..."></textarea>
-                </div>
-
-                <!-- Info da nota -->
-                <div class="ver-nota-info" id="verNotaInfo"></div>
-            </div>
+            <!-- Area de conteudo com linhas -->
+            <textarea id="verNotaConteudo" class="ver-nota-conteudo" readonly placeholder="Conteudo da nota..."></textarea>
         </div>
 
         <!-- Botao salvar (aparece em modo edicao) -->
