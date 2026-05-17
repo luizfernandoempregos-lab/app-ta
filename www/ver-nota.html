@@ -42,9 +42,12 @@
                 </button>
                 <span class="ver-nota-header-titulo" id="verNotaHeaderTitulo">Nota</span>
                 <button id="verNotaEditBtn" onclick="verNotaToggleEdicao()" class="ver-nota-edit-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg id="verNotaIconLapis" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                         <path d="M13.5 6.5l4 4" />
+                    </svg>
+                    <svg id="verNotaIconSalvar" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                        <path d="M5 12l5 5l10 -10" />
                     </svg>
                 </button>
             </div>
@@ -62,10 +65,6 @@
             <textarea id="verNotaConteudo" class="ver-nota-conteudo" readonly placeholder="Conteudo da nota..."></textarea>
         </div>
 
-        <!-- Botao salvar (aparece em modo edicao) -->
-        <div id="verNotaSalvarWrap" class="ver-nota-salvar-wrap ver-nota-hidden">
-            <button class="ver-nota-btn-salvar" onclick="verNotaSalvar()">Salvar</button>
-        </div>
 
     </div>
     

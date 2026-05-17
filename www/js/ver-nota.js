@@ -110,28 +110,27 @@ function verNotaAutoResize(el) {
 
 // Toggle modo edicao
 function verNotaToggleEdicao() {
-    _verNotaEditando = !_verNotaEditando;
+    if (_verNotaEditando) {
+        // Estava editando -> salvar e sair do modo edicao
+        verNotaSalvar();
+        return;
+    }
+
+    _verNotaEditando = true;
 
     var conteudoEl = document.getElementById('verNotaConteudo');
     var editBtn = document.getElementById('verNotaEditBtn');
-    var salvarWrap = document.getElementById('verNotaSalvarWrap');
+    var iconLapis = document.getElementById('verNotaIconLapis');
+    var iconSalvar = document.getElementById('verNotaIconSalvar');
 
-    if (_verNotaEditando) {
-        if (conteudoEl) {
-            conteudoEl.removeAttribute('readonly');
-            conteudoEl.classList.add('editando');
-            conteudoEl.focus();
-        }
-        if (editBtn) editBtn.classList.add('ativo');
-        if (salvarWrap) salvarWrap.classList.remove('ver-nota-hidden');
-    } else {
-        if (conteudoEl) {
-            conteudoEl.setAttribute('readonly', true);
-            conteudoEl.classList.remove('editando');
-        }
-        if (editBtn) editBtn.classList.remove('ativo');
-        if (salvarWrap) salvarWrap.classList.add('ver-nota-hidden');
+    if (conteudoEl) {
+        conteudoEl.removeAttribute('readonly');
+        conteudoEl.classList.add('editando');
+        conteudoEl.focus();
     }
+    if (editBtn) editBtn.classList.add('ativo');
+    if (iconLapis) iconLapis.style.display = 'none';
+    if (iconSalvar) iconSalvar.style.display = 'block';
 }
 
 // Salvar nota editada
@@ -157,8 +156,20 @@ function verNotaSalvar() {
 
     verNotaSalvarTodas(notas);
 
-    // Desativar edicao
-    verNotaToggleEdicao();
+    // Voltar ao modo leitura
+    _verNotaEditando = false;
+
+    var editBtn = document.getElementById('verNotaEditBtn');
+    var iconLapis = document.getElementById('verNotaIconLapis');
+    var iconSalvar = document.getElementById('verNotaIconSalvar');
+
+    if (conteudoEl) {
+        conteudoEl.setAttribute('readonly', true);
+        conteudoEl.classList.remove('editando');
+    }
+    if (editBtn) editBtn.classList.remove('ativo');
+    if (iconLapis) iconLapis.style.display = 'block';
+    if (iconSalvar) iconSalvar.style.display = 'none';
 
     // Recarregar info
     verNotaCarregar();
