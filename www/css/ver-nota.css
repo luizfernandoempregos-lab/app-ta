@@ -87,7 +87,6 @@
 /* ===== PAGE CONTENT COM LINHAS ===== */
 .ver-nota-lined-bg {
     padding: 0;
-    padding-top: calc(env(safe-area-inset-top) + 110px);
     padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
     background-color: #fffef5;
     background-image:
@@ -98,6 +97,7 @@
             #d6cebf 32px
         );
     background-size: 100% 32px;
+    background-attachment: local;
     position: relative;
 }
 
@@ -123,7 +123,8 @@
     border: none;
     outline: none;
     resize: none;
-    padding: 8px 20px 20px 52px;
+    padding: 0 20px 20px 52px;
+    padding-top: 7px;
     line-height: 32px;
     font-family: 'Georgia', 'Times New Roman', serif;
     overflow: hidden;
