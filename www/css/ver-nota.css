@@ -37,15 +37,25 @@
 }
 
 .ver-nota-header-titulo {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: #1f2937;
     flex: 1;
     text-align: center;
-    margin: 0 12px;
+    margin: 0 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 6px 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+.ver-nota-header-titulo::placeholder {
+    color: #9ca3af;
 }
 
 .ver-nota-edit-btn {
@@ -160,6 +170,12 @@ body.dark-mode .ver-nota-header {
 
 body.dark-mode .ver-nota-header-titulo {
     color: var(--app-text-primary, #f1f5f9);
+    background: var(--app-bg-secondary, #111111);
+    border-color: var(--app-border, #222222);
+}
+
+body.dark-mode .ver-nota-header-titulo::placeholder {
+    color: #555;
 }
 
 body.dark-mode .ver-nota-back-btn {

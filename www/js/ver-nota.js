@@ -67,7 +67,7 @@ function verNotaCarregar() {
         conteudoEl.value = (nota.conteudo || '').replace(/<br>/g, '\n');
         verNotaAutoResize(conteudoEl);
     }
-    if (headerTitulo) headerTitulo.textContent = nota.titulo || 'Nota';
+    if (headerTitulo) headerTitulo.value = nota.titulo || 'Nota';
 
     // Info
     if (infoEl) {
@@ -138,16 +138,19 @@ function verNotaSalvar() {
     if (!_verNotaId) return;
 
     var conteudoEl = document.getElementById('verNotaConteudo');
+    var headerTitulo = document.getElementById('verNotaHeaderTitulo');
+    var titulo = headerTitulo ? headerTitulo.value.trim() : '';
     var conteudo = conteudoEl ? conteudoEl.value.trim() : '';
 
-    if (!conteudo) {
-        alert('Preencha o conteudo da nota.');
+    if (!titulo && !conteudo) {
+        alert('Preencha pelo menos o titulo ou conteudo.');
         return;
     }
 
     var notas = verNotaObterTodas();
     notas = notas.map(function(n) {
         if (n.id === _verNotaId) {
+            n.titulo = titulo;
             n.conteudo = conteudo;
             n.editadoEm = Date.now();
         }
