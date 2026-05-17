@@ -298,8 +298,9 @@ function notasDeletar(id) {
 
 // Abrir nota na pagina de visualizacao
 function notasAbrirNota(id) {
+    window._verNotaIdParaAbrir = id;
     if (typeof app !== 'undefined' && app.views && app.views.main) {
-        app.views.main.router.navigate('/ver-nota.html?id=' + id);
+        app.views.main.router.navigate('/ver-nota/');
     } else {
         window.location.href = 'ver-nota.html?id=' + id;
     }

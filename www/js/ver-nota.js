@@ -3,8 +3,11 @@
 var _verNotaId = null;
 var _verNotaEditando = false;
 
-// Obtem o ID da nota da URL (?id=xxx)
+// Obtem o ID da nota (global var do F7 ou URL fallback)
 function verNotaObterIdUrl() {
+    if (window._verNotaIdParaAbrir) {
+        return window._verNotaIdParaAbrir;
+    }
     var params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
@@ -201,7 +204,10 @@ function inicializarVerNota() {
     }
 }
 
-// Auto-inicializar
+// Expor para routes.js
+window.inicializarVerNota = inicializarVerNota;
+
+// Auto-inicializar (fallback para acesso direto)
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
     setTimeout(inicializarVerNota, 200);
 } else {
