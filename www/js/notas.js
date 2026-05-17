@@ -95,14 +95,14 @@ function notasRenderizar() {
         var cor = nota.cor || '#ffffff';
         var borderCor = cor === '#ffffff' ? 'var(--app-primary-color, #1e40af)' : nota.cor;
 
-        html += '<div class="nota-card" style="background:' + cor + '; border-left-color:' + borderCor + ';">';
+        html += '<div class="nota-card" style="background:' + cor + '; border-left-color:' + borderCor + ';" onclick="notasAbrirNota(\'' + nota.id + '\')">';
         html += '  <div class="nota-card-header">';
         html += '    <div class="nota-card-titulo">' + notasEscapeHtml(nota.titulo || 'Sem título') + '</div>';
         html += '    <div class="nota-card-acoes">';
-        html += '      <button class="nota-card-acao" onclick="notasEditar(\'' + nota.id + '\')" title="Editar">';
-        html += '        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>';
-        html += '      </button>';
-        html += '      <button class="nota-card-acao deletar" onclick="notasDeletar(\'' + nota.id + '\')" title="Excluir">';
+        html += '        <button class="nota-card-acao" onclick="event.stopPropagation(); notasEditar(\'' + nota.id + '\')" title="Editar">';
+          html += '        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>';
+          html += '      </button>';
+          html += '      <button class="nota-card-acao deletar" onclick="event.stopPropagation(); notasDeletar(\'' + nota.id + '\')" title="Excluir">';
         html += '        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>';
         html += '      </button>';
         html += '    </div>';
@@ -293,6 +293,15 @@ function notasDeletar(id) {
         if (confirm('Deseja excluir esta nota?')) {
             confirmar();
         }
+    }
+}
+
+// Abrir nota na pagina de visualizacao
+function notasAbrirNota(id) {
+    if (typeof app !== 'undefined' && app.views && app.views.main) {
+        app.views.main.router.navigate('/ver-nota.html?id=' + id);
+    } else {
+        window.location.href = 'ver-nota.html?id=' + id;
     }
 }
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="white">
+    <title>Nota - Banco Digital</title>
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/personalizado.css">
+    <link rel="stylesheet" href="css/ver-nota.css">
+    <script>
+        (function() {
+            var temas = {
+                blue:'#1e40af',green:'#059669',pink:'#db2777',black:'#1f2937',purple:'#7c3aed',
+                orange:'#ea580c',red:'#dc2626',yellow:'#d97706',cyan:'#0891b2',teal:'#14b8a6',
+                indigo:'#4f46e5',fuchsia:'#d946ef',lime:'#84cc16',sky:'#0ea5e9',rose:'#f43f5e',
+                emerald:'#10b981',violet:'#a855f7',navy:'#001f3f',forest:'#0d3d1e',grape:'#4a0e4e',
+                wine:'#722f37',terracota:'#8b4513',magenta:'#9b2667',darkTeal:'#0b6662',
+                darkIndigo:'#1e1b4b',coral:'#ff6b6b',mint:'#00b894',gold:'#f59e0b',brown:'#92400e',
+                slate:'#475569',cobalt:'#1746a2',salmon:'#fa8072',olive:'#4d7c0f',plum:'#6b21a8',
+                steel:'#334155',azure:'#0078d4',crimson:'#be123c',jade:'#16a34a',denim:'#1d4ed8',
+                midnight:'#0f172a',pine:'#166534',brick:'#9f1239',ocean:'#0369a1'
+            };
+            var tema = localStorage.getItem('app-tema') || 'blue';
+            var cor = localStorage.getItem('app-tema-color') || temas[tema] || '#1e40af';
+            document.documentElement.style.setProperty('--app-primary-color', cor);
+        })();
+    </script>
+</head>
+<body>
+    <div class="page" data-name="ver-nota">
+
+        <!-- Header -->
+        <div class="ver-nota-header">
+            <div class="ver-nota-topbar">
+                <button onclick="verNotaVoltar()" class="ver-nota-back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 6l-6 6l6 6" />
+                    </svg>
+                </button>
+                <span class="ver-nota-header-titulo" id="verNotaHeaderTitulo">Nota</span>
+                <button id="verNotaEditBtn" onclick="verNotaToggleEdicao()" class="ver-nota-edit-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                        <path d="M13.5 6.5l4 4" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="page-content">
+            <div class="ver-nota-folha">
+                <!-- Margem vermelha lateral -->
+                <div class="ver-nota-margem"></div>
+
+                <!-- Titulo da nota -->
+                <div class="ver-nota-titulo-wrap">
+                    <input type="text" id="verNotaTitulo" class="ver-nota-titulo-input" readonly placeholder="Titulo da nota...">
+                </div>
+
+                <!-- Separador -->
+                <div class="ver-nota-separador"></div>
+
+                <!-- Area de conteudo com linhas -->
+                <div class="ver-nota-conteudo-wrap">
+                    <textarea id="verNotaConteudo" class="ver-nota-conteudo" readonly placeholder="Conteudo da nota..."></textarea>
+                </div>
+
+                <!-- Info da nota -->
+                <div class="ver-nota-info" id="verNotaInfo"></div>
+            </div>
+        </div>
+
+        <!-- Botao salvar (aparece em modo edicao) -->
+        <div id="verNotaSalvarWrap" class="ver-nota-salvar-wrap ver-nota-hidden">
+            <button class="ver-nota-btn-salvar" onclick="verNotaSalvar()">Salvar</button>
+        </div>
+
+    </div>
+    
+    <script src="js/ver-nota.js"></script>
+</body>
+</html>

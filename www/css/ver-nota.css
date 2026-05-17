@@ -1,0 +1,307 @@
+/* ===== HEADER ===== */
+.ver-nota-header {
+    background: white;
+    padding: 16px;
+    padding-top: calc(env(safe-area-inset-top) + 16px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ver-nota-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ver-nota-back-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f9fafb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.ver-nota-back-btn svg {
+    stroke: #4b5563;
+}
+
+.ver-nota-header-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    flex: 1;
+    text-align: center;
+    margin: 0 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ver-nota-edit-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f9fafb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    color: #6b7280;
+    transition: all 0.2s;
+}
+
+.ver-nota-edit-btn.ativo {
+    background: var(--app-primary-color, #1e40af);
+    color: white;
+}
+
+/* ===== PAGE CONTENT ===== */
+[data-name="ver-nota"] .page-content {
+    padding: 0;
+    padding-top: calc(env(safe-area-inset-top) + 80px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+    background: #fffef5;
+}
+
+/* ===== FOLHA COM LINHAS ===== */
+.ver-nota-folha {
+    position: relative;
+    min-height: calc(100vh - 160px);
+    padding: 20px 20px 20px 52px;
+    background-image:
+        repeating-linear-gradient(
+            transparent,
+            transparent 31px,
+            #d6cebf 31px,
+            #d6cebf 32px
+        );
+    background-size: 100% 32px;
+    background-position: 0 0;
+}
+
+/* Margem vermelha lateral */
+.ver-nota-margem {
+    position: absolute;
+    top: 0;
+    left: 42px;
+    bottom: 0;
+    width: 2px;
+    background: #e8938a;
+    z-index: 1;
+}
+
+/* ===== TITULO ===== */
+.ver-nota-titulo-wrap {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.ver-nota-titulo-input {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 4px 0;
+    line-height: 32px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.ver-nota-titulo-input::placeholder {
+    color: #c4b9a8;
+}
+
+/* ===== SEPARADOR ===== */
+.ver-nota-separador {
+    height: 0;
+    margin-bottom: 0;
+}
+
+/* ===== CONTEUDO ===== */
+.ver-nota-conteudo-wrap {
+    position: relative;
+}
+
+.ver-nota-conteudo {
+    width: 100%;
+    min-height: 400px;
+    font-size: 15px;
+    color: #374151;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 0;
+    line-height: 32px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow: hidden;
+}
+
+.ver-nota-conteudo::placeholder {
+    color: #c4b9a8;
+}
+
+/* Modo edicao */
+.ver-nota-conteudo.editando,
+.ver-nota-titulo-input.editando {
+    color: #111827;
+}
+
+/* ===== INFO DA NOTA ===== */
+.ver-nota-info {
+    margin-top: 24px;
+    padding: 12px 0;
+    font-size: 11px;
+    color: #9ca3af;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.ver-nota-info-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ver-nota-badge-fixada {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.ver-nota-badge-lembrete {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* ===== BOTAO SALVAR ===== */
+.ver-nota-salvar-wrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 20px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    z-index: 100;
+}
+
+.ver-nota-btn-salvar {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--app-primary-color, #1e40af);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.ver-nota-btn-salvar:active {
+    opacity: 0.85;
+}
+
+/* ===== HIDDEN ===== */
+.ver-nota-hidden {
+    display: none !important;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode .ver-nota-header {
+    background: var(--app-bg, #000000);
+    border-bottom-color: var(--app-border, #222222);
+}
+
+body.dark-mode .ver-nota-header-titulo {
+    color: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .ver-nota-back-btn {
+    background: var(--app-bg-secondary, #111111);
+}
+
+body.dark-mode .ver-nota-back-btn svg {
+    stroke: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .ver-nota-edit-btn {
+    background: var(--app-bg-secondary, #111111);
+    color: var(--app-text-secondary, #94a3b8);
+}
+
+body.dark-mode .ver-nota-edit-btn.ativo {
+    background: var(--app-primary-color, #1e40af);
+    color: white;
+}
+
+body.dark-mode [data-name="ver-nota"] .page-content {
+    background: #1a1a14;
+}
+
+body.dark-mode .ver-nota-folha {
+    background-image:
+        repeating-linear-gradient(
+            transparent,
+            transparent 31px,
+            #3a3730 31px,
+            #3a3730 32px
+        );
+}
+
+body.dark-mode .ver-nota-margem {
+    background: #8b4a44;
+}
+
+body.dark-mode .ver-nota-titulo-input {
+    color: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .ver-nota-titulo-input::placeholder {
+    color: #555;
+}
+
+body.dark-mode .ver-nota-conteudo {
+    color: var(--app-text-secondary, #94a3b8);
+}
+
+body.dark-mode .ver-nota-conteudo::placeholder {
+    color: #555;
+}
+
+body.dark-mode .ver-nota-conteudo.editando,
+body.dark-mode .ver-nota-titulo-input.editando {
+    color: var(--app-text-primary, #f1f5f9);
+}
+
+body.dark-mode .ver-nota-info {
+    color: var(--app-text-muted, #64748b);
+}
+
+body.dark-mode .ver-nota-salvar-wrap {
+    background: var(--app-bg, #000000);
+    border-top-color: var(--app-border, #222222);
+}
