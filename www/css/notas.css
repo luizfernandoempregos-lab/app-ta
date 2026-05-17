@@ -65,35 +65,33 @@
 }
 
 .notas-filtro-btn {
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1.5px solid var(--app-border, #e5e7eb);
-    background: var(--app-bg-secondary, #f3f4f6);
-    color: var(--app-text-secondary, #6b7280);
-    font-size: 13px;
+    flex-shrink: 0;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
     font-weight: 500;
+    border: 1.5px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.2s;
+    height: 32px;
+    display: inline-flex !important;
+    align-items: center;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    width: auto !important;
+    outline: none;
 }
 
 .notas-filtro-btn.active {
     background: var(--app-primary-color, #1e40af);
-    color: #ffffff;
     border-color: var(--app-primary-color, #1e40af);
-}
-
-/* Dark mode - filtros */
-body.dark-mode .notas-filtro-btn {
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.15);
     color: white;
-}
-
-body.dark-mode .notas-filtro-btn.active {
-    background: white;
-    color: var(--app-primary-color, #1e40af);
-    border-color: white;
 }
 
 /* Lista de notas */
